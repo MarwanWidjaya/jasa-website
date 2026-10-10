@@ -30,6 +30,20 @@ h2{font-size:1.5rem;margin-bottom:1.2rem;color:#111827;border-bottom:3px solid #
 .blog-list a small{display:block;color:#6b7280;font-weight:400}
 footer{background:#111827;color:#9ca3af;text-align:center;padding:2rem 1rem;font-size:.9rem}
 .wa-float{position:fixed;bottom:20px;right:20px;background:#22c55e;color:#fff;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+.steps{display:flex;gap:1.2rem;margin-top:1.5rem;flex-wrap:wrap}
+.step{flex:1;min-width:220px;background:#fff;border-radius:12px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,.08);text-align:center}
+.step-num{display:inline-block;background:#1e3a8a;color:#fff;width:44px;height:44px;border-radius:50%;font-weight:800;font-size:1.3rem;line-height:44px;margin-bottom:.8rem}
+.paket-rekomendasi{border:3px solid #f59e0b !important;position:relative}
+.badge{display:inline-block;background:#f59e0b;color:#111827;font-size:.75rem;font-weight:800;padding:.25rem .8rem;border-radius:20px;margin-bottom:.5rem}
+.unggul{display:flex;align-items:flex-start;gap:.8rem}
+.unggul-ikon{font-size:1.8rem;flex-shrink:0}
+.faq-item{background:#fff;border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:.8rem;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.faq-item h3{color:#1e3a8a;font-size:1.05rem;margin-bottom:.4rem}
+.faq-item p{font-size:.95rem;color:#4b5563}
+.testi-slot{background:#fff;border:2px dashed #d1d5db;border-radius:12px;padding:2rem 1.5rem;text-align:center;color:#9ca3af}
+.about{display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap}
+.about-text{flex:1;min-width:260px}
+.note-kecil{font-size:.85rem;color:#6b7280;margin-top:1rem;font-style:italic}
 @media(max-width:600px){.hero h1{font-size:1.5rem}nav a{margin-left:.7rem;font-size:.85rem}}
 </style>
 </head>
@@ -38,7 +52,7 @@ footer{background:#111827;color:#9ca3af;text-align:center;padding:2rem 1rem;font
 <header>
 <nav>
 <strong>Marwan</strong>
-<div><a href="#layanan">Layanan</a><a href="#portfolio">Portfolio</a><a href="#blog">Blog</a><a href="#kontak">Kontak</a></div>
+<div><a href="#layanan">Layanan</a><a href="#paket">Paket</a><a href="#tentang">Tentang</a><a href="#faq">FAQ</a><a href="#kontak">Kontak</a></div>
 </nav>
 </header>
 
@@ -104,12 +118,104 @@ footer{background:#111827;color:#9ca3af;text-align:center;padding:2rem 1rem;font
 </div>
 </section>
 
+<section id="paket">
+<h2>Paket Harga Website</h2>
+<p>Pilih paket sesuai kebutuhan. Semua paket mobile-friendly dan siap pakai.</p>
+<div class="cards">
+<div class="card">
+<h3>🌱 Basic</h3>
+<div class="price">Rp500rb</div>
+<ul>
+<li>Landing page 1 halaman</li>
+<li>Mobile-friendly</li>
+<li>1x revisi</li>
+<li>Jadi 3 hari</li>
+</ul>
+<br>
+<a class="btn btn-wa" href="https://wa.me/6285723803537?text=Halo%20kak,%20saya%20tertarik%20paket%20Basic%20(Rp500rb)">Pilih Basic</a>
+</div>
+<div class="card paket-rekomendasi">
+<span class="badge">PALING LARIS</span>
+<h3>🚀 Standard</h3>
+<div class="price">Rp1jt</div>
+<ul>
+<li>Sampai 5 halaman</li>
+<li>Mobile-friendly</li>
+<li>2x revisi</li>
+<li>Optimasi SEO dasar</li>
+<li>Jadi 7 hari</li>
+</ul>
+<br>
+<a class="btn btn-wa" href="https://wa.me/6285723803537?text=Halo%20kak,%20saya%20tertarik%20paket%20Standard%20(Rp1jt)">Pilih Standard</a>
+</div>
+<div class="card">
+<h3>💎 Premium</h3>
+<div class="price">Rp2jt</div>
+<ul>
+<li>Sampai 10 halaman</li>
+<li>Mobile-friendly</li>
+<li>3x revisi</li>
+<li>SEO dasar</li>
+<li>Integrasi WhatsApp</li>
+<li>Jadi 14 hari</li>
+</ul>
+<br>
+<a class="btn btn-wa" href="https://wa.me/6285723803537?text=Halo%20kak,%20saya%20tertarik%20paket%20Premium%20(Rp2jt)">Pilih Premium</a>
+</div>
+</div>
+<p class="note-kecil">* Harga di luar domain & hosting (±Rp150rb/tahun, bisa dibantu daftarkan).</p>
+</section>
+
+<section id="kenapa">
+<h2>Kenapa Pilih Saya</h2>
+<div class="cards">
+<div class="card"><div class="unggul"><span class="unggul-ikon">💰</span><div><h3>Harga Bersahabat</h3><p>Dirancang khusus untuk kantong UMKM. Kualitas profesional, harga kaki lima.</p></div></div></div>
+<div class="card"><div class="unggul"><span class="unggul-ikon">🔄</span><div><h3>Revisi Sampai Cocok</h3><p>Nggak puas? Revisi sampai sesuai keinginan, dalam batas wajar sesuai paket.</p></div></div></div>
+<div class="card"><div class="unggul"><span class="unggul-ikon">⚡</span><div><h3>Fast Respon</h3><p>Chat WhatsApp langsung dibalas. Nggak perlu nunggu berhari-hari.</p></div></div></div>
+<div class="card"><div class="unggul"><span class="unggul-ikon">🤝</span><div><h3>Tanpa Ribet</h3><p>DP 50% untuk mulai, sisanya setelah jadi dan ACC. Simpel dan transparan.</p></div></div></div>
+</div>
+</section>
+
+<section id="cara-order">
+<h2>Cara Order</h2>
+<p>Gampang, cuma 3 langkah:</p>
+<div class="steps">
+<div class="step"><span class="step-num">1</span><h3>Chat & Konsultasi</h3><p>Ceritakan kebutuhan lewat WhatsApp. Konsultasi gratis, tanpa komitmen.</p></div>
+<div class="step"><span class="step-num">2</span><h3>Deal & DP 50%</h3><p>Sepakat harga dan paket, lalu DP 50% sebagai tanda jadi.</p></div>
+<div class="step"><span class="step-num">3</span><h3>Jadi & Pelunasan</h3><p>Pengerjaan → revisi → ACC → pelunasan → serah terima. Beres!</p></div>
+</div>
+<br>
+<a class="btn btn-wa" href="https://wa.me/6285723803537?text=Halo%20kak,%20saya%20mau%20konsultasi%20dulu">💬 Mulai Konsultasi Gratis</a>
+</section>
+
 <section id="portfolio">
 <h2>Portfolio</h2>
 <div class="portfolio-grid">
 <div class="porto"><h3>🚧 Segera Hadir</h3><p>Contoh landing page UMKM — sedang disiapkan.</p></div>
 <div class="porto"><h3>🚧 Segera Hadir</h3><p>Contoh company profile — sedang disiapkan.</p></div>
 <div class="porto"><h3>🚧 Segera Hadir</h3><p>Contoh laporan Excel otomatis — sedang disiapkan.</p></div>
+</div>
+</section>
+
+<section id="testimoni">
+<h2>Testimoni Klien</h2>
+<div class="portfolio-grid">
+<div class="testi-slot"><h3>⭐⭐⭐⭐⭐</h3><p><em>"Jadilah klien pertama yang memberikan testimoni!"</em></p></div>
+<div class="testi-slot"><h3>⭐⭐⭐⭐⭐</h3><p><em>"Jadilah klien pertama yang memberikan testimoni!"</em></p></div>
+<div class="testi-slot"><h3>⭐⭐⭐⭐⭐</h3><p><em>"Jadilah klien pertama yang memberikan testimoni!"</em></p></div>
+</div>
+</section>
+
+<section id="tentang">
+<h2>Tentang Saya</h2>
+<div class="about">
+<div class="about-text">
+<p>Halo, saya <strong>Marwan</strong> — freelancer jasa website & data entry.</p>
+<br>
+<p>Fokus saya bantu <strong>UMKM go-digital</strong> dengan harga terjangkau. Percaya bahwa bisnis kecil pun berhak tampil profesional di internet tanpa harus keluar biaya besar.</p>
+<br>
+<p>Komunikasi ramah, fast respon, dan kerja sampai beres. Konsultasi gratis — jangan ragu chat dulu! 💬</p>
+</div>
 </div>
 </section>
 
@@ -121,6 +227,15 @@ footer{background:#111827;color:#9ca3af;text-align:center;padding:2rem 1rem;font
 <a href="blog/kenapa-bisnis-kecil-butuh-website-2026.html">Kenapa Bisnis Kecil Butuh Website di 2026<small>Alasan praktis punya website sendiri</small></a>
 <a href="blog/jasa-data-entry-murah-kapan-outsourcing.html">Jasa Data Entry Murah: Kapan Bisnis Butuh Outsourcing Data<small>Panduan kapan saatnya serahkan data ke orang lain</small></a>
 </div>
+</section>
+
+<section id="faq">
+<h2>Pertanyaan Umum (FAQ)</h2>
+<div class="faq-item"><h3>❓ Berapa lama pengerjaannya?</h3><p>Tergantung paket: Basic 3 hari, Standard 7 hari, Premium 14 hari. Untuk jasa data entry/lainnya, estimasi diberikan setelah konsultasi.</p></div>
+<div class="faq-item"><h3>❓ Berapa kali revisi?</h3><p>Sesuai paket (1x–3x revisi). Revisi dilakukan sampai cocok dalam batas wajar — saya usahakan Anda puas dengan hasilnya.</p></div>
+<div class="faq-item"><h3>❓ Bagaimana pembayarannya?</h3><p>DP 50% di awal sebagai tanda jadi, pelunasan setelah hasil jadi dan Anda ACC. Pembayaran via transfer bank / e-wallet.</p></div>
+<div class="faq-item"><h3>❓ Apakah dapat garansi?</h3><p>Ya! Garansi 7 hari perbaikan bug/error setelah serah terima, gratis.</p></div>
+<div class="faq-item"><h3>❓ Saya gaptek, bisa dibantu?</h3><p>Sangat bisa! Saya pandu langkah demi langkah sampai Anda bisa pakai websitenya sendiri. Nggak perlu malu bertanya.</p></div>
 </section>
 
 <section id="kontak">
