@@ -98,8 +98,9 @@ function setToolFilter(cat){
   renderTools();
 }
 function renderTools(){
-  const q = ($('toolSearch').value||'').toLowerCase();
-  const grid = $('toolsGrid');
+  const searchEl = $('toolSearch'), grid = $('toolsGrid');
+  if(!searchEl || !grid) return; // explorer dipindah jadi bonus compact
+  const q = (searchEl.value||'').toLowerCase();
   const list = TOOLS.filter(t =>
     (toolFilter==='all' || t.cat===toolFilter) &&
     (!q || t.name.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q))
