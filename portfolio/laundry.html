@@ -8,43 +8,52 @@
 <meta name="description" content="Laundry Bersih Kinclong: jasa cuci kering, setrika, dan express. Gratis antar-jemput. Hubungi kami via WhatsApp.">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Arial,sans-serif;color:#1e3a5f;line-height:1.7;background:#f0f7ff}
-header{background:#1d4ed8;color:#fff;padding:1rem;position:sticky;top:0;z-index:10}
+body{font-family:'Plus Jakarta Sans','Segoe UI',system-ui,sans-serif;color:#0c2b3e;line-height:1.7;background:linear-gradient(160deg,#e0f7ff 0%,#f0fdff 40%,#e8f4ff 100%)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes bubble{0%{transform:translateY(0) scale(1);opacity:.7}100%{transform:translateY(-120px) scale(1.6);opacity:0}}
+header{background:rgba(6,182,212,.92);backdrop-filter:blur(12px);color:#fff;padding:1rem;position:sticky;top:0;z-index:10;box-shadow:0 4px 20px rgba(6,182,212,.3)}
 nav{max-width:960px;margin:auto;display:flex;justify-content:space-between;align-items:center}
-nav strong{font-size:1.2rem}
-nav a{color:#dbeafe;text-decoration:none;margin-left:1.2rem;font-size:.95rem}
-.hero{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff;text-align:center;padding:4.5rem 1.5rem}
-.hero .icon{font-size:3.5rem;margin-bottom:.5rem}
-.hero h1{font-size:2.2rem;margin-bottom:.5rem}
-.hero p{font-size:1.05rem;opacity:.92;max-width:560px;margin:0 auto 1.5rem}
-.btn{display:inline-block;background:#f59e0b;color:#111827;font-weight:700;padding:.8rem 1.8rem;border-radius:8px;text-decoration:none;margin:.3rem}
-.btn-wa{background:#22c55e;color:#fff}
-section{max-width:960px;margin:auto;padding:3rem 1.5rem}
-h2{font-size:1.5rem;margin-bottom:1.2rem;color:#1d4ed8;border-bottom:3px solid #3b82f6;display:inline-block;padding-bottom:.3rem}
-.price-table{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);overflow:hidden;margin-top:1.5rem}
-.price-row{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.5rem;border-bottom:1px solid #e5e7eb}
+nav strong{font-size:1.25rem;font-weight:900}
+nav a{color:#e0fbff;text-decoration:none;margin-left:1.2rem;font-size:.95rem;font-weight:600;transition:color .2s}
+nav a:hover{color:#facc15}
+.hero{background:linear-gradient(135deg,#0891b2 0%,#06b6d4 50%,#22d3ee 100%);color:#fff;text-align:center;padding:5rem 1.5rem;position:relative;overflow:hidden}
+.hero .bubble{position:absolute;bottom:0;border-radius:50%;background:rgba(255,255,255,.25);animation:bubble 5s ease-in infinite}
+.hero .icon{font-size:4rem;margin-bottom:.5rem;animation:float 3s ease-in-out infinite;position:relative;z-index:2}
+.hero h1{font-size:2.6rem;margin-bottom:.5rem;font-weight:900;position:relative;z-index:2;text-shadow:0 3px 12px rgba(0,0,0,.2);animation:fadeUp .7s ease-out}
+.hero p{font-size:1.05rem;max-width:560px;margin:0 auto 1.5rem;position:relative;z-index:2;color:#e0fbff;animation:fadeUp .7s .2s ease-out both}
+.btn{display:inline-block;background:#facc15;color:#0c2b3e;font-weight:900;padding:.9rem 2rem;border:3px solid #0c2b3e;border-radius:16px;text-decoration:none;margin:.3rem;box-shadow:5px 5px 0 #0c2b3e;transition:transform .15s,box-shadow .15s;position:relative;z-index:2}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 #0c2b3e}
+.btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 #0c2b3e}
+.btn-wa{background:#22c55e;color:#06281a}
+section{max-width:960px;margin:auto;padding:3rem 1.5rem;animation:fadeUp .6s ease-out}
+h2{font-size:1.6rem;margin-bottom:1.2rem;color:#0891b2;font-weight:900;display:inline-block;border-bottom:4px solid #22d3ee;padding-bottom:.3rem}
+.price-table{background:rgba(255,255,255,.75);backdrop-filter:blur(16px);border:2px solid rgba(6,182,212,.35);border-radius:20px;box-shadow:0 8px 32px rgba(6,182,212,.18);overflow:hidden;margin-top:1.5rem}
+.price-row{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.5rem;border-bottom:1px solid rgba(6,182,212,.15);transition:background .2s}
+.price-row:hover{background:rgba(6,182,212,.08)}
 .price-row:last-child{border-bottom:none}
 .price-row .svc{flex:1}
-.price-row h3{font-size:1.05rem;color:#1e3a5f}
-.price-row p{font-size:.85rem;color:#64748b}
-.price-row .price{font-weight:800;color:#1d4ed8;white-space:nowrap;margin-left:1rem}
-.badge{display:inline-block;background:#fef3c7;color:#92400e;font-size:.75rem;font-weight:700;padding:.2rem .7rem;border-radius:20px;margin-left:.5rem}
+.price-row h3{font-size:1.05rem;color:#0c2b3e;font-weight:800}
+.price-row p{font-size:.85rem;color:#5b7a8c}
+.price-row .price{font-weight:900;color:#0891b2;white-space:nowrap;margin-left:1rem;font-size:1.1rem}
+.badge{display:inline-block;background:linear-gradient(135deg,#facc15,#fbbf24);color:#0c2b3e;font-size:.72rem;font-weight:900;padding:.25rem .8rem;border-radius:20px;margin-left:.5rem;box-shadow:0 2px 8px rgba(250,204,21,.5)}
 .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:1.5rem}
-.feat{background:#fff;border-radius:12px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,.08);text-align:center}
-.feat .emoji{font-size:2.2rem;margin-bottom:.5rem}
-.feat h3{font-size:1rem;color:#1e3a5f;margin-bottom:.3rem}
-.feat p{font-size:.88rem;color:#64748b}
+.feat{background:rgba(255,255,255,.75);backdrop-filter:blur(16px);border:2px solid rgba(6,182,212,.3);border-radius:20px;padding:1.6rem;box-shadow:0 8px 24px rgba(6,182,212,.12);text-align:center;transition:transform .2s}
+.feat:hover{transform:translateY(-6px)}
+.feat .emoji{font-size:2.4rem;margin-bottom:.5rem}
+.feat h3{font-size:1rem;color:#0c2b3e;margin-bottom:.3rem;font-weight:800}
+.feat p{font-size:.88rem;color:#5b7a8c}
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:1.5rem}
-.step{background:#fff;border-radius:12px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,.08);text-align:center}
-.step .num{background:#1d4ed8;color:#fff;width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;margin-bottom:.8rem}
-.step h3{font-size:1rem;color:#1e3a5f;margin-bottom:.3rem}
-.step p{font-size:.88rem;color:#64748b}
-.cta-box{background:#1d4ed8;color:#fff;border-radius:12px;padding:2rem;text-align:center;margin-top:2rem}
+.step{background:rgba(255,255,255,.75);backdrop-filter:blur(16px);border:2px solid rgba(6,182,212,.3);border-radius:20px;padding:1.6rem;box-shadow:0 8px 24px rgba(6,182,212,.12);text-align:center}
+.step .num{background:linear-gradient(135deg,#06b6d4,#0891b2);color:#fff;width:44px;height:44px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:1.25rem;margin-bottom:.8rem;box-shadow:0 4px 12px rgba(6,182,212,.4)}
+.step h3{font-size:1rem;color:#0c2b3e;margin-bottom:.3rem;font-weight:800}
+.step p{font-size:.88rem;color:#5b7a8c}
+.cta-box{background:linear-gradient(135deg,#0891b2,#06b6d4);color:#fff;border:3px solid #0c2b3e;border-radius:20px;padding:2.2rem;text-align:center;margin-top:2rem;box-shadow:6px 6px 0 #0c2b3e}
 .cta-box h2{color:#fff;border:none;margin-bottom:.5rem}
-.cta-box p{opacity:.9;margin-bottom:1.2rem}
-footer{background:#1e3a5f;color:#94a3b8;text-align:center;padding:2rem 1rem;font-size:.9rem}
-.demo-note{background:#fef3c7;border:1px solid #f59e0b;color:#92400e;padding:.8rem 1.2rem;border-radius:8px;margin:1.5rem auto;max-width:960px;font-size:.85rem;text-align:center}
-@media(max-width:600px){.hero h1{font-size:1.7rem}}
+.cta-box p{color:#e0fbff;margin-bottom:1.2rem}
+footer{background:#0c2b3e;color:#7fa3b8;text-align:center;padding:2rem 1rem;font-size:.9rem}
+.demo-note{background:#fef9c3;border:2px solid #facc15;color:#713f12;padding:.8rem 1.2rem;border-radius:12px;margin:1.5rem auto;max-width:960px;font-size:.85rem;text-align:center;font-weight:600}
+@media(max-width:600px){.hero h1{font-size:2rem}}
 </style>
 </head>
 <body>
@@ -59,6 +68,11 @@ footer{background:#1e3a5f;color:#94a3b8;text-align:center;padding:2rem 1rem;font
 </header>
 
 <div class="hero">
+<div class="bubble" style="left:10%;width:40px;height:40px;animation-delay:0s"></div>
+<div class="bubble" style="left:30%;width:25px;height:25px;animation-delay:1.5s"></div>
+<div class="bubble" style="left:55%;width:50px;height:50px;animation-delay:.8s"></div>
+<div class="bubble" style="left:75%;width:30px;height:30px;animation-delay:2.2s"></div>
+<div class="bubble" style="left:90%;width:42px;height:42px;animation-delay:3s"></div>
 <div class="icon">👕✨</div>
 <h1>Laundry Bersih Kinclong</h1>
 <p>Pakaian bersih, wangi tahan lama, rapi seperti baru. Gratis antar-jemput untuk area kami!</p>
@@ -66,12 +80,12 @@ footer{background:#1e3a5f;color:#94a3b8;text-align:center;padding:2rem 1rem;font
 </div>
 
 <section id="tentang">
-<h2>Tentang Kami</h2>
+<h2>🫧 Tentang Kami</h2>
 <p style="margin-top:1rem">Laundry Bersih Kinclong melayani jasa pencucian pakaian dengan mesin modern dan deterjen premium yang aman untuk semua jenis kain. Kami melayani perorangan, kost-kostan, hingga hotel dan restoran. Kepuasan pelanggan adalah prioritas kami — kalau kurang bersih, cuci ulang <strong>gratis</strong>.</p>
 </section>
 
 <section id="layanan">
-<h2>Layanan & Harga</h2>
+<h2>💧 Layanan & Harga</h2>
 <div class="price-table">
 <div class="price-row"><div class="svc"><h3>Cuci Kering Reguler</h3><p>Cuci + kering, selesai 2 hari</p></div><span class="price">Rp7rb/kg</span></div>
 <div class="price-row"><div class="svc"><h3>Cuci + Setrika</h3><p>Cuci, kering, setrika rapi — selesai 2 hari</p></div><span class="price">Rp10rb/kg</span></div>
@@ -80,11 +94,11 @@ footer{background:#1e3a5f;color:#94a3b8;text-align:center;padding:2rem 1rem;font
 <div class="price-row"><div class="svc"><h3>Cuci Bedcover / Selimut</h3><p>Satuan, semua ukuran</p></div><span class="price">Rp25rb/pcs</span></div>
 <div class="price-row"><div class="svc"><h3>Cuci Sepatu</h3><p>Deep clean semua jenis sepatu</p></div><span class="price">Rp30rb/pasang</span></div>
 </div>
-<p style="margin-top:.8rem;font-size:.85rem;color:#64748b">*Minimal order 3 kg untuk layanan kiloan.</p>
+<p style="margin-top:.8rem;font-size:.85rem;color:#5b7a8c">*Minimal order 3 kg untuk layanan kiloan.</p>
 </section>
 
 <section id="keunggulan">
-<h2>Kenapa Kami?</h2>
+<h2>✨ Kenapa Kami?</h2>
 <div class="feat-grid">
 <div class="feat"><div class="emoji">🛵</div><h3>Gratis Antar-Jemput</h3><p>Area 5 km gratis, tanpa minimal order</p></div>
 <div class="feat"><div class="emoji">🌸</div><h3>Parfum Premium</h3><p>Wangi tahan 7 hari, pilih aroma favoritmu</p></div>
@@ -94,7 +108,7 @@ footer{background:#1e3a5f;color:#94a3b8;text-align:center;padding:2rem 1rem;font
 </section>
 
 <section id="order">
-<h2>Cara Order</h2>
+<h2>📝 Cara Order</h2>
 <div class="steps">
 <div class="step"><div class="num">1</div><h3>Chat WhatsApp</h3><p>Kirim foto / timbang pakaian, kami hitung estimasi</p></div>
 <div class="step"><div class="num">2</div><h3>Antar / Dijemput</h3><p>Antar ke outlet atau kami jemput gratis</p></div>
