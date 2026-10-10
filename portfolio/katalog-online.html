@@ -1,0 +1,166 @@
+<!-- CONTOH DEMO PORTFOLIO — bukan klien asli -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toko Berkah Jaya — Katalog Online</title>
+<meta name="description" content="Katalog online Toko Berkah Jaya: sembako, snack, dan minuman dengan harga terjangkau. Pesan mudah via WhatsApp.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;color:#1f2937;line-height:1.6;background:#f8fafc}
+header{background:#059669;color:#fff;padding:1rem;position:sticky;top:0;z-index:10}
+nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+nav strong{font-size:1.2rem}
+.cart-btn{background:#fff;color:#059669;font-weight:700;border:none;padding:.5rem 1.2rem;border-radius:30px;cursor:pointer;font-size:.95rem}
+.hero{background:linear-gradient(135deg,#059669,#34d399);color:#fff;text-align:center;padding:3.5rem 1.5rem}
+.hero h1{font-size:2.2rem;margin-bottom:.4rem}
+.hero p{opacity:.92;max-width:560px;margin:0 auto}
+.filter-bar{max-width:1100px;margin:1.5rem auto 0;padding:0 1.5rem;display:flex;gap:.6rem;flex-wrap:wrap}
+.filter-bar button{border:2px solid #059669;background:#fff;color:#059669;font-weight:600;padding:.45rem 1.1rem;border-radius:30px;cursor:pointer;font-size:.9rem}
+.filter-bar button.active{background:#059669;color:#fff}
+.grid{max-width:1100px;margin:1.5rem auto;padding:0 1.5rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.2rem}
+.card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08);display:flex;flex-direction:column}
+.card .thumb{font-size:3rem;text-align:center;padding:1.5rem 1rem .8rem;background:#ecfdf5}
+.card .body{padding:1rem 1.2rem;flex:1;display:flex;flex-direction:column}
+.card .cat{font-size:.72rem;color:#059669;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.card h3{font-size:1rem;margin:.2rem 0 .6rem}
+.card .price{font-weight:800;color:#059669;font-size:1.1rem;margin-bottom:.8rem}
+.card button{background:#059669;color:#fff;border:none;font-weight:700;padding:.6rem;border-radius:8px;cursor:pointer;font-size:.9rem;margin-top:auto}
+.card button:hover{background:#047857}
+.card button.added{background:#6b7280}
+.cart-panel{position:fixed;top:0;right:-340px;width:320px;max-width:90vw;height:100%;background:#fff;box-shadow:-4px 0 16px rgba(0,0,0,.15);transition:right .3s;z-index:20;display:flex;flex-direction:column}
+.cart-panel.open{right:0}
+.cart-panel header{background:#059669;color:#fff;padding:1rem;display:flex;justify-content:space-between;align-items:center}
+.cart-panel header button{background:none;border:none;color:#fff;font-size:1.3rem;cursor:pointer}
+.cart-items{flex:1;overflow-y:auto;padding:1rem}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:.6rem 0;border-bottom:1px solid #e5e7eb;font-size:.9rem}
+.cart-item .qty button{background:#e5e7eb;border:none;width:24px;height:24px;border-radius:6px;cursor:pointer;font-weight:700}
+.cart-footer{padding:1rem;border-top:1px solid #e5e7eb}
+.cart-footer .total{font-weight:800;font-size:1.1rem;margin-bottom:.8rem;display:flex;justify-content:space-between}
+.cart-footer a{display:block;background:#22c55e;color:#fff;text-align:center;font-weight:700;padding:.8rem;border-radius:8px;text-decoration:none}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;z-index:15}
+.overlay.show{display:block}
+.empty{text-align:center;color:#9ca3af;padding:2rem 1rem}
+footer{background:#064e3b;color:#a7f3d0;text-align:center;padding:2rem 1rem;font-size:.9rem;margin-top:2rem}
+.demo-note{background:#fef3c7;border:1px solid #f59e0b;color:#92400e;padding:.8rem 1.2rem;border-radius:8px;margin:1.5rem auto;max-width:1100px;font-size:.85rem;text-align:center}
+@media(max-width:600px){.hero h1{font-size:1.7rem}}
+</style>
+</head>
+<body>
+
+<div class="demo-note">⚠️ Ini contoh demo portfolio — "Toko Berkah Jaya" adalah toko fiktif untuk menunjukkan contoh hasil kerja.</div>
+
+<header>
+<nav>
+<strong>🛒 Toko Berkah Jaya</strong>
+<button class="cart-btn" onclick="toggleCart()">🧺 Keranjang (<span id="cartCount">0</span>)</button>
+</nav>
+</header>
+
+<div class="hero">
+<h1>Katalog Online</h1>
+<p>Sembako, snack, dan minuman — harga terjangkau, pesan gampang via WhatsApp. Klik tombol keranjang untuk mulai belanja!</p>
+</div>
+
+<div class="filter-bar" id="filterBar">
+<button class="active" onclick="filterCat('semua',this)">Semua</button>
+<button onclick="filterCat('sembako',this)">Sembako</button>
+<button onclick="filterCat('snack',this)">Snack</button>
+<button onclick="filterCat('minuman',this)">Minuman</button>
+</div>
+
+<div class="grid" id="productGrid"></div>
+
+<div class="overlay" id="overlay" onclick="toggleCart()"></div>
+<div class="cart-panel" id="cartPanel">
+<header><strong>🧺 Keranjang Belanja</strong><button onclick="toggleCart()">✕</button></header>
+<div class="cart-items" id="cartItems"><div class="empty">Keranjang masih kosong.<br>Klik "+ Keranjang" pada produk.</div></div>
+<div class="cart-footer">
+<div class="total"><span>Total</span><span id="cartTotal">Rp0</span></div>
+<a id="waCheckout" href="#" target="_blank" rel="noopener">💬 Pesan via WhatsApp</a>
+</div>
+</div>
+
+<footer>
+<p>© 2026 Toko Berkah Jaya (demo). Dibuat sebagai contoh portfolio jasa website.</p>
+</footer>
+
+<script>
+const products=[
+{id:1,name:"Beras Premium 5kg",cat:"sembako",price:62000,emoji:"🍚"},
+{id:2,name:"Minyak Goreng 2L",cat:"sembako",price:42000,emoji:"🫗"},
+{id:3,name:"Gula Pasir 1kg",cat:"sembako",price:17500,emoji:"🍬"},
+{id:4,name:"Telur Ayam 1kg",cat:"sembako",price:28000,emoji:"🥚"},
+{id:5,name:"Mie Instan (isi 5)",cat:"sembako",price:15000,emoji:"🍜"},
+{id:6,name:"Kopi Bubuk 250g",cat:"sembako",price:22000,emoji:"☕"},
+{id:7,name:"Keripik Singkong",cat:"snack",price:12000,emoji:"🥔"},
+{id:8,name:"Kacang Goreng 250g",cat:"snack",price:18000,emoji:"🥜"},
+{id:9,name:"Biskuit Coklat",cat:"snack",price:14000,emoji:"🍪"},
+{id:10,name:"Teh Botol (6 pcs)",cat:"minuman",price:20000,emoji:"🧃"},
+{id:11,name:"Air Mineral 600ml (12)",cat:"minuman",price:24000,emoji:"💧"},
+{id:12,name:"Susu UHT 1L",cat:"minuman",price:19000,emoji:"🥛"}
+];
+const catLabel={sembako:"Sembako",snack:"Snack",minuman:"Minuman"};
+let cart={};
+let activeCat="semua";
+const WA_NUMBER="6280000000000";
+
+function rupiah(n){return "Rp"+n.toLocaleString("id-ID");}
+function renderProducts(){
+  const grid=document.getElementById("productGrid");grid.innerHTML="";
+  products.filter(p=>activeCat==="semua"||p.cat===activeCat).forEach(p=>{
+    const d=document.createElement("div");d.className="card";
+    d.innerHTML='<div class="thumb">'+p.emoji+'</div><div class="body"><span class="cat">'+catLabel[p.cat]+'</span><h3>'+p.name+'</h3><div class="price">'+rupiah(p.price)+'</div><button onclick="addToCart('+p.id+',this)">+ Keranjang</button></div>';
+    grid.appendChild(d);
+  });
+}
+function filterCat(cat,btn){
+  activeCat=cat;
+  document.querySelectorAll("#filterBar button").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");renderProducts();
+}
+function addToCart(id,btn){
+  cart[id]=(cart[id]||0)+1;updateCart();
+  btn.textContent="✓ Ditambahkan";btn.classList.add("added");
+  setTimeout(()=>{btn.textContent="+ Keranjang";btn.classList.remove("added");},900);
+}
+function changeQty(id,delta){
+  cart[id]=(cart[id]||0)+delta;
+  if(cart[id]<=0)delete cart[id];
+  updateCart();
+}
+function updateCart(){
+  const items=document.getElementById("cartItems");
+  const ids=Object.keys(cart);
+  let count=0,total=0;
+  if(ids.length===0){
+    items.innerHTML='<div class="empty">Keranjang masih kosong.<br>Klik "+ Keranjang" pada produk.</div>';
+  }else{
+    items.innerHTML="";
+    ids.forEach(id=>{
+      const p=products.find(x=>x.id==id);const q=cart[id];
+      count+=q;total+=p.price*q;
+      const row=document.createElement("div");row.className="cart-item";
+      row.innerHTML='<span>'+p.emoji+' '+p.name+'</span><span class="qty"><button onclick="changeQty('+id+',-1)">−</button> '+q+' <button onclick="changeQty('+id+',1)">+</button></span><span>'+rupiah(p.price*q)+'</span>';
+      items.appendChild(row);
+    });
+  }
+  document.getElementById("cartCount").textContent=count;
+  document.getElementById("cartTotal").textContent=rupiah(total);
+  let msg="Halo Toko Berkah Jaya, saya mau pesan:%0A";
+  ids.forEach(id=>{
+    const p=products.find(x=>x.id==id);
+    msg+="- "+p.name+" x"+cart[id]+" = "+rupiah(p.price*cart[id])+"%0A";
+  });
+  msg+="%0ATotal: "+rupiah(total)+"%0ATerima kasih!";
+  document.getElementById("waCheckout").href="https://wa.me/"+WA_NUMBER+"?text="+msg;
+}
+function toggleCart(){
+  document.getElementById("cartPanel").classList.toggle("open");
+  document.getElementById("overlay").classList.toggle("show");
+}
+renderProducts();
+</script>
+</body>
+</html>
