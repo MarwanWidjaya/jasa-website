@@ -147,9 +147,38 @@ section h2::after{content:'';display:block;width:60px;height:4px;background:line
 .price{font-size:2.2em;font-weight:800;color:var(--dark)}
 .price span{font-size:.5em;color:#888;font-weight:400}
 .wa-float{position:fixed;bottom:24px;right:24px;background:#25d366;color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 20px rgba(37,211,102,.5);z-index:100;animation:float 3s ease-in-out infinite;text-decoration:none}
+
+/* === NAVBAR === */
+.navbar{position:sticky;top:0;z-index:99;background:rgba(26,26,46,.95);backdrop-filter:blur(10px);display:flex;justify-content:space-between;align-items:center;padding:14px 24px;box-shadow:0 2px 16px rgba(0,0,0,.3)}
+.nav-logo{color:#d4af37;font-weight:800;font-size:1.3em}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{color:#fff;text-decoration:none;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:#d4af37}
+.nav-cta{background:linear-gradient(135deg,#d4af37,#f4d03f)!important;color:#1a1a2e!important;padding:8px 20px!important;border-radius:20px;font-weight:700!important}
+.nav-toggle{display:none;color:#fff;font-size:1.5em;cursor:pointer}
+@media(max-width:768px){.nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:#1a1a2e;flex-direction:column;padding:16px}.nav-links.open{display:flex}.nav-toggle{display:block}}
+/* === ANIMASI TAMBAHAN === */
+@keyframes slideIn{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.stat-box{background:#fff;border-radius:12px;padding:20px;text-align:center;border:1px solid rgba(212,175,55,.2)}
+.stat-num{font-size:2em;font-weight:800;background:linear-gradient(135deg,#d4af37,#f4d03f);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero .btn{animation:pulse 2s infinite}
+section:nth-child(even){background:rgba(255,255,255,.5)}
 </style>
 </head>
 <body>
+<nav class="navbar">
+  <div class="nav-logo">✨ Marwan</div>
+  <div class="nav-links">
+    <a href="#layanan">Layanan</a>
+    <a href="#harga">Harga</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#blog">Blog</a>
+    <a href="#kontak" class="nav-cta">💬 Chat</a>
+  </div>
+  <div class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</div>
+</nav>
 
 <header>
 <nav>
@@ -165,7 +194,7 @@ section h2::after{content:'';display:block;width:60px;height:4px;background:line
 </div>
 
 <section id="layanan">
-<h2>Layanan Kami</h2>
+<h2> Kami</h2>
 <div class="cards">
 <div class="card">
 <h3>🌐 Website Sederhana</h3>
@@ -219,9 +248,23 @@ section h2::after{content:'';display:block;width:60px;height:4px;background:line
 </div>
 </div>
 </section>
+<section id="stats" style="padding:40px 20px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;max-width:800px;margin:0 auto">
+<div class="stat-box"><div class="stat-num" data-count="7">0</div><div>Layanan</div></div>
+<div class="stat-box"><div class="stat-num" data-count="3">0</div><div>Paket Harga</div></div>
+<div class="stat-box"><div class="stat-num" data-count="3">0</div><div>Demo Portfolio</div></div>
+<div class="stat-box"><div class="stat-num" data-count="100">0</div><div>% Komitmen</div></div>
+</div></section>
+<script>
+// Animated counters
+document.querySelectorAll('.stat-num').forEach(el=>{
+  const target=+el.dataset.count;let cur=0;
+  const timer=setInterval(()=>{cur+=Math.ceil(target/20);if(cur>=target){cur=target;clearInterval(timer)}el.textContent=cur+(target==100?'%':'')},50);
+});
+</script>
 
 <section id="paket">
-<h2>Paket Harga Website</h2>
+<h2 id="harga">Paket Harga Website</h2>
 <p>Pilih paket sesuai kebutuhan. Semua paket mobile-friendly dan siap pakai.</p>
 <div class="cards">
 <div class="card">
@@ -291,7 +334,7 @@ section h2::after{content:'';display:block;width:60px;height:4px;background:line
 </section>
 
 <section id="portfolio">
-<h2>Portfolio</h2>
+<h2 id="portfolio">Portfolio</h2>
 <p style="margin:.5rem 0 0;color:#6b7280;font-size:.92rem">Contoh hasil kerja (demo) — klik untuk melihat langsung:</p>
 <div class="portfolio-grid">
 <div class="porto"><h3>☕ Landing Page Warung Kopi</h3><p>"Kopi Senja" — landing page cozy dengan menu, jam buka, dan tombol WhatsApp.</p><a href="portfolio/warung-kopi.html" target="_blank" rel="noopener" class="btn" style="margin-top:.8rem;font-size:.9rem;padding:.6rem 1.4rem">Lihat Demo →</a></div>
@@ -324,7 +367,7 @@ section h2::after{content:'';display:block;width:60px;height:4px;background:line
 </section>
 
 <section id="blog">
-<h2>Blog</h2>
+<h2 id="blog">Blog</h2>
 <p>Tips praktis buat UMKM soal website, digital marketing, dan data.</p>
 <div class="blog-list">
 <a href="blog/5-cara-konten-umkm-mudah-ditemukan-google.html">5 Cara Membuat Konten UMKM Mudah Ditemukan di Google<small>Tips SEO sederhana untuk pemilik usaha kecil</small></a>
@@ -343,7 +386,7 @@ section h2::after{content:'';display:block;width:60px;height:4px;background:line
 </section>
 
 <section id="kontak">
-<h2>Hubungi Kami</h2>
+<h2 id="kontak">Hubungi Kami</h2>
 <p>Ada pertanyaan atau mau order? Chat aja, gratis konsultasi.</p>
 <br>
 <a class="btn btn-wa" href="https://wa.me/6285723803537?text=Halo%20kak,%20saya%20mau%20tanya-tanya%20dulu">💬 WhatsApp</a>
