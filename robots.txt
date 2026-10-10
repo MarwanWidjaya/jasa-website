@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://marwanwidjaya.github.io/jasa-website/sitemap.xml
