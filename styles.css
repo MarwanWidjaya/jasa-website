@@ -148,6 +148,28 @@ h1 em,h2 em,.hero-title em{font-family:var(--serif);font-style:italic;font-weigh
 .wv-kobi-hero p{font-family:var(--serif);font-style:italic;font-size:1.5rem;margin-top:10px;color:var(--ink-dim)}
 .wv-row{display:flex;gap:12px;padding:24px 36px}
 .wv-row i{flex:1;height:64px;border-radius:6px;background:rgba(244,241,234,.07);display:block}
+/* Mini menu cards — Kobi Senja */
+.wv-mi{flex:1;background:rgba(244,241,234,.06);border:1px solid rgba(244,241,234,.12);border-radius:8px;padding:16px 14px;display:flex;flex-direction:column;gap:6px;transition:transform .3s var(--ease),border-color .3s}
+.work-visual:hover .wv-mi{transform:translateY(-3px)}
+.wv-mi b{font-size:.8rem;font-weight:600;color:#F4F1EA}
+.wv-mi span{font-size:.78rem;font-weight:700;color:var(--lime)}
+/* Mini product cards — Berkah Jaya */
+.wv-pi{flex:1;background:rgba(244,241,234,.07);border:1px solid rgba(244,241,234,.12);border-radius:8px;padding:16px 14px;display:flex;flex-direction:column;gap:6px;transition:transform .3s var(--ease)}
+.work-visual:hover .wv-pi{transform:translateY(-3px)}
+.wv-pi b{font-size:.8rem;font-weight:600;color:#F4F1EA}
+.wv-pi span{font-size:.78rem;font-weight:700;color:#8FB8FF}
+/* Lookbook tiles — Atelier Noir */
+.wv-atl-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:24px 36px 30px;background:#0E0E0E}
+.wv-look{height:110px;background:linear-gradient(150deg,#1C1C1A,#121211);border:1px solid #2A2A28;border-radius:4px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:16px;gap:4px;text-align:left;transition:transform .3s var(--ease),border-color .3s}
+.work-visual:hover .wv-look{transform:translateY(-3px);border-color:#3A3A38}
+.wv-look span{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#7E7A70}
+.wv-look b{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.05rem;color:#F4F1EA}
+/* Feature blocks — Nordwind */
+.wv-nrd-stats{display:flex;gap:12px;padding:24px 36px 30px;background:#0C0C0C}
+.wv-feat{flex:1;background:#111511;border:1px solid #1E2A1E;border-radius:8px;padding:16px 14px;display:flex;flex-direction:column;gap:6px;transition:transform .3s var(--ease),border-color .3s}
+.work-visual:hover .wv-feat{transform:translateY(-3px);border-color:#2A3A2A}
+.wv-feat b{font-size:.8rem;font-weight:700;color:#F4F1EA}
+.wv-feat span{font-size:.72rem;color:var(--lime)}
 .wv-lnd-hero{background:linear-gradient(160deg,#E8F4F8,#D5E9F0);color:#14343F;padding:52px 36px}
 .wv-lnd-hero b{font-family:var(--sans);font-weight:800;letter-spacing:.18em;font-size:1rem}
 .wv-lnd-hero p{font-size:1.4rem;margin-top:10px;font-weight:600}
@@ -160,14 +182,9 @@ h1 em,h2 em,.hero-title em{font-family:var(--serif);font-style:italic;font-weigh
 .wv-atl-hero{background:#0E0E0E;color:#F4F1EA;padding:56px 36px;text-align:center}
 .wv-atl-hero b{font-family:var(--sans);font-weight:800;letter-spacing:.3em;font-size:1rem}
 .wv-atl-hero p{font-family:var(--serif);font-style:italic;margin-top:12px;color:var(--ink-dim)}
-.wv-atl-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:24px 36px 30px;background:#0E0E0E}
-.wv-atl-grid i{height:110px;background:#1A1A18;border:1px solid #2A2A28;display:block}
 .wv-nrd-hero{background:linear-gradient(160deg,#0F1A12,#0C0C0C);color:#F4F1EA;padding:52px 36px}
 .wv-nrd-hero b{font-family:var(--sans);font-weight:800;letter-spacing:.2em;font-size:1rem}
 .wv-nrd-hero p{margin-top:10px;color:var(--lime);font-size:1.1rem;font-weight:500}
-.wv-nrd-stats{display:flex;gap:12px;padding:24px 36px 30px;background:#0C0C0C}
-.wv-nrd-stats i{flex:1;height:8px;background:#1E2A1E;border-radius:4px;display:block}
-.wv-nrd-stats i:first-child{background:var(--lime)}
 .work-open{position:absolute;bottom:18px;right:18px;background:rgba(12,12,12,.85);backdrop-filter:blur(8px);color:var(--ink);font-size:.8rem;font-weight:600;padding:11px 20px;border-radius:100px;display:flex;align-items:center;gap:8px;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
 .work-open svg{width:14px;height:14px}
 .work-visual:hover .work-open{opacity:1;transform:none}
@@ -307,6 +324,9 @@ h1 em,h2 em,.hero-title em{font-family:var(--serif);font-style:italic;font-weigh
   .mock-float-b{bottom:-24px}
   .work-grid{grid-template-columns:1fr}
   .wv-page,.work-featured .wv-page{min-height:240px}
+  .wv-kobi-hero,.wv-lnd-hero,.wv-toko-hero,.wv-atl-hero,.wv-nrd-hero{padding:36px 22px}
+  .wv-row,.wv-atl-grid,.wv-nrd-stats{padding:18px 22px 24px}
+  .wv-price{padding:0 22px 24px}
   .svc-row{grid-template-columns:1fr;gap:18px;padding:32px 0}
   .svc-num{padding-top:0}
   .svc-price{justify-self:start}
