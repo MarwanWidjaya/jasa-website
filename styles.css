@@ -188,6 +188,12 @@ h1 em,h2 em,.hero-title em{font-family:var(--serif);font-style:italic;font-weigh
 .pv-wa svg{width:16px;height:16px}
 .pv-wa b{font-size:.78rem}
 /* laundry */
+.pv-shade-teal{background:linear-gradient(180deg,rgba(4,22,19,.62) 0%,rgba(4,22,19,.18) 40%,rgba(4,22,19,.82) 100%)}
+.pv-laundry .pv-hero-txt h4 em{color:#5EEAD4}
+.pv-strip-teal{background:#071E1B}
+.pv-laundry .pv-item div span{color:#5EEAD4}
+.pv-btn-teal{background:#2DD4BF;color:#04211D}
+.work-visual:hover .pv-btn-teal{box-shadow:0 10px 26px rgba(45,212,191,.4)}
 .pv-hero-light{background:linear-gradient(135deg,#CCFBF1,#E0F2FE);color:#0C1F1D;min-height:300px}
 .pv-hero-light .pv-brand{color:#0F766E}
 .pv-hero-light .pv-menu i{color:#5B716E}
