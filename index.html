@@ -2,38 +2,37 @@
 <html lang="id">
 <head>
 <style>html,body{background:#0a0a0f!important;color:#fff;margin:0}</style>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MAGERWEB — Mager? Biar Web yang Kerja. 🚀</title>
+<title>MAGERWEB — Jasa Website Premium untuk UMKM Indonesia 🚀</title>
 <meta name="google-site-verification" content="LarzVZCfKPtbu27wQDo9hOh3rkw2BmSELoZkfov_Cu8" />
-<meta name="description" content="MAGERWEB — jasa pembuatan website untuk UMKM Indonesia. Landing page mulai Rp250rb, jadi 1-2 hari. Plus jasa data entry, riset data & konten.">
+<meta name="description" content="MAGERWEB — digital agency untuk UMKM Indonesia. Website profesional mulai Rp250rb, jadi 1-2 hari. Landing page, company profile, katalog online & jasa digital lainnya.">
 <link rel="canonical" href="https://marwanwidjaya.github.io/jasa-website/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"MAGERWEB","url":"https://marwanwidjaya.github.io/jasa-website/","description":"Jasa pembuatan website untuk UMKM Indonesia: landing page mulai Rp250rb, jadi 1-2 hari. Plus jasa data entry, riset data & konten.","telephone":"+62-857-2380-3537","priceRange":"Rp50rb - Rp1jt","areaServed":"ID"}
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"MAGERWEB","url":"https://marwanwidjaya.github.io/jasa-website/","description":"Digital agency untuk UMKM Indonesia: website profesional mulai Rp250rb, jadi 1-2 hari. Plus jasa data entry, riset data & konten.","telephone":"+62-857-2380-3537","priceRange":"Rp50rb - Rp1jt","areaServed":"ID"}
 </script>
 </head>
 <body>
 <div class="bg-fx"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="grid-overlay"></div></div>
 
 <!-- NAVBAR -->
-<nav class="navbar">
+<nav class="navbar" id="navbar">
   <div class="nav-inner">
-    <div class="logo" onclick="showView('landing')">MAGERWEB<small>JASA WEBSITE</small></div>
+    <div class="logo" onclick="showView('landing')">MAGERWEB<small>DIGITAL AGENCY</small></div>
     <div class="nav-links" id="navLinks">
+      <a href="#" onclick="showView('landing');scrollToId('layanan');return false">Layanan</a>
       <a href="#" onclick="showView('landing');scrollToId('portfolio');return false">Portfolio</a>
       <a href="#" onclick="showView('landing');scrollToId('harga');return false">Harga</a>
-      <a href="#" onclick="showView('landing');scrollToId('jasa-lain');return false">Jasa Lain</a>
-      <a href="#" onclick="showView('landing');scrollToId('bonus-tools');return false">Bonus Tools</a>
+      <a href="#" onclick="showView('landing');scrollToId('proses');return false">Proses</a>
       <a href="#" onclick="showView('landing');scrollToId('faq');return false">FAQ</a>
-      <a href="https://wa.me/6285723803537?text=Halo%20MagerWeb,%20saya%20mau%20tanya-tanya%20tentang%20jasa%20website" target="_blank" class="btn btn-primary btn-sm" onclick="toggleNav()">💬 Chat</a>
+      <a href="https://wa.me/6285723803537?text=Halo%20MagerWeb,%20saya%20mau%20konsultasi%20tentang%20jasa%20website" target="_blank" class="btn btn-primary btn-sm" onclick="toggleNav()">💬 Konsultasi Gratis</a>
     </div>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" onclick="toggleNav()">☰</button>
   </div>
 </nav>
 
@@ -44,191 +43,195 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-badge"><span class="dot"></span> 🚀 Jasa Website untuk UMKM Indonesia</div>
-    <h1>Mager bikin website? <span class="grad">MagerWeb solusinya. 😎</span></h1>
-    <p>Buat website itu ribet — makanya kamu mager aja, kami yang gerak. Landing page profesional mulai Rp250rb, jadi dalam 1-2 hari.</p>
-    <div class="hero-cta">
-      <button class="btn btn-primary" onclick="scrollToId('harga')"><i data-lucide="wallet"></i> 💰 Lihat Harga</button>
-      <a class="btn btn-ghost" href="https://wa.me/6285723803537?text=Halo%20MagerWeb,%20saya%20mau%20tanya-tanya%20tentang%20jasa%20website" target="_blank"><i data-lucide="message-circle"></i> 💬 Chat WhatsApp</a>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="hero-badge"><span class="dot"></span> 🚀 Digital Agency untuk UMKM Indonesia</div>
+        <h1>Bisnis kamu layak punya <span class="grad">website profesional.</span></h1>
+        <p class="hero-sub">Kami rancang & bangun website yang bikin bisnismu terlihat meyakinkan — tanpa kamu perlu pusing teknis. Mager? Biar kami yang gerak. 😎</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="https://wa.me/6285723803537?text=Halo%20MagerWeb,%20saya%20mau%20konsultasi%20gratis%20tentang%20website" target="_blank"><i data-lucide="message-circle"></i> Konsultasi Gratis</a>
+          <button class="btn btn-ghost btn-lg" onclick="scrollToId('portfolio')"><i data-lucide="eye"></i> Lihat Portfolio</button>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item"><strong>Rp250rb</strong><span>harga mulai</span></div>
+          <div class="trust-item"><strong>1-2 hari</strong><span>pengerjaan*</span></div>
+          <div class="trust-item"><strong>100%</strong><span>revisi sampai cocok</span></div>
+        </div>
+        <p class="hero-note">*landing page paket Basic</p>
+      </div>
+      <div class="hero-visual">
+        <div class="browser-mockup">
+          <div class="browser-bar"><span></span><span></span><span></span><div class="browser-url">magerweb.id/preview</div></div>
+          <div class="browser-body">
+            <div class="mock-hero"><div class="mock-line big"></div><div class="mock-line"></div><div class="mock-btn"></div></div>
+            <div class="mock-row"><div class="mock-card"></div><div class="mock-card"></div><div class="mock-card"></div></div>
+          </div>
+        </div>
+        <div class="float-card fc1">⚡ Website jadi 1-2 hari</div>
+        <div class="float-card fc2">💬 Fast respon</div>
+        <div class="float-card fc3">✅ Revisi sampai cocok</div>
+      </div>
     </div>
-    <div class="hero-visual">
-      <div class="float-card fc1">🌐 Website jadi 1-2 hari</div>
-      <div class="float-card fc2">💬 Fast respon</div>
-      <div class="float-card fc3">✅ Revisi sampai cocok</div>
-    </div>
-    <div class="stats">
-      <div class="stat"><div class="stat-num" data-count="5">0</div><div class="stat-label">Layanan Digital</div></div>
-      <div class="stat"><div class="stat-num" data-count="3">0</div><div class="stat-label">Demo Portfolio</div></div>
-      <div class="stat"><div class="stat-num" data-count="2">0</div><div class="stat-label">Hari Pengerjaan*</div></div>
-      <div class="stat"><div class="stat-num" data-count="100">0</div><div class="stat-label">% Komitmen</div></div>
-    </div>
-    <p style="color:var(--muted);font-size:.75rem;margin-top:10px">*landing page paket Basic</p>
   </section>
 
-<!-- PORTFOLIO -->
-<section id="portfolio" class="section">
-<div class="container">
-<div class="section-head"><span class="badge">🎨 PORTFOLIO</span><h2>Contoh Hasil Kerja</h2><p>Klik untuk lihat demo langsung — semua bisa dibuka di HP.</p></div>
-<div class="pricing-grid">
-<div class="price-card glass">
-<h3>☕ Kopi Senja</h3>
-<p>Landing page warung kopi — cozy dark theme dengan menu, jam buka, dan tombol WhatsApp.</p>
-<a class="btn btn-primary" href="portfolio/warung-kopi.html" target="_blank">Lihat Demo →</a>
-</div>
-<div class="price-card glass">
-<h3>👕 Laundry Bersih Kinclong</h3>
-<p>Company profile laundry — fresh & clean dengan price list dan cara order 3 langkah.</p>
-<a class="btn btn-primary" href="portfolio/laundry.html" target="_blank">Lihat Demo →</a>
-</div>
-<div class="price-card glass">
-<h3>🛒 Toko Berkah Jaya</h3>
-<p>Katalog online — 12 produk dengan filter kategori + keranjang belanja → pesan via WA.</p>
-<a class="btn btn-primary" href="portfolio/katalog-online.html" target="_blank">Lihat Demo →</a>
-</div>
-</div>
-<p class="price-note">* Nama usaha di atas adalah contoh untuk keperluan demo.</p>
-</div>
-</section>
+  <!-- MARQUEE -->
+  <div class="marquee"><div class="marquee-track">
+    <span>Landing Page</span><span>✦</span><span>Company Profile</span><span>✦</span><span>Katalog Online</span><span>✦</span><span>Toko Online</span><span>✦</span><span>SEO Dasar</span><span>✦</span><span>Integrasi WhatsApp</span><span>✦</span><span>Data Entry</span><span>✦</span><span>Riset Data</span><span>✦</span>
+    <span>Landing Page</span><span>✦</span><span>Company Profile</span><span>✦</span><span>Katalog Online</span><span>✦</span><span>Toko Online</span><span>✦</span><span>SEO Dasar</span><span>✦</span><span>Integrasi WhatsApp</span><span>✦</span><span>Data Entry</span><span>✦</span><span>Riset Data</span><span>✦</span>
+  </div></div>
 
+  <!-- LAYANAN -->
+  <section id="layanan" class="section">
+    <div class="container">
+      <div class="section-head"><span class="badge">🛠️ LAYANAN</span><h2>Apa yang bisa kami kerjakan</h2><p>Solusi digital lengkap untuk bisnismu — dari website sampai operasional harian.</p></div>
+      <div class="services-list">
+        <div class="service-row reveal">
+          <div class="service-num">01</div>
+          <div class="service-body"><h3>Landing Page</h3><p>Halaman promosi satu layar yang fokus bikin pengunjung chat atau beli. Cocok untuk launching produk, jasa, & event.</p><div class="service-tags"><span>Mulai Rp250rb</span><span>1-2 hari</span></div></div>
+          <div class="service-arrow">→</div>
+        </div>
+        <div class="service-row reveal">
+          <div class="service-num">02</div>
+          <div class="service-body"><h3>Website Bisnis / Company Profile</h3><p>Website multi-halaman yang bikin bisnismu terlihat profesional & terpercaya di mata calon pelanggan.</p><div class="service-tags"><span>Mulai Rp500rb</span><span>3-5 hari</span></div></div>
+          <div class="service-arrow">→</div>
+        </div>
+        <div class="service-row reveal">
+          <div class="service-num">03</div>
+          <div class="service-body"><h3>Katalog & Toko Online</h3><p>Katalog produk dengan filter kategori & keranjang belanja → order langsung via WhatsApp. Tanpa marketplace fee.</p><div class="service-tags"><span>Mulai Rp1jt</span><span>7-10 hari</span></div></div>
+          <div class="service-arrow">→</div>
+        </div>
+        <div class="service-row reveal">
+          <div class="service-num">04</div>
+          <div class="service-body"><h3>Perbaikan & Pengembangan Website</h3><p>Website lama lemot / berantakan? Kami perbaiki, rapikan, & tingkatkan — termasuk optimasi mobile & SEO dasar.</p><div class="service-tags"><span>Konsultasi gratis</span></div></div>
+          <div class="service-arrow">→</div>
+        </div>
+        <div class="service-row reveal">
+          <div class="service-num">05</div>
+          <div class="service-body"><h3>Jasa Digital Lainnya</h3><p>Data entry & Excel (Rp100rb), riset data (Rp150rb), konten & dokumen (Rp50rb) — per proyek, transparan.</p><div class="service-tags"><span>Mulai Rp50rb</span></div></div>
+          <div class="service-arrow">→</div>
+        </div>
+      </div>
+      <div class="center" style="margin-top:32px"><a class="btn btn-primary" href="https://wa.me/6285723803537?text=Halo%20MagerWeb,%20saya%20mau%20diskusi%20kebutuhan%20website" target="_blank">💬 Diskusikan Kebutuhanmu</a></div>
+    </div>
+  </section>
 
-  
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="section">
+    <div class="container">
+      <div class="section-head"><span class="badge">🎨 PORTFOLIO</span><h2>Hasil kerja kami</h2><p>Klik untuk buka demo live — semua mobile-friendly.</p></div>
+      <div class="portfolio-grid">
+        <a class="portfolio-card reveal" href="portfolio/warung-kopi.html" target="_blank">
+          <div class="portfolio-thumb pt-kopi"><span class="portfolio-emoji">☕</span></div>
+          <div class="portfolio-info"><h3>Kopi Senja</h3><p>Landing page warung kopi — cozy dark theme, menu, jam buka, tombol WA.</p><span class="portfolio-link">Lihat Demo Live →</span></div>
+        </a>
+        <a class="portfolio-card reveal" href="portfolio/laundry.html" target="_blank">
+          <div class="portfolio-thumb pt-laundry"><span class="portfolio-emoji">👕</span></div>
+          <div class="portfolio-info"><h3>Laundry Bersih Kinclong</h3><p>Company profile laundry — fresh & clean, price list, cara order 3 langkah.</p><span class="portfolio-link">Lihat Demo Live →</span></div>
+        </a>
+        <a class="portfolio-card reveal" href="portfolio/katalog-online.html" target="_blank">
+          <div class="portfolio-thumb pt-toko"><span class="portfolio-emoji">🛒</span></div>
+          <div class="portfolio-info"><h3>Toko Berkah Jaya</h3><p>Katalog online — 12 produk, filter kategori, keranjang → pesan via WA.</p><span class="portfolio-link">Lihat Demo Live →</span></div>
+        </a>
+      </div>
+      <p class="price-note">* Contoh demo untuk menunjukkan kualitas hasil kerja.</p>
+    </div>
+  </section>
 
+  <!-- HARGA -->
+  <section id="harga" class="section">
+    <div class="container">
+      <div class="section-head"><span class="badge">💰 HARGA</span><h2>Investasi yang transparan</h2><p>Tanpa biaya tersembunyi. DP 50%, pelunasan setelah kamu ACC.</p></div>
+      <div class="pricing-grid">
+        <div class="price-card glass reveal">
+          <div class="price-top"><h3>🌱 Basic</h3><p class="price-desc">Untuk mulai tampil online</p></div>
+          <div class="price">Rp250<span>rb</span></div>
+          <ul><li>✅ Landing page 1 halaman</li><li>✅ Mobile-friendly</li><li>✅ Tombol WhatsApp</li><li>✅ 1x revisi</li><li>✅ Jadi 1-2 hari</li><li class="off">❌ Halaman tambahan</li><li class="off">❌ Optimasi SEO</li></ul>
+          <a class="btn btn-ghost btn-block" href="https://wa.me/6285723803537?text=Halo%20MagerWeb,%20saya%20tertarik%20paket%20Basic%20(Rp250rb)" target="_blank">Pilih Basic</a>
+        </div>
+        <div class="price-card glass featured reveal">
+          <div class="featured-tag">PALING DIPILIH</div>
+          <div class="price-top"><h3>🚀 Standard</h3><p class="price-desc">Untuk bisnis yang serius</p></div>
+          <div class="price">Rp500<span>rb</span></div>
+          <ul><li>✅ Sampai 5 halaman</li><li>✅ Mobile-friendly</li><li>✅ WA + formulir kontak</li><li>✅ 2x revisi</li><li>✅ SEO dasar</li><li>✅ Jadi 3-5 hari</li><li class="off">❌ Update bulanan</li></ul>
+          <a class="btn btn-primary btn-block" href="https://wa.me/6285723803537?text=Halo%20MagerWeb,%20saya%20tertarik%20paket%20Standard%20(Rp500rb)" target="_blank">Pilih Standard</a>
+        </div>
+        <div class="price-card glass reveal">
+          <div class="price-top"><h3>💎 Premium</h3><p class="price-desc">Untuk skala maksimal</p></div>
+          <div class="price">Rp1<span>jt</span></div>
+          <ul><li>✅ Sampai 10 halaman</li><li>✅ Desain custom</li><li>✅ Integrasi WA penuh</li><li>✅ 3x revisi</li><li>✅ SEO + Google Business</li><li>✅ Panduan penggunaan</li><li>✅ Jadi 7-10 hari</li></ul>
+          <a class="btn btn-ghost btn-block" href="https://wa.me/6285723803537?text=Halo%20MagerWeb,%20saya%20tertarik%20paket%20Premium%20(Rp1jt)" target="_blank">Pilih Premium</a>
+        </div>
+      </div>
+      <p class="price-note">* Di luar domain & hosting (±Rp150rb/tahun, bisa dibantu daftarkan).</p>
+    </div>
+  </section>
 
+  <!-- PROSES -->
+  <section id="proses" class="section">
+    <div class="container">
+      <div class="section-head"><span class="badge">⚙️ PROSES</span><h2>Simpel, tanpa ribet</h2><p>Dari chat pertama sampai website live — kamu tinggal terima beres.</p></div>
+      <div class="process-timeline">
+        <div class="process-step reveal"><div class="process-num">01</div><h3>Konsultasi Gratis</h3><p>Ceritakan kebutuhanmu via WhatsApp. Tanya-tanya dulu, tanpa komitmen.</p></div>
+        <div class="process-step reveal"><div class="process-num">02</div><h3>Deal & DP 50%</h3><p>Sepakat paket & timeline. DP 50% sebagai tanda jadi pengerjaan.</p></div>
+        <div class="process-step reveal"><div class="process-num">03</div><h3>Pengerjaan</h3><p>Website dibangun sesuai timeline. Progres dikabari berkala via WA.</p></div>
+        <div class="process-step reveal"><div class="process-num">04</div><h3>Revisi & Serah Terima</h3><p>Revisi sampai cocok, pelunasan, serah terima penuh + panduan. 🎉</p></div>
+      </div>
+    </div>
+  </section>
 
-  
+  <!-- KEUNGGULAN -->
+  <section id="keunggulan" class="section">
+    <div class="container">
+      <div class="section-head"><span class="badge">⭐ KENAPA KAMI</span><h2>Kenapa pilih MagerWeb</h2></div>
+      <div class="why-grid">
+        <div class="why-card reveal"><div class="why-icon">⚡</div><h3>Cepat</h3><p>Landing page jadi 1-2 hari. Nggak pakai nunggu berminggu-minggu.</p></div>
+        <div class="why-card reveal"><div class="why-icon">💰</div><h3>Transparan</h3><p>Harga jelas di depan. Tanpa biaya siluman.</p></div>
+        <div class="why-card reveal"><div class="why-icon">🔄</div><h3>Revisi Sampai Cocok</h3><p>Garansi kepuasan sesuai paket yang dipilih.</p></div>
+        <div class="why-card reveal"><div class="why-icon">🤝</div><h3>Ramah & Fast Respon</h3><p>Chat WA langsung dibalas. Gaptek? Dipandu sampai bisa.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BONUS TOOLS -->
+  <section id="bonus-tools" class="section">
+    <div class="container">
+      <div class="section-head"><span class="badge">🎁 BONUS</span><h2>Tools gratis buat kamu</h2><p>Sambil nunggu website jadi — langsung pakai di browser, tanpa daftar.</p></div>
+      <div class="tools-grid">
+        <div class="tool-card" onclick="openTool('prompt-studio')"><div class="tool-top"><span class="tool-cat">AI</span><span class="demo-badge" style="position:static">DEMO</span></div><h3>✨ AI Prompt Studio</h3><p>Generate prompt terstruktur dari kebutuhanmu.</p></div>
+        <div class="tool-card" onclick="openTool('text-tools')"><div class="tool-top"><span class="tool-cat">Teks</span></div><h3>🔤 Smart Text Tools</h3><p>Hitung kata, ubah kapital, bersihkan teks.</p></div>
+        <div class="tool-card" onclick="openTool('prompt-library')"><div class="tool-top"><span class="tool-cat">Produktivitas</span></div><h3>📚 Prompt Library</h3><p>Simpan, cari & kelola prompt favoritmu.</p></div>
+        <div class="tool-card" onclick="openTool('dashboard')"><div class="tool-top"><span class="tool-cat">Produktivitas</span></div><h3>📈 Dashboard</h3><p>Statistik penggunaan tools-mu.</p></div>
+      </div>
+    </div>
+  </section>
 
   <!-- FAQ -->
-  
-<!-- PRICING JASA -->
-
-<section id="harga" class="section">
-<div class="container">
-<div class="section-head"><span class="badge">💰 HARGA</span><h2>Jasa Pembuatan Website</h2><p>Mager bikin website? Serahin ke kami. Harga transparan, hasil profesional.</p></div>
-<div class="pricing-grid">
-<div class="price-card glass">
-<h3>🌱 Basic</h3><div class="price">Rp250<span>rb</span></div>
-<ul><li>✅ Landing page 1 halaman</li><li>✅ Mobile-friendly</li><li>✅ Tombol WhatsApp</li><li>✅ 1x revisi</li><li>✅ Jadi 1-2 hari</li><li>❌ Halaman tambahan</li><li>❌ Optimasi SEO</li></ul>
-<a class="btn btn-primary" href="https://wa.me/6285723803537?text=Halo%20MagerWeb,%20saya%20tertarik%20paket%20Basic%20(Rp250rb)">Pilih Basic</a>
-</div>
-<div class="price-card glass featured">
-<h3>🚀 Standard</h3><div class="price">Rp500<span>rb</span></div>
-<ul><li>✅ Sampai 5 halaman</li><li>✅ Mobile-friendly</li><li>✅ WA + formulir kontak</li><li>✅ 2x revisi</li><li>✅ SEO dasar</li><li>✅ Jadi 3-5 hari</li><li>❌ Update bulanan</li></ul>
-<a class="btn btn-primary" href="https://wa.me/6285723803537?text=Halo%20MagerWeb,%20saya%20tertarik%20paket%20Standard%20(Rp500rb)">Pilih Standard</a>
-</div>
-<div class="price-card glass">
-<h3>💎 Premium</h3><div class="price">Rp1<span>jt</span></div>
-<ul><li>✅ Sampai 10 halaman</li><li>✅ Desain custom</li><li>✅ Integrasi WA penuh</li><li>✅ 3x revisi</li><li>✅ SEO + Google Business</li><li>✅ Panduan penggunaan</li><li>✅ Jadi 7-10 hari</li></ul>
-<a class="btn btn-primary" href="https://wa.me/6285723803537?text=Halo%20MagerWeb,%20saya%20tertarik%20paket%20Premium%20(Rp1jt)">Pilih Premium</a>
-</div>
-</div>
-<p class="price-note">* Harga di luar domain & hosting (±Rp150rb/tahun, bisa dibantu daftarkan).</p>
-</div>
-</section>
-
-
-<!-- JASA LAINNYA -->
-<section id="jasa-lain" class="section">
-<div class="container">
-<div class="section-head"><span class="badge">🛠️ JASA LAINNYA</span><h2>Butuh Bantuan Lain?</h2><p>Selain website, kami juga bantu kerjaan digital lainnya.</p></div>
-<div class="pricing-grid">
-<div class="price-card glass">
-<h3>📊 Data Entry & Excel</h3><div class="price">Rp100<span>rb/proyek</span></div>
-<ul><li>✅ Input & rapikan data</li><li>✅ Laporan Excel otomatis</li><li>✅ Konversi PDF/CSV ke Excel</li><li>✅ Pembersihan data</li></ul>
-<a class="btn btn-primary" href="https://wa.me/6285723803537?text=Halo%20MagerWeb,%20saya%20butuh%20jasa%20data%20entry">Chat Sekarang</a>
-</div>
-<div class="price-card glass">
-<h3>🔍 Riset Data</h3><div class="price">Rp150<span>rb/proyek</span></div>
-<ul><li>✅ Web research</li><li>✅ Daftar kontak / leads</li><li>✅ Riset kompetitor</li><li>✅ Rekap spreadsheet rapi</li></ul>
-<a class="btn btn-primary" href="https://wa.me/6285723803537?text=Halo%20MagerWeb,%20saya%20butuh%20jasa%20riset%20data">Chat Sekarang</a>
-</div>
-<div class="price-card glass">
-<h3>✍️ Konten & Dokumen</h3><div class="price">Rp50<span>rb/proyek</span></div>
-<ul><li>✅ Artikel / deskripsi produk</li><li>✅ CV & surat lamaran</li><li>✅ Slide presentasi</li><li>✅ Terjemahan ID ↔ EN</li></ul>
-<a class="btn btn-primary" href="https://wa.me/6285723803537?text=Halo%20MagerWeb,%20saya%20butuh%20jasa%20konten">Chat Sekarang</a>
-</div>
-</div>
-</div>
-</section>
-
-<!-- KEUNGGULAN -->
-<section id="keunggulan" class="section">
-<div class="container">
-<div class="section-head"><span class="badge">⭐ KENAPA KAMI</span><h2>Keunggulan MagerWeb</h2><p>Kenapa UMKM pilih kami dibanding yang lain.</p></div>
-<div class="pricing-grid">
-<div class="price-card"><div style="font-size:2.4em;margin-bottom:8px">⚡</div><h3>Pengerjaan Cepat</h3><p>Landing page jadi dalam 1-2 hari. Nggak perlu nunggu berminggu-minggu.</p></div>
-<div class="price-card"><div style="font-size:2.4em;margin-bottom:8px">💰</div><h3>Harga Transparan</h3><p>Harga jelas di depan, tanpa biaya tersembunyi. DP 50%, pelunasan setelah ACC.</p></div>
-<div class="price-card"><div style="font-size:2.4em;margin-bottom:8px">🔄</div><h3>Revisi Sampai Cocok</h3><p>Garansi kepuasan: revisi sesuai paket sampai desain benar-benar pas.</p></div>
-<div class="price-card"><div style="font-size:2.4em;margin-bottom:8px">🤝</div><h3>Support Ramah</h3><p>Fast respon via WhatsApp. Tanya-tanya dulu, tanpa komitmen.</p></div>
-</div>
-</div>
-</section>
-
-<section id="cara-kerja">
-    <div class="sec-head">
-      <div class="sec-tag">Simpel Banget</div>
-      <h2>Cara <span class="grad">Kerja</span></h2>
-    </div>
-    <div class="steps">
-      <div class="step"><div class="step-num">01</div><h3>Konsultasi</h3><p>Ceritakan kebutuhanmu via WhatsApp. Tanya-tanya dulu, tanpa komitmen.</p></div>
-      <div class="step"><div class="step-num">02</div><h3>Deal & DP 50%</h3><p>Sepakat paket & harga, DP 50% sebagai tanda jadi pengerjaan.</p></div>
-      <div class="step"><div class="step-num">03</div><h3>Pengerjaan</h3><p>Website dikerjakan sesuai timeline. Progres dikabari berkala.</p></div>
-      <div class="step"><div class="step-num">04</div><h3>Revisi & Serah Terima</h3><p>Revisi sampai cocok, pelunasan, serah terima penuh. Beres! 🎉</p></div>
-    </div>
-  </section>
-
-<!-- BONUS TOOLS -->
-  <section id="bonus-tools">
-    <div class="sec-head">
-      <div class="sec-tag">🎁 Bonus</div>
-      <h2>Bonus Buat <span class="grad">Kamu 🎁</span></h2>
-      <p>Sambil nunggu website jadi, coba tools digital kami — langsung pakai di browser, tanpa daftar.</p>
-    </div>
-    <div class="tools-grid">
-      <div class="tool-card" onclick="openTool('prompt-studio')">
-        <div class="tool-top"><span class="tool-cat">AI</span><span class="demo-badge" style="position:static">DEMO</span></div>
-        <h3>✨ AI Prompt Studio</h3>
-        <p>Generate prompt terstruktur dari kebutuhanmu.</p>
-      </div>
-      <div class="tool-card" onclick="openTool('text-tools')">
-        <div class="tool-top"><span class="tool-cat">Teks</span></div>
-        <h3>🔤 Smart Text Tools</h3>
-        <p>Hitung kata, ubah kapital, bersihkan teks.</p>
-      </div>
-      <div class="tool-card" onclick="openTool('prompt-library')">
-        <div class="tool-top"><span class="tool-cat">Produktivitas</span></div>
-        <h3>📚 Prompt Library</h3>
-        <p>Simpan, cari & kelola prompt favoritmu.</p>
-      </div>
-      <div class="tool-card" onclick="openToolWithTab('text-tools','counter')">
-        <div class="tool-top"><span class="tool-cat">Teks</span></div>
-        <h3>📊 Word Counter</h3>
-        <p>Hitung kata & karakter — live.</p>
-      </div>
-      <div class="tool-card" onclick="openTool('dashboard')">
-        <div class="tool-top"><span class="tool-cat">Produktivitas</span></div>
-        <h3>📈 Dashboard</h3>
-        <p>Statistik penggunaan tools-mu.</p>
+  <section id="faq" class="section">
+    <div class="container narrow">
+      <div class="section-head"><span class="badge">❓ FAQ</span><h2>Pertanyaan populer</h2></div>
+      <div id="faqList">
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Berapa lama pengerjaannya? <i data-lucide="chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">Basic 1-2 hari, Standard 3-5 hari, Premium 7-10 hari.</div></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Bagaimana sistem pembayarannya? <i data-lucide="chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">DP 50% di awal, pelunasan setelah kamu ACC. Via transfer bank / e-wallet.</div></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Berapa kali revisi? <i data-lucide="chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">1x (Basic), 2x (Standard), 3x (Premium) — sampai cocok dalam batas wajar.</div></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Apakah dapat domain sendiri? <i data-lucide="chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">Bisa dibantu daftarkan. Biaya domain & hosting ±Rp150rb/tahun, di luar harga paket.</div></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Saya gaptek, bisa dibantu? <i data-lucide="chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">Sangat bisa! Dipandu langkah demi langkah sampai bisa pakai sendiri. 😊</div></div></div>
       </div>
     </div>
   </section>
 
-<section id="faq">
-    <div class="sec-head">
-      <div class="sec-tag">FAQ</div>
-      <h2>Pertanyaan <span class="grad">Populer</span></h2>
-    </div>
-    <div id="faqList">
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Berapa lama pengerjaannya? <i data-lucide="chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">Tergantung paket: Basic 1-2 hari, Standard 3-5 hari, Premium 7-10 hari. Untuk jasa data entry/lainnya, estimasi diberikan setelah konsultasi.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Bagaimana sistem pembayarannya? <i data-lucide="chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">DP 50% di awal sebagai tanda jadi, pelunasan setelah hasil jadi dan kamu ACC. Pembayaran via transfer bank / e-wallet.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Berapa kali revisi? <i data-lucide="chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">Sesuai paket: 1x (Basic), 2x (Standard), 3x (Premium). Revisi dikerjakan sampai cocok dalam batas wajar.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Apakah dapat domain sendiri? <i data-lucide="chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">Bisa dibantu daftarkan (misal: namatoko.com). Biaya domain & hosting ±Rp150rb/tahun dibayar ke penyedia, di luar harga paket.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Saya gaptek, bisa dibantu? <i data-lucide="chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">Sangat bisa! Dipandu langkah demi langkah sampai kamu bisa pakai websitenya sendiri. Nggak perlu malu bertanya. 😊</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Apa itu Bonus Tools? <i data-lucide="chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">Tools digital kecil (prompt studio, text tools, dll) yang bisa langsung dipakai di browser tanpa daftar — bonus buat pengunjung MagerWeb.</div></div></div>
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>Siap bikin bisnismu <span class="grad">tampil profesional?</span></h2>
+      <p>Konsultasi gratis, tanpa komitmen. Ceritakan kebutuhanmu — kami kasih solusi terbaik.</p>
+      <a class="btn btn-primary btn-lg" href="https://wa.me/6285723803537?text=Halo%20MagerWeb,%20saya%20mau%20konsultasi%20gratis!" target="_blank">💬 Chat WhatsApp Sekarang</a>
+      <p class="cta-note">Mager bikin website? MagerWeb solusinya. 😎</p>
     </div>
   </section>
-</div>
 
-<!-- ============ TOOL: PROMPT STUDIO ============ -->
+</div><!-- /view-landing -->
+
+<!-- ============ TOOL VIEWS (unchanged) ============ -->
 <div id="view-prompt-studio" class="view">
   <section style="padding-top:40px">
     <div class="view-head">
@@ -272,7 +275,6 @@
   </section>
 </div>
 
-<!-- ============ TOOL: TEXT TOOLS ============ -->
 <div id="view-text-tools" class="view">
   <section style="padding-top:40px">
     <div class="view-head">
@@ -285,7 +287,6 @@
       <button class="tab" onclick="switchTab('text-tools','clean')">🧹 Bersihkan</button>
       <button class="tab" onclick="switchTab('text-tools','reverse')">🔄 Balik Teks</button>
     </div>
-
     <div class="tab-panel active" id="ttp-counter">
       <div class="panel">
         <h3><i data-lucide="bar-chart-3"></i> Penghitung Kata (Live)</h3>
@@ -300,7 +301,6 @@
         </div>
       </div>
     </div>
-
     <div class="tab-panel" id="ttp-case">
       <div class="panel">
         <h3><i data-lucide="case-sensitive"></i> Ubah Kapitalisasi</h3>
@@ -316,7 +316,6 @@
         <div class="output-actions"><button class="btn btn-primary btn-sm" onclick="copyText('caseOutput')"><i data-lucide="copy"></i> Salin</button></div>
       </div>
     </div>
-
     <div class="tab-panel" id="ttp-clean">
       <div class="panel">
         <h3><i data-lucide="brush"></i> Bersihkan Teks</h3>
@@ -330,7 +329,6 @@
         <div class="output-actions"><button class="btn btn-primary btn-sm" onclick="copyText('cleanOutput')"><i data-lucide="copy"></i> Salin</button></div>
       </div>
     </div>
-
     <div class="tab-panel" id="ttp-reverse">
       <div class="panel">
         <h3><i data-lucide="repeat"></i> Balik Teks (For Fun 🎮)</h3>
@@ -347,7 +345,6 @@
   </section>
 </div>
 
-<!-- ============ TOOL: PROMPT LIBRARY ============ -->
 <div id="view-prompt-library" class="view">
   <section style="padding-top:40px">
     <div class="view-head">
@@ -386,7 +383,6 @@
   </section>
 </div>
 
-<!-- ============ TOOL: DASHBOARD ============ -->
 <div id="view-dashboard" class="view">
   <section style="padding-top:40px">
     <div class="view-head">
@@ -418,30 +414,29 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="logo" style="margin-bottom:12px">MAGERWEB<small>JASA WEBSITE</small></div>
-        <p>Mager bikin website? MagerWeb solusinya. 😎 Jasa website & digital untuk UMKM Indonesia.</p>
+        <div class="logo" style="margin-bottom:12px">MAGERWEB<small>DIGITAL AGENCY</small></div>
+        <p>Digital agency untuk UMKM Indonesia. Website profesional, harga transparan, hasil memuaskan. 😎</p>
+        <a class="btn btn-primary btn-sm" style="margin-top:12px" href="https://wa.me/6285723803537?text=Halo%20MagerWeb!" target="_blank">💬 Hubungi Kami</a>
       </div>
       <div>
-        <h4>Jasa</h4>
+        <h4>Layanan</h4>
+        <a href="#" onclick="showView('landing');scrollToId('layanan');return false">Landing Page</a>
+        <a href="#" onclick="showView('landing');scrollToId('layanan');return false">Company Profile</a>
+        <a href="#" onclick="showView('landing');scrollToId('layanan');return false">Katalog Online</a>
+        <a href="#" onclick="showView('landing');scrollToId('harga');return false">Harga</a>
+      </div>
+      <div>
+        <h4>Perusahaan</h4>
         <a href="#" onclick="showView('landing');scrollToId('portfolio');return false">Portfolio</a>
-        <a href="#" onclick="showView('landing');scrollToId('harga');return false">Harga Website</a>
-        <a href="#" onclick="showView('landing');scrollToId('jasa-lain');return false">Jasa Lainnya</a>
+        <a href="#" onclick="showView('landing');scrollToId('proses');return false">Cara Kerja</a>
         <a href="#" onclick="showView('landing');scrollToId('faq');return false">FAQ</a>
+        <a href="blog/kenapa-bisnis-kecil-butuh-website-2026.html">Blog</a>
       </div>
       <div>
         <h4>Bonus Tools</h4>
         <a href="#" onclick="openTool('prompt-studio');return false">AI Prompt Studio</a>
         <a href="#" onclick="openTool('text-tools');return false">Smart Text Tools</a>
         <a href="#" onclick="openTool('prompt-library');return false">Prompt Library</a>
-        <a href="#" onclick="openTool('dashboard');return false">Dashboard</a>
-      </div>
-      <div>
-        <h4>Lainnya</h4>
-        <a href="blog/kenapa-bisnis-kecil-butuh-website-2026.html">Blog</a>
-        <a href="#" onclick="showView('landing');scrollToId('portfolio');return false">Portfolio</a>
-      <a href="#" onclick="showView('landing');scrollToId('harga');return false">Harga</a>
-      <a href="#" onclick="showView('landing');scrollToId('jasa-lain');return false">Jasa Lain</a>
-      <a href="#" onclick="showView('landing');scrollToId('faq');return false">FAQ</a>
         <a href="sitemap.xml">Sitemap</a>
       </div>
     </div>
@@ -452,6 +447,27 @@
 <div class="toast" id="toast"></div>
 
 <script src="app.js"></script>
+<script>
+// Scroll reveal + navbar effect
+(function(){
+  var nav = document.getElementById('navbar');
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+    // reveal
+    document.querySelectorAll('.reveal').forEach(function(el){
+      var r = el.getBoundingClientRect();
+      if(r.top < window.innerHeight * 0.88) el.classList.add('visible');
+    });
+  }, {passive:true});
+  // trigger once on load
+  setTimeout(function(){
+    document.querySelectorAll('.reveal').forEach(function(el){
+      var r = el.getBoundingClientRect();
+      if(r.top < window.innerHeight * 0.88) el.classList.add('visible');
+    });
+  }, 300);
+})();
+</script>
 <script data-goatcounter="https://marwan-jasa.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
