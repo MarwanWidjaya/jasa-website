@@ -124,6 +124,7 @@ section{padding:80px 0}
 .pt-toko{background:linear-gradient(135deg,#1e1033,#120a1f)}
 .portfolio-info{padding:24px}
 .portfolio-info h3{font-size:1.2rem;margin-bottom:8px}
+.portfolio-tier{display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:rgba(139,92,246,.16);border:1px solid rgba(139,92,246,.4);color:#c4b5fd;border-radius:100px;padding:4px 14px;margin-bottom:12px}
 .portfolio-info p{color:var(--muted);font-size:.92rem;margin-bottom:14px}
 .portfolio-link{color:var(--purple);font-weight:700;font-size:.9rem}
 
