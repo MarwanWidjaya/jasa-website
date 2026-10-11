@@ -103,7 +103,7 @@ h1 em,h2 em,.hero-title em{font-family:var(--serif);font-style:italic;font-weigh
 .mock-chrome span:first-child{background:#3d3d3a}
 .mock-url{margin-left:10px;flex:1;font-size:.72rem;color:var(--ink-faint);font-family:ui-monospace,monospace;letter-spacing:.04em}
 .mock-page{padding:0}
-.mock-kobi{background:#1E1A15;color:#F4F1EA}
+.mock-kopi{background:#1E1A15;color:#F4F1EA}
 .mk-nav{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid rgba(244,241,234,.1)}
 .mk-logo{font-family:var(--sans);font-weight:800;font-size:.85rem;letter-spacing:.14em}
 .mk-links{display:flex;gap:14px}
@@ -160,7 +160,7 @@ h1 em,h2 em,.hero-title em{font-family:var(--serif);font-style:italic;font-weigh
 .pv-hero-txt h4{font-family:var(--sans);font-weight:800;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.08;letter-spacing:-.02em;margin-bottom:10px}
 .work-featured .pv-hero-txt h4{font-size:clamp(2rem,4vw,3rem)}
 .pv-hero-txt h4 em{font-family:var(--serif);font-style:italic;font-weight:400}
-.pv-kobi .pv-hero-txt h4 em{color:#E8B96A}
+.pv-kopi .pv-hero-txt h4 em{color:#E8B96A}
 .pv-toko .pv-hero-txt h4 em{color:#9DB8FF}
 .pv-nord .pv-hero-txt h4 em{color:var(--lime)}
 .pv-hero-txt p{font-size:.88rem;opacity:.82;margin-bottom:16px;max-width:380px}
