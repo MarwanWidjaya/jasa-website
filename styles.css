@@ -395,9 +395,9 @@ h1 em,h2 em,.hero-title em{font-family:var(--serif);font-style:italic;font-weigh
   .hero-ctas .btn{flex:1;justify-content:center}
   .hero-meta{gap:26px}
   .mock-main{transform:none}
-  .mock-float{max-width:200px;padding:14px 16px}
-  .mock-float-a{top:-24px}
-  .mock-float-b{bottom:-24px}
+  .mock-stage{display:flex;flex-direction:column;gap:14px}
+  .mock-float{position:static;max-width:none;padding:14px 16px;animation:none}
+  .mock-float-a,.mock-float-b{top:auto;bottom:auto;left:auto;right:auto}
   .work-grid{grid-template-columns:1fr}
   .pv-hero{min-height:260px;padding:22px}
   .work-featured .pv-hero{min-height:320px}
