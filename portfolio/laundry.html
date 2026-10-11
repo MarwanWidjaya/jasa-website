@@ -34,6 +34,7 @@ nav .links a:hover{color:var(--teal-dk)}
 .hero-badges span{background:#fff;border:1px solid #14b8a633;border-radius:100px;padding:.5rem 1.1rem;font-size:.82rem;font-weight:700;color:var(--teal-dk)}
 .hero-card{background:#fff;border-radius:24px;padding:2.5rem;box-shadow:0 24px 70px rgba(20,184,166,.16);border:1px solid #14b8a622;position:relative}
 .hero-card::before{content:'👕';font-size:3.4rem;position:absolute;top:-1.6rem;left:2rem;background:#fff;border-radius:50%;width:4.2rem;height:4.2rem;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(20,184,166,.25)}
+.hero-photo{height:150px;border-radius:16px;background-size:cover;background-position:center;margin:-1rem -1rem 1.2rem}
 .hero-card h3{margin-bottom:1.2rem;font-size:1.25rem}
 .calc-row{display:flex;justify-content:space-between;align-items:center;padding:.7rem 0;border-bottom:1px dashed #14b8a633;font-size:.92rem}
 .calc-row select{border:1.5px solid #14b8a655;border-radius:10px;padding:.5rem .8rem;font-family:inherit;font-weight:700;color:var(--teal-dk)}
@@ -93,12 +94,14 @@ footer a{color:var(--cyan)}
 <div class="hero-badges"><span>🚚 Antar-jemput gratis</span><span>⚡ Express 6 jam</span><span>✅ Garansi bersih</span></div>
 </div>
 <div class="hero-card">
+<div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?w=800&q=65&auto=format&fit=crop')"></div>
 <h3>🧮 Estimasi Harga</h3>
 <div class="calc-row"><span>Cuci + Setrika / kg</span><select id="jenis"><option value="8000">Reguler — Rp8rb</option><option value="15000">Express — Rp15rb</option><option value="12000">Cuci Kering — Rp12rb</option></select></div>
 <div class="calc-row"><span>Berat (kg)</span><select id="berat"><option>2</option><option>3</option><option selected>5</option><option>7</option><option>10</option></select></div>
 <div class="calc-row"><span>Bed cover</span><select id="bed"><option value="0">0</option><option value="25000">1 — Rp25rb</option><option value="45000">2 — Rp45rb</option></select></div>
 <div class="calc-total"><span>Estimasi:</span><strong id="total">Rp40rb</strong></div>
-<p style="margin-top:1rem"><a class="btn btn-teal" style="width:100%;justify-content:center" href="https://wa.me/6281234567890" target="_blank">Order via WA →</a></p>
+<p style="margin-top:1rem"><a class="btn btn-teal" id="orderBtn" style="width:100%;justify-content:center" href="https://wa.me/6281234567890" target="_blank">Order via WA →</a></p>
+<p style="font-size:.75rem;color:var(--muted);text-align:center;margin-top:.6rem">Estimasi otomatis terkirim ke WhatsApp</p>
 </div>
 </div></div>
 
@@ -150,11 +153,17 @@ footer a{color:var(--cyan)}
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 function hitung(){
-  const j=+document.getElementById('jenis').value;
+  const jenisEl=document.getElementById('jenis');
+  const j=+jenisEl.value;
   const b=+document.getElementById('berat').value;
-  const d=+document.getElementById('bed').value;
+  const bedEl=document.getElementById('bed');
+  const d=+bedEl.value;
   const t=j*b+d;
   document.getElementById('total').textContent='Rp'+t.toLocaleString('id-ID');
+  const jenisTxt=jenisEl.options[jenisEl.selectedIndex].text;
+  const bedTxt=bedEl.options[bedEl.selectedIndex].text;
+  const msg='Halo Laundry Bersih Kinclong! Saya mau order:%0A'+encodeURIComponent('- '+jenisTxt+' x '+b+'kg')+'%0A'+encodeURIComponent('- Bed cover: '+bedTxt)+'%0A%0AEstimasi: Rp'+t.toLocaleString('id-ID');
+  document.getElementById('orderBtn').href='https://wa.me/6281234567890?text='+msg;
 }
 ['jenis','berat','bed'].forEach(id=>document.getElementById(id).addEventListener('change',hitung));
 hitung();
