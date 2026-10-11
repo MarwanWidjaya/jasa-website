@@ -37,7 +37,26 @@ main{max-width:1200px;margin:auto;padding:3rem 1.5rem}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.4rem}
 .pcard{background:var(--card);border:1px solid #a855f733;border-radius:20px;overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s}
 .pcard:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(124,58,237,.25);border-color:#a855f788}
-.pimg{height:170px;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative}
+.pimg{height:170px;background-size:cover;background-position:center;position:relative;cursor:pointer;overflow:hidden}
+.pimg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(14,10,26,.55));opacity:0;transition:opacity .3s}
+.pcard:hover .pimg::after{opacity:1}
+.zoom{position:absolute;bottom:12px;left:50%;transform:translateX(-50%) translateY(8px);background:rgba(14,10,26,.85);color:#fff;font-size:.72rem;font-weight:700;padding:7px 16px;border-radius:100px;opacity:0;transition:all .3s;z-index:2;white-space:nowrap}
+.pcard:hover .zoom{opacity:1;transform:translateX(-50%) translateY(0)}
+.dmodal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.dmodal.open{display:flex}
+.dmodal-bg{position:absolute;inset:0;background:rgba(5,3,12,.82);backdrop-filter:blur(8px)}
+.dmodal-box{position:relative;background:var(--bg2);border:1px solid #a855f755;border-radius:24px;max-width:560px;width:100%;overflow:hidden;animation:popIn .45s cubic-bezier(.22,1,.36,1);max-height:90vh;overflow-y:auto}
+@keyframes popIn{from{opacity:0;transform:translateY(28px) scale(.96)}to{opacity:1;transform:none}}
+.dmodal-photo{height:260px;background-size:cover;background-position:center;position:relative}
+.dmodal-body{padding:2rem}
+.dmodal-body .cat{font-size:.72rem;color:#c084fc;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.dmodal-body h3{font-size:1.5rem;margin:.4rem 0 .8rem}
+.dmodal-body p{color:var(--muted);font-size:.92rem;margin-bottom:1.2rem}
+.dmodal-foot{display:flex;gap:1rem;align-items:center}
+.qty2{display:flex;align-items:center;gap:.8rem;background:var(--card);border-radius:100px;padding:.4rem .8rem}
+.qty2 button{width:2rem;height:2rem;border-radius:50%;border:1px solid #a855f766;background:none;color:#fff;cursor:pointer;font-weight:800;font-size:1rem}
+.dmodal-close{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:none;background:rgba(14,10,26,.7);color:#fff;font-size:1.1rem;cursor:pointer;z-index:2}
+.sim-note{font-size:.75rem;color:var(--muted);text-align:center;margin-top:.8rem}
 .pimg .disc{position:absolute;top:12px;left:12px;background:#ef4444;color:#fff;font-size:.7rem;font-weight:800;padding:4px 12px;border-radius:100px}
 .pbody{padding:1.4rem}
 .pbody .cat{font-size:.72rem;color:#c084fc;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
@@ -124,10 +143,29 @@ footer a{color:#c084fc}
 <div class="drawer-foot">
 <div class="total-row"><span>Total:</span><strong id="cartTotal">Rp0</strong></div>
 <button class="checkout" onclick="checkout()">💬 Checkout via WhatsApp</button>
+<p class="sim-note">Mode simulasi demo — pesanan diteruskan ke WhatsApp, bukan checkout sungguhan.</p>
 </div>
 </aside>
 
 <div class="toast" id="toast">Ditambahkan ke keranjang! ✓</div>
+
+<div class="dmodal" id="dmodal" role="dialog" aria-modal="true">
+<div class="dmodal-bg" onclick="closeDetail()"></div>
+<div class="dmodal-box">
+<button class="dmodal-close" onclick="closeDetail()" aria-label="Tutup">✕</button>
+<div class="dmodal-photo" id="dmPhoto"></div>
+<div class="dmodal-body">
+<div class="cat" id="dmCat"></div>
+<h3 id="dmName"></h3>
+<p id="dmDesc"></p>
+<div class="price-row" style="margin-bottom:1.4rem"><span class="price" id="dmPrice" style="font-size:1.6rem"></span><span class="old" id="dmOld"></span></div>
+<div class="dmodal-foot">
+<div class="qty2"><button onclick="dmQtyChg(-1)">−</button><b id="dmQty">1</b><button onclick="dmQtyChg(1)">+</button></div>
+<button class="add-btn" style="flex:1" onclick="dmAdd()">+ Keranjang</button>
+</div>
+</div>
+</div>
+</div>
 
 <footer>
 <p>© 2026 Toko Berkah Jaya — Demo website oleh <a href="https://marwanwidjaya.github.io/magerweb/">MagerWeb</a></p>
@@ -136,18 +174,18 @@ footer a{color:#c084fc}
 
 <script>
 const PRODUCTS=[
-{e:'🍚',n:'Beras Premium 5kg',c:'Sembako',p:68000,o:75000,d:9},
-{e:'🫗',n:'Minyak Goreng 2L',c:'Sembako',p:42000,o:48000,d:12},
-{e:'🍬',n:'Gula Pasir 1kg',c:'Sembako',p:17500,o:19000,d:8},
-{e:'☕',n:'Kopi Bubuk 250g',c:'Minuman',p:32000,o:null,d:0},
-{e:'🍵',n:'Teh Celup 50pcs',c:'Minuman',p:28000,o:32000,d:12},
-{e:'🧃',n:'Susu UHT 1L',c:'Minuman',p:21000,o:null,d:0},
-{e:'🧼',n:'Sabun Cuci Piring',c:'Rumah Tangga',p:12000,o:15000,d:20},
-{e:'🧴',n:'Deterjen 800g',c:'Rumah Tangga',p:24000,o:null,d:0},
-{e:'🧻',n:'Tisu Roll 12pcs',c:'Rumah Tangga',p:55000,o:62000,d:11},
-{e:'🍜',n:'Mie Instan (dus)',c:'Sembako',p:115000,o:125000,d:8},
-{e:'🥫',n:'Sarden Kaleng',c:'Sembako',p:15000,o:null,d:0},
-{e:'🧂',n:'Garam & Penyedap Set',c:'Sembako',p:18000,o:22000,d:18},
+{e:'🍚',img:'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&q=60&auto=format&fit=crop',n:'Beras Premium 5kg',c:'Sembako',p:68000,o:75000,d:9},
+{e:'🫗',img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500&q=60&auto=format&fit=crop',n:'Minyak Goreng 2L',c:'Sembako',p:42000,o:48000,d:12},
+{e:'🍬',img:'https://images.unsplash.com/photo-1610725664285-7c57e6eeac3f?w=500&q=60&auto=format&fit=crop',n:'Gula Pasir 1kg',c:'Sembako',p:17500,o:19000,d:8},
+{e:'☕',img:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500&q=60&auto=format&fit=crop',n:'Kopi Bubuk 250g',c:'Minuman',p:32000,o:null,d:0},
+{e:'🍵',img:'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&q=60&auto=format&fit=crop',n:'Teh Celup 50pcs',c:'Minuman',p:28000,o:32000,d:12},
+{e:'🧃',img:'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=500&q=60&auto=format&fit=crop',n:'Susu UHT 1L',c:'Minuman',p:21000,o:null,d:0},
+{e:'🧼',img:'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=500&q=60&auto=format&fit=crop',n:'Sabun Cuci Piring',c:'Rumah Tangga',p:12000,o:15000,d:20},
+{e:'🧴',img:'https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=500&q=60&auto=format&fit=crop',n:'Deterjen 800g',c:'Rumah Tangga',p:24000,o:null,d:0},
+{e:'🧻',img:'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&q=60&auto=format&fit=crop',n:'Tisu Roll 12pcs',c:'Rumah Tangga',p:55000,o:62000,d:11},
+{e:'🍜',img:'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&q=60&auto=format&fit=crop',n:'Mie Instan (dus)',c:'Sembako',p:115000,o:125000,d:8},
+{e:'🥫',img:'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&q=60&auto=format&fit=crop',n:'Sarden Kaleng',c:'Sembako',p:15000,o:null,d:0},
+{e:'🧂',img:'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&q=60&auto=format&fit=crop',n:'Garam & Penyedap Set',c:'Sembako',p:18000,o:22000,d:18},
 ];
 const CATS=['Semua','Sembako','Minuman','Rumah Tangga'];
 let activeCat='Semua', cart={};
@@ -163,7 +201,7 @@ function render(){
   document.getElementById('grid').innerHTML=list.map((p,i)=>{
     const idx=PRODUCTS.indexOf(p);
     return `<div class="pcard reveal visible">
-    <div class="pimg" style="background:linear-gradient(135deg,#2a1b4e,#1c1430)">${p.e}${p.d?`<span class="disc">-${p.d}%</span>`:''}</div>
+    <div class="pimg" style="background-image:url('${p.img}')" onclick="openDetail(${idx})" role="button" tabindex="0" aria-label="Lihat detail ${p.n}" onkeydown="if(event.key==='Enter')openDetail(${idx})">${p.d?`<span class="disc">-${p.d}%</span>`:''}<span class="zoom">Lihat detail</span></div>
     <div class="pbody"><div class="cat">${p.c}</div><h3>${p.n}</h3>
     <div class="price-row"><span class="price">${fmt(p.p)}</span>${p.o?`<span class="old">${fmt(p.o)}</span>`:''}</div>
     <button class="add-btn" id="add${idx}" onclick="add(${idx})">+ Keranjang</button></div></div>`;
@@ -201,6 +239,25 @@ function checkout(){
   window.open(`https://wa.me/6281234567890?text=${msg}`,'_blank');
 }
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800);}
+let dmIdx=0,dmQ=1;
+const DESCS={'Sembako':'Produk kebutuhan pokok berkualitas dengan harga grosir. Stok selalu segar dan terjamin.','Minuman':'Minuman pilihan untuk menemani harimu. Dikemas higienis dan siap saji.','Rumah Tangga':'Kebutuhan rumah tangga esensial. Produk original 100% dengan harga bersaing.'};
+function openDetail(i){
+  dmIdx=i;dmQ=1;
+  const p=PRODUCTS[i];
+  document.getElementById('dmPhoto').style.backgroundImage="url('"+p.img+"')";
+  document.getElementById('dmCat').textContent=p.c;
+  document.getElementById('dmName').textContent=p.n;
+  document.getElementById('dmDesc').textContent=DESCS[p.c]||'';
+  document.getElementById('dmPrice').textContent=fmt(p.p);
+  document.getElementById('dmOld').textContent=p.o?fmt(p.o):'';
+  document.getElementById('dmQty').textContent='1';
+  document.getElementById('dmodal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeDetail(){document.getElementById('dmodal').classList.remove('open');document.body.style.overflow='';}
+function dmQtyChg(d){dmQ=Math.max(1,dmQ+d);document.getElementById('dmQty').textContent=dmQ;}
+function dmAdd(){cart[dmIdx]=(cart[dmIdx]||0)+dmQ;updateCart();closeDetail();toast('Ditambahkan ke keranjang! \u2713');toggleCart(true);}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeDetail();toggleCart(false);}});
 renderCats();render();updateCart();
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target)}}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
