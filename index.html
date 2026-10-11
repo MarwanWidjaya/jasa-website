@@ -62,16 +62,47 @@
       <div class="hero-visual">
         <div class="browser-mockup">
           <div class="browser-bar"><span></span><span></span><span></span><div class="browser-url">magerweb.id/preview</div></div>
+          <div class="mock-tabs">
+            <button class="mock-tab active" onclick="switchMock(0)">☕ Basic</button>
+            <button class="mock-tab" onclick="switchMock(1)">👕 Standard</button>
+            <button class="mock-tab" onclick="switchMock(2)">🛒 Premium</button>
+          </div>
           <div class="browser-body">
-            <div class="mock-nav"><div class="mock-logo">☕ Kopi Senja</div><div class="mock-menu"><i></i><i></i><i></i></div><div class="mock-cta">Pesan</div></div>
-            <div class="mock-hero">
-              <div class="mock-hero-text"><div class="mock-h1">Ngopi Santai,<br>Rasa Bintang Lima</div><div class="mock-sub">Biji kopi pilihan, diseduh dengan presisi oleh barista berpengalaman.</div><div class="mock-btns"><span class="mock-btn1">☕ Pesan Sekarang</span><span class="mock-btn2">Lihat Menu</span></div></div>
-              <div class="mock-hero-img">☕</div>
+            <div class="mock-pane active" id="mockPane0">
+              <div class="mock-nav"><div class="mock-logo">☕ Kopi Senja</div><div class="mock-menu"><i></i><i></i><i></i></div><div class="mock-cta">Pesan</div></div>
+              <div class="mock-hero">
+                <div class="mock-hero-text"><div class="mock-h1">Ngopi Santai,<br>Rasa Bintang Lima</div><div class="mock-sub">Biji kopi pilihan, diseduh dengan presisi oleh barista berpengalaman.</div><div class="mock-btns"><span class="mock-btn1">☕ Pesan Sekarang</span><span class="mock-btn2">Lihat Menu</span></div></div>
+                <div class="mock-hero-img">☕</div>
+              </div>
+              <div class="mock-row">
+                <div class="mock-card"><div class="mock-emoji">🥛</div><div class="mock-ptitle">Kopi Susu Aren</div><div class="mock-price">Rp22rb</div></div>
+                <div class="mock-card"><div class="mock-emoji">🍵</div><div class="mock-ptitle">Matcha Latte</div><div class="mock-price">Rp26rb</div></div>
+                <div class="mock-card"><div class="mock-emoji">🧋</div><div class="mock-ptitle">Brown Sugar Boba</div><div class="mock-price">Rp24rb</div></div>
+              </div>
             </div>
-            <div class="mock-row">
-              <div class="mock-card"><div class="mock-emoji">🥛</div><div class="mock-ptitle">Kopi Susu Aren</div><div class="mock-price">Rp22rb</div></div>
-              <div class="mock-card"><div class="mock-emoji">🍵</div><div class="mock-ptitle">Matcha Latte</div><div class="mock-price">Rp26rb</div></div>
-              <div class="mock-card"><div class="mock-emoji">🧋</div><div class="mock-ptitle">Brown Sugar Boba</div><div class="mock-price">Rp24rb</div></div>
+            <div class="mock-pane" id="mockPane1">
+              <div class="mock-nav"><div class="mock-logo" style="color:#5eead4">✨ Bersih Kinclong</div><div class="mock-menu"><i></i><i></i><i></i></div><div class="mock-cta" style="background:linear-gradient(135deg,#14b8a6,#0f766e)">Order</div></div>
+              <div class="mock-hero" style="background:linear-gradient(135deg,#ccfbf1,#e0f2fe);border-color:#14b8a633">
+                <div class="mock-hero-text"><div class="mock-h1" style="color:#0c1f1d">Cucian Numpuk?<br>Biar Kami Urus.</div><div class="mock-sub" style="color:#5b716e">Antar-jemput GRATIS. Bersih, wangi, tepat waktu.</div><div class="mock-btns"><span class="mock-btn1" style="background:linear-gradient(135deg,#14b8a6,#0f766e);color:#fff;box-shadow:0 4px 14px rgba(20,184,166,.4)">🧺 Order</span></div></div>
+                <div class="mock-hero-img" style="background:rgba(20,184,166,.12);border-color:#14b8a644">👕</div>
+              </div>
+              <div class="mock-row">
+                <div class="mock-card" style="background:#fff;border-color:#14b8a633"><div class="mock-emoji">👔</div><div class="mock-ptitle" style="color:#0c1f1d">Cuci+Setrika</div><div class="mock-price" style="color:#0f766e">Rp8rb/kg</div></div>
+                <div class="mock-card" style="background:#fff;border-color:#14b8a633"><div class="mock-emoji">⚡</div><div class="mock-ptitle" style="color:#0c1f1d">Express 6 Jam</div><div class="mock-price" style="color:#0f766e">Rp15rb/kg</div></div>
+                <div class="mock-card" style="background:#fff;border-color:#14b8a633"><div class="mock-emoji">👟</div><div class="mock-ptitle" style="color:#0c1f1d">Cuci Sepatu</div><div class="mock-price" style="color:#0f766e">Rp30rb</div></div>
+              </div>
+            </div>
+            <div class="mock-pane" id="mockPane2">
+              <div class="mock-nav"><div class="mock-logo" style="background:linear-gradient(90deg,#c084fc,#f0abfc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">🛒 Berkah Jaya</div><div class="mock-menu"><i></i><i></i><i></i></div><div class="mock-cta" style="background:linear-gradient(135deg,#7c3aed,#5b21b6)">🛒 3</div></div>
+              <div class="mock-hero" style="background:radial-gradient(ellipse at 20% 10%,#3b1d6e,transparent 60%),#141024;border-color:#a855f744">
+                <div class="mock-hero-text"><div class="mock-h1" style="color:#f2edff">Belanja Hemat,<br>Semakin Untung</div><div class="mock-sub" style="color:#a79bc9">500+ produk sembako harga grosir.</div><div class="mock-btns"><span class="mock-btn1" style="background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;box-shadow:0 4px 14px rgba(124,58,237,.4)">Belanja</span></div></div>
+                <div class="mock-hero-img" style="background:rgba(168,85,247,.12);border-color:#a855f766">🛒</div>
+              </div>
+              <div class="mock-row">
+                <div class="mock-card" style="background:#1c1430;border-color:#a855f744"><div class="mock-emoji">🍚</div><div class="mock-ptitle" style="color:#f2edff">Beras 5kg</div><div class="mock-price" style="color:#fbbf24">Rp68rb</div></div>
+                <div class="mock-card" style="background:#1c1430;border-color:#a855f744"><div class="mock-emoji">🫗</div><div class="mock-ptitle" style="color:#f2edff">Minyak 2L</div><div class="mock-price" style="color:#fbbf24">Rp42rb</div></div>
+                <div class="mock-card" style="background:#1c1430;border-color:#a855f744"><div class="mock-emoji">🍜</div><div class="mock-ptitle" style="color:#f2edff">Mie Dus</div><div class="mock-price" style="color:#fbbf24">Rp115rb</div></div>
+              </div>
             </div>
           </div>
         </div>
@@ -461,6 +492,11 @@
 
 <script src="app.js"></script>
 <script>
+// Mockup tab switcher (hero preview)
+function switchMock(i){
+  document.querySelectorAll('.mock-tab').forEach((t,j)=>t.classList.toggle('active',j===i));
+  document.querySelectorAll('.mock-pane').forEach((p,j)=>p.classList.toggle('active',j===i));
+}
 // Scroll reveal + navbar effect
 (function(){
   var nav = document.getElementById('navbar');
