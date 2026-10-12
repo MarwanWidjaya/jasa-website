@@ -47,3 +47,4 @@ Daftar kata kunci target untuk artikel blog. Setiap artikel baru WAJIB target 1 
 | 2026-10-10 | (artikel lama, sebelum sistem keyword) | kenapa-bisnis-kecil-butuh-website-2026.html |
 | 2026-10-10 | (artikel lama, sebelum sistem keyword) | jasa-data-entry-murah-kapan-outsourcing.html |
 | 2026-10-11 | jasa bikin website murah | 2026-10-11-jasa-bikin-website-murah-umkm.html |
+| 2026-10-12 | jasa pembuatan website umkm | 2026-10-12-jasa-pembuatan-website-umkm.html |
