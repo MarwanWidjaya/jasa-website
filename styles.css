@@ -422,3 +422,69 @@ h1 em,h2 em,.hero-title em{font-family:var(--serif);font-style:italic;font-weigh
   .final-cta{padding:90px 0}
   .cta-btns .btn{width:100%;justify-content:center}
 }
+
+/* ============================================================
+   MAGERWEB — CINEMATIC MOTION SYSTEM (2026-10-14)
+   Signature: masked word reveals + curtain wipes.
+   Tokens: --ease (out), --ease-io (in-out); transform/opacity only.
+   ============================================================ */
+:root{
+  --ease-io:cubic-bezier(.65,0,.35,1);
+  --d-micro:.25s;
+  --d-reveal:.9s;
+  --d-cine:1.2s;
+}
+
+/* ---- 1. Masked word reveal (dipakai via JS: .masked) ---- */
+.masked .mw{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em;margin-bottom:-.08em}
+.masked .mwi{display:inline-block;transform:translateY(115%);opacity:0;transition:transform var(--d-cine) var(--ease),opacity .6s ease;will-change:transform}
+.masked.in .mwi{transform:translateY(0);opacity:1}
+/* hero-visual: lepas animasi generik setelah selesai agar parallax inline jalan */
+.hero-visual.cine-settled{animation:none!important;opacity:1!important;transform:none!important}
+
+/* ---- 2. Hero cinematic entrance ---- */
+.hero-title.masked{margin-bottom:28px}
+.hero-copy .hero-title.masked{animation:none} /* matikan heroIn generik saat mask aktif */
+.hero-visual{will-change:transform}
+.hero-copy{will-change:transform,opacity}
+
+/* ---- 3. Curtain wipe untuk portfolio ---- */
+.work-visual::after{content:'';position:absolute;inset:0;z-index:4;background:#0e0e0c;transform:scaleY(1);transform-origin:top;transition:transform 1.15s var(--ease-io);pointer-events:none}
+.work-visual.in::after{transform:scaleY(0)}
+.work-visual .pv-hero{transition:transform .9s var(--ease)}
+/* hover editorial: bukan sekadar membesar */
+.work-card{position:relative}
+.work-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--lime),transparent);transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease);z-index:5}
+.work-card:hover::before{transform:scaleX(1)}
+.work-visual:hover .pv-hero{transform:scale(1.045)}
+.work-visual:hover .pv-shade{opacity:.92}
+.pv-shade{transition:opacity .5s ease}
+.pv-hero-txt{transition:transform .6s var(--ease)}
+.work-visual:hover .pv-hero-txt{transform:translateY(-6px)}
+.work-open{backdrop-filter:blur(10px);border:1px solid rgba(198,242,78,.35)}
+
+/* ---- 4. Magnetic buttons (JS menambah transform) ---- */
+.btn.magnetic{transition:transform .3s var(--ease),background .25s,color .25s,border-color .25s;will-change:transform}
+
+/* ---- 5. Section titles: ritme editorial ---- */
+.sec-head.masked-head .sec-index{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.sec-head.masked-head .sec-desc{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease) .35s,transform .8s var(--ease) .35s}
+.sec-head.masked-head.in .sec-index,.sec-head.masked-head.in .sec-desc{opacity:1;transform:none}
+
+/* ---- 6. Final CTA: mask juga ---- */
+.cta-title.masked{position:relative}
+
+/* ---- 7. Reduced motion: matikan semua yang baru ---- */
+@media(prefers-reduced-motion:reduce){
+  .masked .mwi{transform:none;opacity:1;transition:none}
+  .work-visual::after{display:none}
+  .sec-head.masked-head .sec-index,.sec-head.masked-head .sec-desc{opacity:1;transform:none;transition:none}
+  .hero-visual,.hero-copy{will-change:auto}
+}
+
+/* ---- 8. Mobile: sederhanakan ---- */
+@media(max-width:760px){
+  .masked .mwi{transition-duration:.8s}
+  .work-visual::after{transition-duration:.8s}
+  .btn.magnetic{will-change:auto}
+}
