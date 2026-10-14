@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Isi Brief Proyek — MAGERWEB</title>
+<meta name="description" content="Isi brief proyek website MAGERWEB — jawab 23 pertanyaan singkat, hasilnya langsung terkirim via WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+.brief-hero{padding:150px 0 40px;text-align:center}
+.brief-hero h1{font-size:clamp(2rem,5vw,3.4rem);text-transform:uppercase;margin-bottom:16px}
+.brief-hero h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--lime);text-transform:none}
+.brief-hero p{color:var(--ink-dim);max-width:620px;margin:0 auto}
+.brief-form{max-width:760px;margin:0 auto;padding:0 20px 100px}
+.fsec{background:#141412;border:1px solid var(--line);border-radius:18px;padding:32px 28px;margin-bottom:22px}
+.fsec-head{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.fsec-num{width:42px;height:42px;border-radius:50%;background:var(--lime);color:#0C0C0C;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0}
+.fsec-head h2{font-size:1.25rem;margin:0}
+.fsec-head p{color:var(--ink-faint);font-size:.85rem;margin:2px 0 0}
+.fgroup{margin-bottom:20px}
+.fgroup>label.flabel{display:block;font-weight:700;font-size:.95rem;margin-bottom:10px}
+.fgroup>label.flabel small{color:var(--ink-faint);font-weight:400}
+.fgroup input[type=text],.fgroup input[type=url],.fgroup textarea,.fgroup select{width:100%;background:#0e0e0c;border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:13px 16px;font-family:inherit;font-size:.95rem;transition:border-color .25s}
+.fgroup input:focus,.fgroup textarea:focus,.fgroup select:focus{outline:none;border-color:var(--lime)}
+.fgroup textarea{min-height:90px;resize:vertical}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{display:inline-flex;align-items:center;gap:8px;background:#0e0e0c;border:1px solid var(--line);border-radius:100px;padding:10px 18px;font-size:.88rem;cursor:pointer;transition:border-color .25s,background .25s;user-select:none}
+.opt:hover{border-color:var(--lime)}
+.opt input{accent-color:var(--lime);width:16px;height:16px;cursor:pointer}
+.opt:has(input:checked){border-color:var(--lime);background:var(--lime-dim)}
+.fsubmit{text-align:center;margin-top:10px}
+.fsubmit .btn{font-size:1.05rem;padding:18px 44px}
+.fnote{text-align:center;color:var(--ink-faint);font-size:.85rem;margin-top:18px;max-width:560px;margin-left:auto;margin-right:auto}
+.ferr{display:none;background:#3a1414;border:1px solid #a33;color:#ffb3b3;border-radius:12px;padding:14px 18px;margin-bottom:20px;font-size:.9rem}
+@media(max-width:600px){.fsec{padding:24px 18px}}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">MAGERWEB<sup>®</sup></a>
+    <nav class="nav-links" aria-label="Navigasi utama">
+      <a href="index.html#work">Karya</a>
+      <a href="index.html#services">Layanan</a>
+      <a href="index.html#about">Tentang</a>
+    </nav>
+    <div class="nav-right">
+      <a class="btn btn-lime btn-sm" href="https://wa.me/6285723803537?text=Halo%20MAGERWEB,%20saya%20ingin%20memulai%20proyek%20website." target="_blank" rel="noopener">Mari Bicara</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="brief-hero wrap">
+  <p class="eyebrow"><span class="eyebrow-dot"></span>Brief Proyek</p>
+  <h1>Ceritakan <em>proyekmu.</em></h1>
+  <p>Jawab pertanyaan singkat di bawah — hasilnya langsung terkirim ke WhatsApp kami. Makin lengkap jawabanmu, makin pas penawaran yang kami buat.</p>
+</div>
+
+<form class="brief-form" id="briefForm" novalidate>
+<div class="ferr" id="ferr">Mohon isi nama usaha dan bidang usaha dulu ya.</div>
+
+<!-- A -->
+<div class="fsec"><div class="fsec-head"><span class="fsec-num">A</span><div><h2>Tentang Usaha</h2><p>Ceritakan bisnismu secara singkat</p></div></div>
+<div class="fgroup"><label class="flabel" for="f_nama">1. Nama usaha *</label><input type="text" id="f_nama" placeholder="misal: Kopi Senja"></div>
+<div class="fgroup"><label class="flabel">2. Bentuk usaha</label><div class="opts">
+<label class="opt"><input type="radio" name="f_bentuk" value="Perorangan"> Perorangan</label>
+<label class="opt"><input type="radio" name="f_bentuk" value="CV"> CV</label>
+<label class="opt"><input type="radio" name="f_bentuk" value="PT"> PT</label>
+</div></div>
+<div class="fgroup"><label class="flabel" for="f_bidang">3. Bidang usaha & produk/jasa utama *</label><input type="text" id="f_bidang" placeholder="misal: kedai kopi, jual biji single-origin"></div>
+<div class="fgroup"><label class="flabel" for="f_lokasi">4. Lokasi & wilayah layanan</label><input type="text" id="f_lokasi" placeholder="misal: Tasikmalaya, melayani seluruh Indonesia"></div>
+<div class="fgroup"><label class="flabel" for="f_lama">5. Sudah berapa lama berjalan?</label><input type="text" id="f_lama" placeholder="misal: 2 tahun"></div>
+<div class="fgroup"><label class="flabel" for="f_target">6. Target pelanggannya siapa?</label><input type="text" id="f_target" placeholder="misal: anak muda 20-35 tahun"></div>
+</div>
+
+<!-- B -->
+<div class="fsec"><div class="fsec-head"><span class="fsec-num">B</span><div><h2>Tujuan Website</h2><p>Website ini mau dipakai buat apa?</p></div></div>
+<div class="fgroup"><label class="flabel">7. Tujuan utama website <small>(boleh pilih lebih dari satu)</small></label><div class="opts">
+<label class="opt"><input type="checkbox" name="f_tujuan" value="Jualan online"> Jualan online</label>
+<label class="opt"><input type="checkbox" name="f_tujuan" value="Company profile"> Company profile</label>
+<label class="opt"><input type="checkbox" name="f_tujuan" value="Katalog"> Katalog</label>
+<label class="opt"><input type="checkbox" name="f_tujuan" value="Terima booking"> Terima booking</label>
+<label class="opt"><input type="checkbox" name="f_tujuan" value="Portofolio"> Portofolio</label>
+</div></div>
+<div class="fgroup"><label class="flabel">8. Pengunjung diharapkan ngapain? <small>(boleh pilih lebih dari satu)</small></label><div class="opts">
+<label class="opt"><input type="checkbox" name="f_aksi" value="Chat WhatsApp"> Chat WhatsApp</label>
+<label class="opt"><input type="checkbox" name="f_aksi" value="Isi form"> Isi form</label>
+<label class="opt"><input type="checkbox" name="f_aksi" value="Beli langsung"> Beli langsung</label>
+<label class="opt"><input type="checkbox" name="f_aksi" value="Telepon"> Telepon</label>
+</div></div>
+<div class="fgroup"><label class="flabel" for="f_ref">9. Ada website kompetitor/referensi yang disukai?</label><input type="url" id="f_ref" placeholder="tempel link-nya di sini"></div>
+</div>
+
+<!-- C -->
+<div class="fsec"><div class="fsec-head"><span class="fsec-num">C</span><div><h2>Fitur yang Dibutuhkan</h2><p>Pilih yang wajib ada</p></div></div>
+<div class="fgroup"><label class="flabel">10. Fitur wajib <small>(boleh pilih lebih dari satu)</small></label><div class="opts">
+<label class="opt"><input type="checkbox" name="f_fitur" value="Katalog produk"> Katalog produk</label>
+<label class="opt"><input type="checkbox" name="f_fitur" value="Galeri foto"> Galeri foto</label>
+<label class="opt"><input type="checkbox" name="f_fitur" value="Artikel/blog"> Artikel/blog</label>
+<label class="opt"><input type="checkbox" name="f_fitur" value="Testimoni"> Testimoni</label>
+<label class="opt"><input type="checkbox" name="f_fitur" value="FAQ"> FAQ</label>
+<label class="opt"><input type="checkbox" name="f_fitur" value="Peta lokasi"> Peta lokasi</label>
+<label class="opt"><input type="checkbox" name="f_fitur" value="Dua bahasa"> Dua bahasa (ID/EN)</label>
+</div></div>
+<div class="fgroup"><label class="flabel">11. Sistem order</label><div class="opts">
+<label class="opt"><input type="radio" name="f_order" value="Via WhatsApp saja"> Via WhatsApp saja</label>
+<label class="opt"><input type="radio" name="f_order" value="Form order"> Form order</label>
+<label class="opt"><input type="radio" name="f_order" value="Keranjang belanja"> Keranjang belanja</label>
+</div></div>
+<div class="fgroup"><label class="flabel">12. Pembayaran online</label><div class="opts">
+<label class="opt"><input type="radio" name="f_bayar" value="Transfer manual"> Transfer manual</label>
+<label class="opt"><input type="radio" name="f_bayar" value="QRIS"> QRIS</label>
+<label class="opt"><input type="radio" name="f_bayar" value="Payment gateway otomatis"> Payment gateway otomatis</label>
+<label class="opt"><input type="radio" name="f_bayar" value="Belum perlu"> Belum perlu</label>
+</div></div>
+<div class="fgroup"><label class="flabel">13. Perlu akun member / login pelanggan?</label><div class="opts">
+<label class="opt"><input type="radio" name="f_member" value="Ya"> Ya</label>
+<label class="opt"><input type="radio" name="f_member" value="Tidak"> Tidak</label>
+</div></div>
+<div class="fgroup"><label class="flabel">14. Integrasi lain <small>(boleh pilih lebih dari satu)</small></label><div class="opts">
+<label class="opt"><input type="checkbox" name="f_integrasi" value="Feed Instagram"> Feed Instagram</label>
+<label class="opt"><input type="checkbox" name="f_integrasi" value="Google Maps"> Google Maps</label>
+<label class="opt"><input type="checkbox" name="f_integrasi" value="Google Analytics"> Google Analytics</label>
+<label class="opt"><input type="checkbox" name="f_integrasi" value="Chat otomatis"> Chat otomatis</label>
+</div></div>
+</div>
+
+<!-- D -->
+<div class="fsec"><div class="fsec-head"><span class="fsec-num">D</span><div><h2>Materi & Konten</h2><p>Logo, foto, dan tulisan</p></div></div>
+<div class="fgroup"><label class="flabel">15. Logo</label><div class="opts">
+<label class="opt"><input type="radio" name="f_logo" value="Sudah ada"> Sudah ada</label>
+<label class="opt"><input type="radio" name="f_logo" value="Belum ada"> Belum ada</label>
+</div></div>
+<div class="fgroup"><label class="flabel">16. Foto produk/tempat usaha</label><div class="opts">
+<label class="opt"><input type="radio" name="f_foto" value="Saya foto sendiri (minta panduan)"> Saya foto sendiri <small>(minta panduan)</small></label>
+<label class="opt"><input type="radio" name="f_foto" value="Pakai foto stok gratis"> Pakai foto stok gratis</label>
+<label class="opt"><input type="radio" name="f_foto" value="Buatkan ilustrasi AI"> Buatkan ilustrasi AI</label>
+</div></div>
+<div class="fgroup"><label class="flabel">17. Teks profil, deskripsi produk, daftar harga</label><div class="opts">
+<label class="opt"><input type="radio" name="f_teks" value="Sudah siap"> Sudah siap</label>
+<label class="opt"><input type="radio" name="f_teks" value="Belum, perlu dibantu"> Belum, perlu dibantu</label>
+</div></div>
+<div class="fgroup"><label class="flabel" for="f_gaya">18. Warna / gaya visual yang diinginkan</label><input type="text" id="f_gaya" placeholder="misal: mewah gelap seperti demo Senja Estate"></div>
+</div>
+
+<!-- E -->
+<div class="fsec"><div class="fsec-head"><span class="fsec-num">E</span><div><h2>Teknis</h2><p>Domain & email</p></div></div>
+<div class="fgroup"><label class="flabel">19. Domain</label><div class="opts">
+<label class="opt"><input type="radio" name="f_domain" value="Sudah punya"> Sudah punya</label>
+<label class="opt"><input type="radio" name="f_domain" value="Belum, mau .com"> Belum — mau .com</label>
+<label class="opt"><input type="radio" name="f_domain" value="Belum, mau .id"> Belum — mau .id</label>
+<label class="opt"><input type="radio" name="f_domain" value="Belum, mau .my.id"> Belum — mau .my.id</label>
+</div></div>
+<div class="fgroup"><label class="flabel">20. Perlu email bisnis? <small>(misal: halo@tokosaya.com)</small></label><div class="opts">
+<label class="opt"><input type="radio" name="f_email" value="Ya"> Ya</label>
+<label class="opt"><input type="radio" name="f_email" value="Tidak"> Tidak</label>
+</div></div>
+</div>
+
+<!-- F -->
+<div class="fsec"><div class="fsec-head"><span class="fsec-num">F</span><div><h2>Budget & Waktu</h2><p>Sesuaikan dengan kebutuhanmu</p></div></div>
+<div class="fgroup"><label class="flabel" for="f_budget">21. Budget</label><select id="f_budget">
+<option value="">— pilih —</option>
+<option>Basic — Rp250rb</option>
+<option>Standard — Rp500rb</option>
+<option>Premium — Rp1jt</option>
+<option>Custom — diskusi dulu</option>
+</select></div>
+<div class="fgroup"><label class="flabel" for="f_deadline">22. Deadline / momen yang dikejar</label><input type="text" id="f_deadline" placeholder="misal: sebelum grand opening 1 Desember"></div>
+</div>
+
+<!-- G -->
+<div class="fsec"><div class="fsec-head"><span class="fsec-num">G</span><div><h2>Setelah Website Jadi</h2><p>Perawatan ke depan</p></div></div>
+<div class="fgroup"><label class="flabel">23. Perlu jasa maintenance / update berkala?</label><div class="opts">
+<label class="opt"><input type="radio" name="f_maint" value="Ya, perlu"> Ya, perlu</label>
+<label class="opt"><input type="radio" name="f_maint" value="Tidak"> Tidak</label>
+</div></div>
+<div class="fgroup"><label class="flabel">24. Mau bisa update sendiri? <small>(kami kasih panduan)</small></label><div class="opts">
+<label class="opt"><input type="radio" name="f_self" value="Ya, minta panduan"> Ya, minta panduan</label>
+<label class="opt"><input type="radio" name="f_self" value="Tidak"> Tidak</label>
+</div></div>
+</div>
+
+<div class="fsubmit">
+<button type="submit" class="btn btn-lime">Kirim Brief via WhatsApp</button>
+<p class="fnote">Dengan menekan tombol di atas, WhatsApp akan terbuka dengan brief yang sudah terisi rapi — tinggal tekan kirim.</p>
+</div>
+</form>
+</main>
+
+<footer style="border-top:1px solid var(--line);padding:40px 20px;text-align:center;color:var(--ink-faint);font-size:.88rem">
+<p><strong style="color:var(--lime)">MAGERWEB<sup>®</sup></strong> — Studio Digital Independen, Indonesia</p>
+</footer>
+
+<script>
+document.getElementById('briefForm').addEventListener('submit',function(e){
+e.preventDefault();
+const v=id=>{const el=document.getElementById(id);return el?el.value.trim():''};
+const chk=n=>[...document.querySelectorAll('input[name="'+n+'"]:checked')].map(x=>x.value).join(', ');
+const rad=n=>{const x=document.querySelector('input[name="'+n+'"]:checked');return x?x.value:''};
+const nama=v('f_nama'),bidang=v('f_bidang');
+const err=document.getElementById('ferr');
+if(!nama||!bidang){err.style.display='block';err.scrollIntoView({behavior:'smooth',block:'center'});return}
+err.style.display='none';
+const L=[];
+L.push('*BRIEF PROYEK WEBSITE — MAGERWEB*');
+L.push('');
+L.push('*A. Tentang Usaha*');
+L.push('1. Nama usaha: '+nama);
+L.push('2. Bentuk: '+(rad('f_bentuk')||'-'));
+L.push('3. Bidang: '+bidang);
+L.push('4. Lokasi: '+(v('f_lokasi')||'-'));
+L.push('5. Lama berjalan: '+(v('f_lama')||'-'));
+L.push('6. Target pelanggan: '+(v('f_target')||'-'));
+L.push('');
+L.push('*B. Tujuan Website*');
+L.push('7. Tujuan: '+(chk('f_tujuan')||'-'));
+L.push('8. Aksi pengunjung: '+(chk('f_aksi')||'-'));
+L.push('9. Referensi: '+(v('f_ref')||'-'));
+L.push('');
+L.push('*C. Fitur*');
+L.push('10. Fitur: '+(chk('f_fitur')||'-'));
+L.push('11. Sistem order: '+(rad('f_order')||'-'));
+L.push('12. Pembayaran: '+(rad('f_bayar')||'-'));
+L.push('13. Member/login: '+(rad('f_member')||'-'));
+L.push('14. Integrasi: '+(chk('f_integrasi')||'-'));
+L.push('');
+L.push('*D. Materi & Konten*');
+L.push('15. Logo: '+(rad('f_logo')||'-'));
+L.push('16. Foto: '+(rad('f_foto')||'-'));
+L.push('17. Teks: '+(rad('f_teks')||'-'));
+L.push('18. Gaya visual: '+(v('f_gaya')||'-'));
+L.push('');
+L.push('*E. Teknis*');
+L.push('19. Domain: '+(rad('f_domain')||'-'));
+L.push('20. Email bisnis: '+(rad('f_email')||'-'));
+L.push('');
+L.push('*F. Budget & Waktu*');
+L.push('21. Budget: '+(v('f_budget')||'-'));
+L.push('22. Deadline: '+(v('f_deadline')||'-'));
+L.push('');
+L.push('*G. Setelah Jadi*');
+L.push('23. Maintenance: '+(rad('f_maint')||'-'));
+L.push('24. Update sendiri: '+(rad('f_self')||'-'));
+window.open('https://wa.me/6285723803537?text='+encodeURIComponent(L.join('\n')),'_blank');
+});
+</script>
+</body>
+</html>
