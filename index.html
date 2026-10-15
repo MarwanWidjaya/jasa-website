@@ -17,54 +17,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=20261011c">
-<style>
-/* ===== 3D ANIMATED HERO (2026-10-15) ===== */
-.scene3d-wrap{position:relative;height:560px;perspective:1400px;overflow:hidden}
-.scene3d{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .35s ease-out}
-.orbit-ring{position:absolute;border:1px dashed rgba(198,241,53,.22);border-radius:50%;pointer-events:none}
-.or1{width:480px;height:480px;top:40px;left:50%;margin-left:-240px;animation:orbSpin 42s linear infinite}
-.or2{width:330px;height:330px;top:115px;left:50%;margin-left:-165px;animation:orbSpin 30s linear infinite reverse}
-@keyframes orbSpin{to{transform:rotate(360deg)}}
-.b3d{position:absolute;width:290px;border-radius:14px;overflow:hidden;background:#141a0e;
-  border:1px solid rgba(198,241,53,.28);
-  box-shadow:0 30px 80px rgba(0,0,0,.65),0 0 60px rgba(198,241,53,.12);
-  transform-style:preserve-3d}
-.b3d-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#1b2212;border-bottom:1px solid rgba(198,241,53,.14)}
-.b3d-d{width:9px;height:9px;border-radius:50%}
-.b3d-url{flex:1;background:#0d1209;border-radius:6px;font-size:.6rem;color:#9aa48c;padding:4px 10px;margin-left:6px;white-space:nowrap;overflow:hidden;font-family:'Inter',sans-serif}
-.b3d-body{padding:13px;display:grid;gap:9px}
-.b3d-nav{font-family:'Archivo';font-weight:800;font-size:.72rem;letter-spacing:1px;color:#c6f135}
-.b3d-hero{border-radius:8px;background:linear-gradient(135deg,#232d15,#0f150a);border:1px solid rgba(198,241,53,.14);padding:14px;position:relative;overflow:hidden}
-.b3d-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 70% 25%,rgba(198,241,53,.32),transparent 62%)}
-.b3d-h{font-family:'Archivo';font-weight:800;font-size:.95rem;line-height:1.25;position:relative;z-index:1}
-.b3d-h em{font-family:'Instrument Serif',serif;font-style:italic;color:#c6f135}
-.b3d-btn{display:inline-block;margin-top:10px;background:#c6f135;color:#0a0e07;font-size:.62rem;font-weight:800;padding:6px 14px;border-radius:100px;position:relative;z-index:1}
-.b3d-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
-.b3d-c{background:#1d2513;border:1px solid rgba(198,241,53,.14);border-radius:7px;padding:8px 6px;text-align:center}
-.b3d-c b{display:block;font-size:.6rem;font-family:'Archivo'}
-.b3d-c span{font-size:.58rem;color:#c6f135;font-weight:700}
-.b3d-c:nth-child(2){background:rgba(198,241,53,.14);border-color:rgba(198,241,53,.4)}
-.b3d-1{top:30px;left:6%;transform:rotateY(-17deg) rotateX(7deg);animation:fl1 7s ease-in-out infinite}
-.b3d-2{top:175px;right:2%;transform:rotateY(15deg) rotateX(-6deg) scale(.88);animation:fl2 8.5s ease-in-out infinite}
-.b3d-3{bottom:5px;left:20%;transform:rotateY(-7deg) rotateX(11deg) scale(.74);animation:fl3 9.5s ease-in-out infinite}
-@keyframes fl1{0%,100%{margin-top:0}50%{margin-top:-22px}}
-@keyframes fl2{0%,100%{margin-top:0}50%{margin-top:18px}}
-@keyframes fl3{0%,100%{margin-top:0}50%{margin-top:-14px}}
-.chip3d{position:absolute;background:#c6f135;color:#0a0e07;font-weight:800;font-size:.7rem;font-family:'Inter',sans-serif;
-  padding:8px 16px;border-radius:100px;box-shadow:0 10px 30px rgba(198,241,53,.4);white-space:nowrap;z-index:5}
-.chip-a{top:6%;right:8%;animation:fl2 6s ease-in-out infinite}
-.chip-b{bottom:20%;left:0;animation:fl1 7.5s ease-in-out infinite}
-@media(max-width:900px){.scene3d-wrap{height:500px;max-width:500px;margin:0 auto;width:100%;overflow:hidden}
-.or1{width:320px;height:320px;top:90px;margin-left:-160px}
-.or2{width:220px;height:220px;top:140px;margin-left:-110px}
-.b3d{width:240px}
-.b3d-1{left:2%;top:24px;transform:rotateY(-10deg) rotateX(5deg)}
-.b3d-2{left:auto;right:2%;top:180px;transform:rotateY(10deg) rotateX(-4deg) scale(.9)}
-.b3d-3{left:12%;top:auto;bottom:0;transform:rotateY(-5deg) rotateX(8deg) scale(.8)}
-.chip-a{top:0;right:4%}
-.chip-b{bottom:2%;left:2%}}
-@media(prefers-reduced-motion:reduce){.scene3d *,.orbit-ring{animation:none!important}}
-</style>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"MAGERWEB","url":"https://marwanwidjaya.github.io/magerweb/","description":"Studio digital independen yang merancang website premium dan pengalaman digital. Desain website, e-commerce, landing page, identitas brand.","telephone":"+62-857-2380-3537","priceRange":"Rp250rb - Rp1jt+","areaServed":"ID"}
@@ -92,14 +44,14 @@
 
 <main id="top">
 
-<!-- ================= HERO (3D ANIMATED) ================= -->
+<!-- ================= HERO ================= -->
 <section class="hero">
   <div class="hero-bg" aria-hidden="true"><span class="hero-grain"></span></div>
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <p class="eyebrow reveal"><span class="eyebrow-dot"></span>Studio Digital Independen — Indonesia</p>
       <h1 class="hero-title reveal">KAMI MEMBANGUN <em>PENGALAMAN</em> DIGITAL YANG MEMAJUKAN <span class="lime">BRAND.</span></h1>
-      <p class="hero-sub reveal">MAGERWEB membantu bisnis yang ambisius tampil kelas dunia di internet — desain website premium, animasi 3D, dan pengalaman digital yang dirancang untuk membangun kepercayaan dan memenangkan pelanggan.</p>
+      <p class="hero-sub reveal">MAGERWEB membantu bisnis yang ambisius tampil kelas dunia di internet — desain website premium, pengembangan, dan pengalaman digital yang dirancang untuk membangun kepercayaan dan memenangkan pelanggan.</p>
       <div class="hero-ctas reveal">
         <a class="btn btn-lime btn-lg" href="https://wa.me/6285723803537?text=Halo%20MAGERWEB,%20saya%20ingin%20memulai%20proyek%20website." target="_blank" rel="noopener">Mulai Proyek <i data-lucide="arrow-up-right"></i></a>
         <a class="btn btn-ghost btn-lg" href="#work" data-scroll>Lihat Karya Kami</a>
@@ -111,23 +63,22 @@
       </div>
     </div>
     <div class="hero-visual reveal" aria-hidden="true">
-      <div class="scene3d-wrap">
-        <div class="orbit-ring or1"></div><div class="orbit-ring or2"></div>
-        <div class="scene3d" id="scene3d">
-          <div class="b3d b3d-1">
-            <div class="b3d-bar"><span class="b3d-d" style="background:#ff5f57"></span><span class="b3d-d" style="background:#febc2e"></span><span class="b3d-d" style="background:#28c840"></span><span class="b3d-url">kopi-senja — konsep</span></div>
-            <div class="b3d-body"><div class="b3d-nav"><b>KOPI SENJA</b></div><div class="b3d-hero"><div class="b3d-h">Pagi yang tenang,<br><em>kopi yang berani.</em></div><div class="b3d-btn">Jelajahi menu</div></div><div class="b3d-cards"><div class="b3d-c"><b>Espresso</b><span>Rp28rb</span></div><div class="b3d-c"><b>V60 Pour</b><span>Rp32rb</span></div><div class="b3d-c"><b>Cold Brew</b><span>Rp35rb</span></div></div></div>
+      <div class="mock-stage" id="mockStage">
+        <div class="mock-main">
+          <div class="mock-chrome"><span></span><span></span><span></span><div class="mock-url">kopi-senja — konsep</div></div>
+          <div class="mock-page mock-kopi">
+            <div class="mk-nav"><div class="mk-logo">KOPI SENJA</div><div class="mk-links"><i></i><i></i><i></i></div></div>
+            <div class="mk-hero"><div class="mk-h">Pagi yang tenang,<br><em>kopi yang berani.</em></div><div class="mk-p">Biji single-origin, diseduh dengan obsesi.</div><div class="mk-btn">Jelajahi menu</div></div>
+            <div class="mk-cards"><div class="mk-card"><b>Espresso</b><span>Rp28rb</span></div><div class="mk-card"><b>V60 Pour</b><span>Rp32rb</span></div><div class="mk-card"><b>Cold Brew</b><span>Rp35rb</span></div></div>
           </div>
-          <div class="b3d b3d-2">
-            <div class="b3d-bar"><span class="b3d-d" style="background:#ff5f57"></span><span class="b3d-d" style="background:#febc2e"></span><span class="b3d-d" style="background:#28c840"></span><span class="b3d-url">tokokue.com</span></div>
-            <div class="b3d-body"><div class="b3d-hero"><div class="b3d-h">Kue fresh<br><em>setiap hari.</em></div></div><div class="b3d-cards"><div class="b3d-c"><b>Lapis</b><span>Rp15rb</span></div><div class="b3d-c"><b>Bolu</b><span>Rp25rb</span></div><div class="b3d-c"><b>Donat</b><span>Rp12rb</span></div></div></div>
-          </div>
-          <div class="b3d b3d-3">
-            <div class="b3d-bar"><span class="b3d-d" style="background:#ff5f57"></span><span class="b3d-d" style="background:#febc2e"></span><span class="b3d-d" style="background:#28c840"></span><span class="b3d-url">barbershop.co</span></div>
-            <div class="b3d-body"><div class="b3d-nav"><b>BARBER</b></div><div class="b3d-hero"><div class="b3d-h">Tampil tajam,<br><em>percaya diri.</em></div><div class="b3d-btn">Booking</div></div></div>
-          </div>
-          <div class="chip3d chip-a">⚡ Animasi 3D</div>
-          <div class="chip3d chip-b">📱 Mobile-first</div>
+        </div>
+        <div class="mock-float mock-float-a">
+          <div class="mf-head"><i data-lucide="trending-up"></i><span>Fokus konversi</span></div>
+          <p>Setiap keputusan layout melayani satu tujuan — mengubah pengunjung jadi pelanggan.</p>
+        </div>
+        <div class="mock-float mock-float-b">
+          <div class="mf-head"><i data-lucide="smartphone"></i><span>Mobile-first</span></div>
+          <p>Didesain untuk layar yang benar-benar dipakai pelanggan Anda.</p>
         </div>
       </div>
     </div>
@@ -135,7 +86,7 @@
   <div class="hero-scroll" aria-hidden="true"><span>Geser</span><i data-lucide="arrow-down"></i></div>
 </section>
 
-<!-- ================= TICKER ================= --><!-- ================= TICKER ================= -->
+<!-- ================= TICKER ================= -->
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track">
     <span>Desain Website</span><i>✦</i><span>E-Commerce</span><i>✦</i><span>Landing Page</span><i>✦</i><span>Identitas Brand</span><i>✦</i><span>Redesign</span><i>✦</i><span>Solusi AI</span><i>✦</i>
@@ -599,17 +550,6 @@
   </div>
 </footer>
 
-<script>
-/* 3D hero mouse parallax (2026-10-15) */
-(function(){var s=document.getElementById('scene3d');if(!s)return;
-if(!window.matchMedia('(pointer:fine)').matches)return;
-var hero=s.closest('.hero');var raf=null;
-hero.addEventListener('mousemove',function(e){if(raf)return;
-raf=requestAnimationFrame(function(){var r=hero.getBoundingClientRect();
-var x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-s.style.transform='rotateY('+(x*13)+'deg) rotateX('+(-y*9)+'deg)';raf=null;});});
-hero.addEventListener('mouseleave',function(){s.style.transform='';});})();
-</script>
 <script src="app.js"></script>
 <script data-goatcounter="https://marwan-jasa.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
