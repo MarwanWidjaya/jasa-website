@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="styles.css?v=20261011c">
 <style>
 /* ===== 3D ANIMATED HERO (2026-10-15) ===== */
-.scene3d-wrap{position:relative;height:560px;perspective:1400px}
+.scene3d-wrap{position:relative;height:560px;perspective:1400px;overflow:hidden}
 .scene3d{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .35s ease-out}
 .orbit-ring{position:absolute;border:1px dashed rgba(198,241,53,.22);border-radius:50%;pointer-events:none}
 .or1{width:480px;height:480px;top:40px;left:50%;margin-left:-240px;animation:orbSpin 42s linear infinite}
@@ -54,7 +54,15 @@
   padding:8px 16px;border-radius:100px;box-shadow:0 10px 30px rgba(198,241,53,.4);white-space:nowrap;z-index:5}
 .chip-a{top:6%;right:8%;animation:fl2 6s ease-in-out infinite}
 .chip-b{bottom:20%;left:0;animation:fl1 7.5s ease-in-out infinite}
-@media(max-width:900px){.scene3d-wrap{height:430px;max-width:500px;margin:0 auto;width:100%}}
+@media(max-width:900px){.scene3d-wrap{height:500px;max-width:500px;margin:0 auto;width:100%;overflow:hidden}
+.or1{width:320px;height:320px;top:90px;margin-left:-160px}
+.or2{width:220px;height:220px;top:140px;margin-left:-110px}
+.b3d{width:240px}
+.b3d-1{left:2%;top:24px;transform:rotateY(-10deg) rotateX(5deg)}
+.b3d-2{left:auto;right:2%;top:180px;transform:rotateY(10deg) rotateX(-4deg) scale(.9)}
+.b3d-3{left:12%;top:auto;bottom:0;transform:rotateY(-5deg) rotateX(8deg) scale(.8)}
+.chip-a{top:0;right:4%}
+.chip-b{bottom:2%;left:2%}}
 @media(prefers-reduced-motion:reduce){.scene3d *,.orbit-ring{animation:none!important}}
 </style>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
