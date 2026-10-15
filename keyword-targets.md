@@ -50,3 +50,4 @@ Daftar kata kunci target untuk artikel blog. Setiap artikel baru WAJIB target 1 
 | 2026-10-12 | jasa pembuatan website umkm | 2026-10-12-jasa-pembuatan-website-umkm.html |
 | 2026-10-13 | bikin website toko online murah | 2026-10-13-bikin-website-toko-online-murah.html |
 | 2026-10-14 | jasa data entry | 2026-10-14-jasa-data-entry.html |
+| 2026-10-15 | berapa biaya bikin website untuk umkm 2026 | 2026-10-15-berapa-biaya-bikin-website-umkm-2026.html |
