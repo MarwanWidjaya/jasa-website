@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RetroMart — Marketplace Elektronik Termurah</title>
+<meta name="description" content="Fresh Marketplace: konsep revamp RetroMart. Belanja elektronik termurah, gratis ongkir, flash deal tiap hari.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#ee4d2d; --orange-d:#d73211; --pink:#ff6b9d; --yellow:#ffd93d;
+  --red:#e63946; --bg:#f5f5f5; --white:#fff; --txt:#222; --muted:#8a8a8a;
+  --line:#eee; --radius:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-height:1.5;overflow-x:hidden}
+h1,h2,h3,.rounded{font-family:'Nunito',sans-serif}
+img{display:block;max-width:100%}
+.wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+.demo-badge{position:fixed;bottom:16px;right:16px;z-index:999;background:#222;color:#fff;font-size:.68rem;font-weight:800;letter-spacing:1px;padding:8px 14px;border-radius:100px;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+
+/* ===== topbar promo ===== */
+.topbar{background:linear-gradient(90deg,var(--orange),var(--pink));color:#fff;font-size:.78rem;font-weight:600;text-align:center;padding:7px 12px;letter-spacing:.3px}
+
+/* ===== sticky nav ===== */
+.navbar{position:sticky;top:0;z-index:100;background:var(--white);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.nav-in{max-width:1200px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:18px}
+.logo{font-family:'Nunito';font-weight:900;font-size:1.5rem;color:var(--orange);white-space:nowrap;text-decoration:none}
+.logo span{color:var(--pink)}
+.searchbar{flex:1;display:flex;background:#f1f1f1;border:2px solid transparent;border-radius:10px;overflow:hidden;transition:border-color .2s}
+.searchbar:focus-within{border-color:var(--orange)}
+.searchbar input{flex:1;border:none;background:transparent;padding:11px 16px;font-size:.9rem;font-family:'Inter';outline:none;min-width:0}
+.searchbar button{border:none;background:var(--orange);color:#fff;font-weight:700;padding:0 26px;cursor:pointer;font-size:.9rem}
+.searchbar button:hover{background:var(--orange-d)}
+.nav-icons{display:flex;gap:18px;align-items:center}
+.nicon{position:relative;font-size:1.45rem;cursor:pointer;text-decoration:none}
+.nicon .dot{position:absolute;top:-6px;right:-8px;background:var(--red);color:#fff;font-size:.62rem;font-weight:700;min-width:18px;height:18px;border-radius:100px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+
+/* ===== hero carousel ===== */
+.hero{margin:18px 0 0}
+.slides{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(238,77,45,.18)}
+.slide{display:none;padding:48px 40px;color:#fff;min-height:230px;position:relative;overflow:hidden}
+.slide.active{display:block;animation:slideIn .5s ease}
+@keyframes slideIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+.slide::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.12)}
+.slide::before{content:'';position:absolute;right:60px;bottom:-90px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.08)}
+.s1{background:linear-gradient(120deg,#ee4d2d,#ff8a3d)}
+.s2{background:linear-gradient(120deg,#7b2ff7,#ff6b9d)}
+.s3{background:linear-gradient(120deg,#0ba360,#ffd93d)}
+.slide .tag{display:inline-block;background:rgba(255,255,255,.25);font-size:.72rem;font-weight:700;letter-spacing:2px;padding:6px 14px;border-radius:100px;margin-bottom:14px}
+.slide h2{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:900;line-height:1.15;margin-bottom:10px}
+.slide p{font-size:.95rem;opacity:.92;margin-bottom:20px;max-width:420px}
+.slide .cta{display:inline-block;background:#fff;color:var(--orange);font-weight:800;text-decoration:none;padding:12px 32px;border-radius:100px;font-size:.92rem;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.dot{width:10px;height:10px;border-radius:100px;background:#d5d5d5;cursor:pointer;transition:all .3s;border:none;padding:0}
+.dot.active{width:28px;background:var(--orange)}
+
+/* ===== kategori ===== */
+.cats{padding:34px 0 8px}
+.cats h3,.sec-title{font-size:1.25rem;font-weight:800;margin-bottom:18px}
+.cat-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:12px}
+.cat{background:var(--white);border-radius:14px;padding:18px 6px;text-align:center;cursor:pointer;border:2px solid transparent;transition:all .25s;text-decoration:none;color:var(--txt)}
+.cat:hover{border-color:var(--orange);transform:translateY(-4px);box-shadow:0 10px 24px rgba(238,77,45,.15)}
+.cat .ico{font-size:1.9rem;margin-bottom:8px}
+.cat span{font-size:.74rem;font-weight:600}
+
+/* ===== flash deal ===== */
+.flash{margin:30px 0 0;background:linear-gradient(135deg,#ff6a00,#ee4d2d);border-radius:16px;padding:22px;position:relative;overflow:hidden}
+.flash::before{content:'⚡';position:absolute;font-size:9rem;opacity:.12;right:10px;top:-20px;transform:rotate(15deg)}
+.flash-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px;color:#fff}
+.flash-head h3{font-size:1.3rem;font-weight:900}
+.countdown{display:flex;gap:6px;align-items:center;font-weight:700;font-size:.85rem}
+.cd-box{background:#fff;color:var(--orange-d);font-weight:800;min-width:38px;text-align:center;padding:6px 4px;border-radius:8px;font-size:1rem}
+.flash-row{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(160px,1fr);gap:14px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.fcard{background:#fff;border-radius:12px;overflow:hidden;position:relative;flex:none;cursor:pointer;transition:transform .25s}
+.fcard:hover{transform:translateY(-4px)}
+.fcard img{width:100%;height:130px;object-fit:cover}
+.fcard .fbadge{position:absolute;top:8px;left:8px;background:var(--red);color:#fff;font-size:.7rem;font-weight:800;padding:4px 10px;border-radius:6px}
+.fcard .fbody{padding:10px 12px 14px}
+.fcard .fname{font-size:.8rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:6px}
+.fcard .fprice{color:var(--orange);font-weight:800;font-size:1rem}
+.fcard .fold{color:var(--muted);font-size:.72rem;text-decoration:line-through}
+
+/* ===== rekomendasi ===== */
+.reco{padding:36px 0}
+.reco-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.reco-head a{color:var(--orange);font-size:.85rem;font-weight:600;text-decoration:none}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pcard{background:#fff;border-radius:var(--radius);overflow:hidden;border:2px solid transparent;cursor:pointer;transition:all .25s;display:flex;flex-direction:column}
+.pcard:hover{border-color:var(--orange);transform:translateY(-6px);box-shadow:0 16px 36px rgba(238,77,45,.16)}
+.pcard .pimg{position:relative;overflow:hidden}
+.pcard .pimg img{width:100%;height:200px;object-fit:cover;transition:transform .4s}
+.pcard:hover .pimg img{transform:scale(1.06)}
+.pbadge{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:.7rem;font-weight:800;padding:5px 10px;border-radius:6px}
+.pbody{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.pname{font-weight:600;font-size:.95rem}
+.prices{display:flex;align-items:baseline;gap:10px}
+.ppromo{color:var(--orange);font-weight:800;font-size:1.25rem}
+.pold{color:var(--muted);font-size:.82rem;text-decoration:line-through}
+.pmeta{display:flex;align-items:center;justify-content:space-between;font-size:.78rem;color:var(--muted);margin-top:auto}
+.stars{color:#f5a623;letter-spacing:1px}
+.sold{background:#fff0ec;color:var(--orange-d);font-weight:600;padding:3px 10px;border-radius:100px;font-size:.72rem}
+
+/* ===== footer ===== */
+footer{background:#222;color:#cfcfcf;margin-top:20px}
+.foot-grid{max-width:1200px;margin:0 auto;padding:44px 16px 20px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px}
+.foot-grid h4{color:#fff;font-size:.9rem;margin-bottom:14px;letter-spacing:1px}
+.foot-grid a{display:block;color:#cfcfcf;text-decoration:none;font-size:.84rem;margin-bottom:9px}
+.foot-grid a:hover{color:var(--orange)}
+.foot-logo{font-family:'Nunito';font-weight:900;font-size:1.4rem;color:var(--orange);margin-bottom:12px}
+.foot-logo span{color:var(--pink)}
+.foot-grid p{font-size:.82rem;line-height:1.7}
+.foot-bottom{border-top:1px solid #3a3a3a;text-align:center;padding:18px;font-size:.76rem;color:#8a8a8a}
+
+/* ===== reveal ===== */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ===== responsive ===== */
+@media(max-width:900px){
+  .cat-grid{grid-template-columns:repeat(4,1fr)}
+  .prod-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .searchbar button{padding:0 16px}
+}
+@media(max-width:560px){
+  .nav-in{flex-wrap:wrap;gap:10px}
+  .searchbar{order:3;flex-basis:100%}
+  .slide{padding:32px 22px;min-height:190px}
+  .prod-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .pcard .pimg img{height:140px}
+  .ppromo{font-size:1.05rem}
+  .flash-row{grid-auto-columns:150px}
+  .foot-grid{grid-template-columns:1fr;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="demo-badge">DEMO MAGERWEB</div>
+
+<div class="topbar">🎉 Gratis ongkir se-Indonesia! Min. belanja Rp50rb &nbsp;•&nbsp; Flash Deal tiap jam 12.00 & 20.00 ⚡</div>
+
+<nav class="navbar"><div class="nav-in">
+  <a class="logo" href="#">Retro<span>Mart</span></a>
+  <div class="searchbar">
+    <input type="text" id="searchInput" placeholder="Cari iPhone, laptop, headphone...">
+    <button type="button" id="searchBtn">Cari</button>
+  </div>
+  <div class="nav-icons">
+    <a class="nicon" href="#" aria-label="Notifikasi">🔔<span class="dot">3</span></a>
+    <a class="nicon" href="#" aria-label="Keranjang">🛒<span class="dot">2</span></a>
+  </div>
+</div></nav>
+
+<div class="wrap">
+  <!-- HERO CAROUSEL -->
+  <section class="hero">
+    <div class="slides" id="slides">
+      <div class="slide s1 active">
+        <span class="tag">PROMO TERBESAR</span>
+        <h2>Big Season Sale<br>Diskon s.d. 90%!</h2>
+        <p>Elektronik original bergaransi resmi. Stok terbatas, siapa cepat dia dapat.</p>
+        <a class="cta" href="#flash">Serbu Sekarang</a>
+      </div>
+      <div class="slide s2">
+        <span class="tag">GRATIS ONGKIR</span>
+        <h2>Belanja Nyaman<br>Ongkir Rp0!</h2>
+        <p>Untuk semua pembelian elektronik min. Rp50rb ke seluruh Indonesia.</p>
+        <a class="cta" href="#rekomendasi">Mulai Belanja</a>
+      </div>
+      <div class="slide s3">
+        <span class="tag">PRODUK BARU</span>
+        <h2>Gadget Terbaru<br>Sudah Tiba!</h2>
+        <p>Koleksi smartphone & wearable 2026 langsung dari distributor resmi.</p>
+        <a class="cta" href="#kategori">Lihat Katalog</a>
+      </div>
+    </div>
+    <div class="dots" id="dots"></div>
+  </section>
+
+  <!-- KATEGORI -->
+  <section class="cats reveal" id="kategori">
+    <h3>🛍️ Jelajahi Kategori</h3>
+    <div class="cat-grid">
+      <a class="cat" href="#"><div class="ico">📱</div><span>HP</span></a>
+      <a class="cat" href="#"><div class="ico">💻</div><span>Laptop</span></a>
+      <a class="cat" href="#"><div class="ico">🎧</div><span>Audio</span></a>
+      <a class="cat" href="#"><div class="ico">⌚</div><span>Wearable</span></a>
+      <a class="cat" href="#"><div class="ico">🔌</div><span>Aksesoris</span></a>
+      <a class="cat" href="#"><div class="ico">🎮</div><span>Gaming</span></a>
+      <a class="cat" href="#"><div class="ico">📷</div><span>Kamera</span></a>
+      <a class="cat" href="#"><div class="ico">📟</div><span>Tablet</span></a>
+    </div>
+  </section>
+
+  <!-- FLASH DEAL -->
+  <section class="flash reveal" id="flash">
+    <div class="flash-head">
+      <h3>⚡ FLASH DEAL</h3>
+      <div class="countdown">
+        <span>Berakhir dalam</span>
+        <span class="cd-box" id="cdH">00</span> :
+        <span class="cd-box" id="cdM">00</span> :
+        <span class="cd-box" id="cdS">00</span>
+      </div>
+    </div>
+    <div class="flash-row">
+      <div class="fcard">
+        <span class="fbadge">-50%</span>
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=60&auto=format&fit=crop" alt="Headphone Premium" loading="lazy">
+        <div class="fbody"><div class="fname">Headphone Premium</div><div class="fprice">Rp749rb</div><div class="fold">Rp1.499.000</div></div>
+      </div>
+      <div class="fcard">
+        <span class="fbadge">-40%</span>
+        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&q=60&auto=format&fit=crop" alt="Smartwatch X2" loading="lazy">
+        <div class="fbody"><div class="fname">Smartwatch X2</div><div class="fprice">Rp1.739rb</div><div class="fold">Rp2.899.000</div></div>
+      </div>
+      <div class="fcard">
+        <span class="fbadge">-35%</span>
+        <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=600&q=60&auto=format&fit=crop" alt="Smartphone Nova 12" loading="lazy">
+        <div class="fbody"><div class="fname">Smartphone Nova 12</div><div class="fprice">Rp3.249rb</div><div class="fold">Rp4.999.000</div></div>
+      </div>
+      <div class="fcard">
+        <span class="fbadge">-30%</span>
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=60&auto=format&fit=crop" alt="Jam Tangan Klasik" loading="lazy">
+        <div class="fbody"><div class="fname">Jam Tangan Klasik</div><div class="fprice">Rp2.449rb</div><div class="fold">Rp3.499.000</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REKOMENDASI -->
+  <section class="reco reveal" id="rekomendasi">
+    <div class="reco-head">
+      <h3 class="sec-title" style="margin:0">✨ Rekomendasi Untukmu</h3>
+      <a href="#">Lihat Semua →</a>
+    </div>
+    <div class="prod-grid">
+      <div class="pcard">
+        <div class="pimg"><span class="pbadge">-17%</span>
+          <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&q=60&auto=format&fit=crop" alt="iPhone 15 Pro Max" loading="lazy"></div>
+        <div class="pbody">
+          <div class="pname">iPhone 15 Pro Max 256GB</div>
+          <div class="prices"><span class="ppromo">Rp23.999.000</span><span class="pold">Rp28.999.000</span></div>
+          <div class="pmeta"><span class="stars">★★★★★ 4.9</span><span class="sold">Terjual 1rb+</span></div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pimg"><span class="pbadge">-12%</span>
+          <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&q=60&auto=format&fit=crop" alt="Samsung Galaxy S24 Ultra" loading="lazy"></div>
+        <div class="pbody">
+          <div class="pname">Samsung Galaxy S24 Ultra</div>
+          <div class="prices"><span class="ppromo">Rp21.999.000</span><span class="pold">Rp24.999.000</span></div>
+          <div class="pmeta"><span class="stars">★★★★★ 4.8</span><span class="sold">Terjual 2rb+</span></div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pimg"><span class="pbadge">-50%</span>
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=60&auto=format&fit=crop" alt="Headphone Premium" loading="lazy"></div>
+        <div class="pbody">
+          <div class="pname">Headphone Premium Noise Cancelling</div>
+          <div class="prices"><span class="ppromo">Rp1.499.000</span><span class="pold">Rp2.999.000</span></div>
+          <div class="pmeta"><span class="stars">★★★★☆ 4.7</span><span class="sold">Terjual 5rb+</span></div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pimg"><span class="pbadge">-25%</span>
+          <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&q=60&auto=format&fit=crop" alt="Smartwatch X2" loading="lazy"></div>
+        <div class="pbody">
+          <div class="pname">Smartwatch X2 AMOLED</div>
+          <div class="prices"><span class="ppromo">Rp2.899.000</span><span class="pold">Rp3.899.000</span></div>
+          <div class="pmeta"><span class="stars">★★★★★ 4.9</span><span class="sold">Terjual 3rb+</span></div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pimg"><span class="pbadge">-20%</span>
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=60&auto=format&fit=crop" alt="Jam Tangan Klasik" loading="lazy"></div>
+        <div class="pbody">
+          <div class="pname">Jam Tangan Klasik Leather</div>
+          <div class="prices"><span class="ppromo">Rp3.499.000</span><span class="pold">Rp4.399.000</span></div>
+          <div class="pmeta"><span class="stars">★★★★☆ 4.6</span><span class="sold">Terjual 800+</span></div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pimg"><span class="pbadge">-30%</span>
+          <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=600&q=60&auto=format&fit=crop" alt="Smartphone Nova 12" loading="lazy"></div>
+        <div class="pbody">
+          <div class="pname">Smartphone Nova 12 5G</div>
+          <div class="prices"><span class="ppromo">Rp4.999.000</span><span class="pold">Rp7.199.000</span></div>
+          <div class="pmeta"><span class="stars">★★★★★ 4.8</span><span class="sold">Terjual 1,5rb+</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-logo">Retro<span>Mart</span></div>
+      <p>Marketplace elektronik termurah & terpercaya. 100% original, garansi resmi, gratis ongkir se-Indonesia.</p>
+    </div>
+    <div><h4>BELANJA</h4><a href="#">Flash Deal</a><a href="#">Kategori</a><a href="#">Voucher Saya</a><a href="#">Gratis Ongkir</a></div>
+    <div><h4>BANTUAN</h4><a href="#">Lacak Pesanan</a><a href="#">Pengembalian</a><a href="#">Hubungi Kami</a><a href="#">FAQ</a></div>
+    <div><h4>IKUTI KAMI</h4><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">YouTube</a><a href="#">Facebook</a></div>
+  </div>
+  <div class="foot-bottom">© 2026 RetroMart — Konsep revamp demo oleh MagerWeb</div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---------- Carousel ---------- */
+  try {
+    var slides = document.querySelectorAll('#slides .slide');
+    var dotsWrap = document.getElementById('dots');
+    var cur = 0, timer = null;
+    if (slides.length && dotsWrap) {
+      slides.forEach(function(_, i){
+        var d = document.createElement('button');
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Slide ' + (i + 1));
+        d.addEventListener('click', function(){ go(i); restart(); });
+        dotsWrap.appendChild(d);
+      });
+      var dots = dotsWrap.querySelectorAll('.dot');
+      function go(i){
+        cur = (i + slides.length) % slides.length;
+        slides.forEach(function(s, j){ s.classList.toggle('active', j === cur); });
+        dots.forEach(function(d, j){ d.classList.toggle('active', j === cur); });
+      }
+      function restart(){
+        if (timer) clearInterval(timer);
+        timer = setInterval(function(){ go(cur + 1); }, 4000);
+      }
+      restart();
+    }
+  } catch (e) { /* carousel non-kritis */ }
+
+  /* ---------- Countdown ke tengah malam ---------- */
+  try {
+    var elH = document.getElementById('cdH'),
+        elM = document.getElementById('cdM'),
+        elS = document.getElementById('cdS');
+    function pad(n){ return (n < 10 ? '0' : '') + n; }
+    function tick(){
+      if (!elH || !elM || !elS) return;
+      var now = new Date();
+      var end = new Date(now); end.setHours(24, 0, 0, 0);
+      var diff = Math.max(0, Math.floor((end - now) / 1000));
+      elH.textContent = pad(Math.floor(diff / 3600));
+      elM.textContent = pad(Math.floor((diff % 3600) / 60));
+      elS.textContent = pad(diff % 60);
+    }
+    tick();
+    setInterval(tick, 1000);
+  } catch (e) { /* countdown non-kritis */ }
+
+  /* ---------- Reveal on scroll ---------- */
+  try {
+    var rev = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && rev.length) {
+      var io = new IntersectionObserver(function(es){
+        es.forEach(function(e){
+          if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.1 });
+      rev.forEach(function(el){ io.observe(el); });
+    } else {
+      rev.forEach(function(el){ el.classList.add('visible'); });
+    }
+  } catch (e) { /* reveal non-kritis */ }
+
+  /* ---------- Search demo ---------- */
+  try {
+    var btn = document.getElementById('searchBtn'),
+        inp = document.getElementById('searchInput');
+    function doSearch(){
+      var q = inp ? inp.value.trim() : '';
+      if (q) { try { alert('Mencari: ' + q + ' (demo)'); } catch (ae) {} }
+    }
+    if (btn) btn.addEventListener('click', doSearch);
+    if (inp) inp.addEventListener('keydown', function(e){ if (e.key === 'Enter') doSearch(); });
+  } catch (e) { /* search non-kritis */ }
+})();
+</script>
+</body>
+</html>
