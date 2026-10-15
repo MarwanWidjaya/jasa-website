@@ -17,6 +17,28 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=20261011c">
+<style>
+/* ===== DEMO PREVIEW MODAL (2026-10-15) ===== */
+.demo-modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:22px;visibility:hidden;opacity:0;transition:opacity .35s ease,visibility 0s .35s}
+.demo-modal.open{visibility:visible;opacity:1;transition:opacity .35s ease}
+.dm-backdrop{position:absolute;inset:0;background:rgba(8,10,6,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.dm-box{position:relative;width:min(1020px,100%);background:#101408;border:1px solid rgba(198,242,78,.28);border-radius:20px;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.65);transform:scale(.9) translateY(30px) rotate(.6deg);transition:transform .5s cubic-bezier(.2,.9,.25,1.15)}
+.demo-modal.open .dm-box{transform:none}
+.dm-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 22px;border-bottom:1px solid rgba(198,242,78,.14)}
+.dm-head b{font-family:'Archivo',sans-serif;font-size:1.05rem;color:#f2f5e9}
+.dm-head span{display:block;font-size:.78rem;color:#9aa48c;margin-top:2px}
+.dm-x{flex:none;background:transparent;border:1px solid rgba(198,242,78,.35);color:#f2f5e9;width:40px;height:40px;border-radius:50%;font-size:1rem;cursor:pointer;transition:background .2s,transform .2s}
+.dm-x:hover{background:rgba(198,242,78,.16);transform:rotate(90deg)}
+.dm-frame-wrap{height:min(62vh,580px);background:#0a0c07;position:relative}
+.dm-frame-wrap iframe{width:100%;height:100%;border:0;display:block;background:#fff}
+.dm-load{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#9aa48c;font-size:.9rem;background:#0e1208;transition:opacity .3s}
+.dm-load.hide{opacity:0;pointer-events:none}
+.dm-load::after{content:'';width:34px;height:34px;margin-left:12px;border:3px solid rgba(198,242,78,.25);border-top-color:#C6F24E;border-radius:50%;animation:dmspin .8s linear infinite}
+@keyframes dmspin{to{transform:rotate(360deg)}}
+.dm-foot{display:flex;gap:12px;padding:16px 22px;border-top:1px solid rgba(198,242,78,.14);flex-wrap:wrap}
+@media(max-width:640px){.demo-modal{padding:10px}.dm-frame-wrap{height:64vh}.dm-box{border-radius:14px}}
+@media(prefers-reduced-motion:reduce){.demo-modal,.dm-box{transition:none}}
+</style>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"MAGERWEB","url":"https://marwanwidjaya.github.io/magerweb/","description":"Studio digital independen yang merancang website premium dan pengalaman digital. Desain website, e-commerce, landing page, identitas brand.","telephone":"+62-857-2380-3537","priceRange":"Rp250rb - Rp1jt+","areaServed":"ID"}
@@ -552,5 +574,55 @@
 
 <script src="app.js"></script>
 <script data-goatcounter="https://marwan-jasa.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+<!-- ================= DEMO PREVIEW MODAL ================= -->
+<div class="demo-modal" id="demoModal" aria-hidden="true">
+  <div class="dm-backdrop" data-close></div>
+  <div class="dm-box" role="dialog" aria-modal="true" aria-label="Preview demo">
+    <div class="dm-head">
+      <div><b id="dmTitle">Demo</b><span>Preview langsung — klik "Buka Full" untuk versi lengkap</span></div>
+      <button class="dm-x" data-close aria-label="Tutup preview">✕</button>
+    </div>
+    <div class="dm-frame-wrap">
+      <div class="dm-load" id="dmLoad">Memuat demo</div>
+      <iframe id="dmFrame" title="Preview demo website"></iframe>
+    </div>
+    <div class="dm-foot">
+      <a class="btn btn-lime" id="dmOpen" href="#" target="_blank" rel="noopener">Buka Demo Full →</a>
+      <button class="btn btn-ghost" data-close>Tutup</button>
+    </div>
+  </div>
+</div>
+<script>
+/* Demo preview modal — klik kartu karya = preview animasi, bukan tab baru (2026-10-15) */
+(function(){
+  var modal=document.getElementById('demoModal'),frame=document.getElementById('dmFrame'),
+      title=document.getElementById('dmTitle'),openBtn=document.getElementById('dmOpen'),
+      load=document.getElementById('dmLoad');
+  function openDemo(url,name){
+    title.textContent=name||'Demo';frame.src=url;openBtn.href=url;
+    load.classList.remove('hide');
+    modal.classList.add('open');modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+  function closeDemo(){
+    modal.classList.remove('open');modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    setTimeout(function(){frame.src='about:blank'},450);
+  }
+  frame.addEventListener('load',function(){load.classList.add('hide')});
+  document.querySelectorAll('a.work-visual').forEach(function(a){
+    a.addEventListener('click',function(e){
+      if(e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+      e.preventDefault();
+      var label=a.getAttribute('aria-label')||'';
+      var name=label.replace(/^Lihat demo live\s*/i,'')||'Demo';
+      openDemo(a.href,name);
+    });
+  });
+  modal.querySelectorAll('[data-close]').forEach(function(b){b.addEventListener('click',closeDemo)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))closeDemo()});
+})();
+</script>
 </body>
 </html>
