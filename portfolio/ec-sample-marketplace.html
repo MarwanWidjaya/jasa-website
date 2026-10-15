@@ -69,7 +69,7 @@ img{display:block;max-width:100%}
 
 /* ===== flash deal ===== */
 .flash{margin:30px 0 0;background:linear-gradient(135deg,#ff6a00,#ee4d2d);border-radius:16px;padding:22px;position:relative;overflow:hidden}
-.flash::before{content:'⚡';position:absolute;font-size:9rem;opacity:.12;right:10px;top:-20px;transform:rotate(15deg)}
+.flash::before{content:'';position:absolute;font-size:9rem;opacity:.12;right:10px;top:-20px;transform:rotate(15deg)}
 .flash-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px;color:#fff}
 .flash-head h3{font-size:1.3rem;font-weight:900}
 .countdown{display:flex;gap:6px;align-items:center;font-weight:700;font-size:.85rem}
@@ -141,11 +141,11 @@ footer{background:#222;color:#cfcfcf;margin-top:20px}
   .reveal{opacity:1;transform:none}
 }
 </style>
-</head>
+<style>.ico{display:flex;align-items:center;justify-content:center}.ico svg{color:#ee4d2d}.nicon svg{vertical-align:-4px}.h-ico{display:flex;align-items:center;gap:10px}.h-ico svg{color:#ee4d2d;flex:none}</style></head>
 <body>
 <div class="demo-badge">DEMO MAGERWEB</div>
 
-<div class="topbar">🎉 Gratis ongkir se-Indonesia! Min. belanja Rp50rb &nbsp;•&nbsp; Flash Deal tiap jam 12.00 & 20.00 ⚡</div>
+<div class="topbar">Gratis ongkir se-Indonesia! Min. belanja Rp50rb &nbsp;•&nbsp; Flash Deal tiap jam 12.00 & 20.00</div>
 
 <nav class="navbar"><div class="nav-in">
   <a class="logo" href="#">Retro<span>Mart</span></a>
@@ -154,8 +154,8 @@ footer{background:#222;color:#cfcfcf;margin-top:20px}
     <button type="button" id="searchBtn">Cari</button>
   </div>
   <div class="nav-icons">
-    <a class="nicon" href="#" aria-label="Notifikasi">🔔<span class="dot">3</span></a>
-    <a class="nicon" href="#" aria-label="Keranjang">🛒<span class="dot">2</span></a>
+    <a class="nicon" href="#" aria-label="Notifikasi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="dot">3</span></a>
+    <a class="nicon" href="#" aria-label="Keranjang"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span class="dot">2</span></a>
   </div>
 </div></nav>
 
@@ -165,7 +165,7 @@ footer{background:#222;color:#cfcfcf;margin-top:20px}
     <div class="slides" id="slides">
       <div class="slide s1 active">
         <span class="tag">PROMO TERBESAR</span>
-        <h2>Big Season Sale<br>Diskon s.d. 90%!</h2>
+        <h2>Pesta Gadget<br>Diskon s.d. 90%!</h2>
         <p>Elektronik original bergaransi resmi. Stok terbatas, siapa cepat dia dapat.</p>
         <a class="cta" href="#flash">Serbu Sekarang</a>
       </div>
@@ -187,23 +187,23 @@ footer{background:#222;color:#cfcfcf;margin-top:20px}
 
   <!-- KATEGORI -->
   <section class="cats reveal" id="kategori">
-    <h3>🛍️ Jelajahi Kategori</h3>
+    <h3 class="h-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> Jelajahi Kategori</h3>
     <div class="cat-grid">
-      <a class="cat" href="#"><div class="ico">📱</div><span>HP</span></a>
-      <a class="cat" href="#"><div class="ico">💻</div><span>Laptop</span></a>
-      <a class="cat" href="#"><div class="ico">🎧</div><span>Audio</span></a>
-      <a class="cat" href="#"><div class="ico">⌚</div><span>Wearable</span></a>
-      <a class="cat" href="#"><div class="ico">🔌</div><span>Aksesoris</span></a>
-      <a class="cat" href="#"><div class="ico">🎮</div><span>Gaming</span></a>
-      <a class="cat" href="#"><div class="ico">📷</div><span>Kamera</span></a>
-      <a class="cat" href="#"><div class="ico">📟</div><span>Tablet</span></a>
+      <a class="cat" href="#"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><span>HP</span></a>
+      <a class="cat" href="#"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div><span>Laptop</span></a>
+      <a class="cat" href="#"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div><span>Audio</span></a>
+      <a class="cat" href="#"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="6" width="10" height="12" rx="3"/><line x1="9" y1="2" x2="9" y2="6"/><line x1="15" y1="2" x2="15" y2="6"/><line x1="9" y1="18" x2="9" y2="22"/><line x1="15" y1="18" x2="15" y2="22"/></svg></div><span>Wearable</span></a>
+      <a class="cat" href="#"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0V8z"/><line x1="12" y1="18" x2="12" y2="22"/></svg></div><span>Aksesoris</span></a>
+      <a class="cat" href="#"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="11" rx="5"/><line x1="7" y1="10.5" x2="7" y2="13.5"/><line x1="5.5" y1="12" x2="8.5" y2="12"/><circle cx="16" cy="11" r="1" fill="currentColor"/><circle cx="18" cy="13.5" r="1" fill="currentColor"/></svg></div><span>Gaming</span></a>
+      <a class="cat" href="#"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><span>Kamera</span></a>
+      <a class="cat" href="#"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><span>Tablet</span></a>
     </div>
   </section>
 
   <!-- FLASH DEAL -->
   <section class="flash reveal" id="flash">
     <div class="flash-head">
-      <h3>⚡ FLASH DEAL</h3>
+      <h3 class="h-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> FLASH DEAL</h3>
       <div class="countdown">
         <span>Berakhir dalam</span>
         <span class="cd-box" id="cdH">00</span> :
