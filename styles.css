@@ -429,7 +429,7 @@ section[id]{scroll-margin-top:80px}
 .section{position:relative}
 .section .wrap{position:relative;z-index:2}
 .section::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 90% 70% at 50% 40%,rgba(5,5,7,.72) 0%,rgba(5,5,7,.35) 55%,transparent 100%)}
+  background:radial-gradient(ellipse 90% 70% at 50% 40%,rgba(5,5,7,.88) 0%,rgba(5,5,7,.55) 55%,rgba(5,5,7,.25) 100%)}
 /* Hero: teks di atas black hole harus tegas */
 .hero .wrap{position:relative;z-index:3;text-shadow:0 2px 24px rgba(0,0,0,.8)}
 /* Pastikan heading selalu off-white solid */
