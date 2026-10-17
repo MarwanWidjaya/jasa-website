@@ -497,3 +497,10 @@ section[id]{scroll-margin-top:80px}
 .hero .wrap, #work .wrap, #about .wrap, .final-cta .wrap{position:relative;z-index:2}
 /* Sembunyikan canvas 3D berat (diganti gambar) */
 #stars{display:none}
+
+/* Dive prompt */
+.dive-prompt{margin-top:2rem;font-size:.85rem;letter-spacing:.35em;color:var(--gold);
+  text-transform:uppercase;opacity:.9;animation:pulse 2s ease-in-out infinite}
+.dive-arrow{display:inline-block;animation:bounce 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
