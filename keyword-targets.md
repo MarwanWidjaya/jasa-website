@@ -53,3 +53,4 @@ Daftar kata kunci target untuk artikel blog. Setiap artikel baru WAJIB target 1 
 | 2026-10-15 | berapa biaya bikin website untuk umkm 2026 | 2026-10-15-berapa-biaya-bikin-website-umkm-2026.html |
 | 2026-10-16 | jasa input produk ke shopee berapa harganya | 2026-10-16-jasa-input-produk-shopee-harga.html |
 | 2026-10-17 | cara membuat toko online sendiri untuk pemula | 2026-10-17-cara-membuat-toko-online-sendiri-untuk-pemula.html |
+| 2026-10-18 | jasa pembuatan landing page | 2026-10-18-jasa-pembuatan-landing-page.html |
