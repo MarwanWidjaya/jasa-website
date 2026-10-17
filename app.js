@@ -85,7 +85,7 @@ var EMBED_MODE = /[?&]embed=1/.test(location.search);
 (function(){
   var canvas=document.getElementById('stars');
   if(!canvas) return;
-  if(EMBED_MODE){ return; } // demo iframe: konten saja, tanpa WebGL
+  if(EMBED_MODE){ return; }
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isMobile = window.innerWidth<640;
 
@@ -95,377 +95,168 @@ var EMBED_MODE = /[?&]embed=1/.test(location.search);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, isMobile?1.5:2));
       renderer.setSize(window.innerWidth,window.innerHeight);
       var scene=new THREE.Scene();
-      scene.fog=new THREE.FogExp2(0x050507,0.02);
-      var camera=new THREE.PerspectiveCamera(62,window.innerWidth/window.innerHeight,.1,220);
-      camera.position.set(0,0,26);
+      scene.fog=new THREE.FogExp2(0x050507,0.015);
+      var camera=new THREE.PerspectiveCamera(62,window.innerWidth/window.innerHeight,.1,600);
+      
+      // ===== WORLD 0: BLACK HOLE (z=0) =====
+      var bhGroup=new THREE.Group();
+      // Event horizon (bola hitam)
+      var bhSphere=new THREE.Mesh(
+        new THREE.SphereGeometry(3,32,32),
+        new THREE.MeshBasicMaterial({color:0x000000})
+      );
+      bhGroup.add(bhSphere);
+      // Accretion disk (cakram emas)
+      var diskGeo=new THREE.RingGeometry(3.5,7,64);
+      var diskMat=new THREE.MeshBasicMaterial({
+        color:0xE9A13B, transparent:true, opacity:.85, side:THREE.DoubleSide
+      });
+      var disk=new THREE.Mesh(diskGeo,diskMat);
+      disk.rotation.x=-Math.PI/2.3;
+      bhGroup.add(disk);
+      // Glow
+      var glowGeo=new THREE.RingGeometry(3.2,4.2,64);
+      var glowMat=new THREE.MeshBasicMaterial({
+        color:0xffd700, transparent:true, opacity:.4, side:THREE.DoubleSide,
+        blending:THREE.AdditiveBlending
+      });
+      var glow=new THREE.Mesh(glowGeo,glowMat);
+      glow.rotation.x=-Math.PI/2.3;
+      bhGroup.add(glow);
+      bhGroup.position.z=0;
+      scene.add(bhGroup);
 
-      /* ===== STARFIELD ===== */
-      var COUNT=EMBED_MODE?500:(isMobile?900:2200);
-      var pos=new Float32Array(COUNT*3), col=new Float32Array(COUNT*3);
-      var lime=new THREE.Color('#C6F24E'), white=new THREE.Color('#ffffff'),
-          cyan=new THREE.Color('#7dd3fc'), gold=new THREE.Color('#E9A13B'), tmp=new THREE.Color();
-      for(var i=0;i<COUNT;i++){
-        var r=18+Math.random()*60, th=Math.random()*Math.PI*2, ph=Math.acos(2*Math.random()-1);
-        pos[i*3]=r*Math.sin(ph)*Math.cos(th);
-        pos[i*3+1]=r*Math.sin(ph)*Math.sin(th);
-        pos[i*3+2]=r*Math.cos(ph)-20;
-        var pick=Math.random();
-        if(pick<.1) tmp.copy(lime); else if(pick<.15) tmp.copy(cyan);
-        else if(pick<.18) tmp.copy(gold); else tmp.copy(white);
-        tmp.multiplyScalar(.45+Math.random()*.55);
-        col[i*3]=tmp.r; col[i*3+1]=tmp.g; col[i*3+2]=tmp.b;
-      }
-      var geo=new THREE.BufferGeometry();
-      geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
-      geo.setAttribute('color',new THREE.BufferAttribute(col,3));
-      var dotCv=document.createElement('canvas'); dotCv.width=dotCv.height=64;
-      var dg=dotCv.getContext('2d'), dgrd=dg.createRadialGradient(32,32,0,32,32,32);
-      dgrd.addColorStop(0,'rgba(255,255,255,1)'); dgrd.addColorStop(.4,'rgba(255,255,255,.9)');
-      dgrd.addColorStop(1,'rgba(255,255,255,0)');
-      dg.fillStyle=dgrd; dg.fillRect(0,0,64,64);
-      var starMat=new THREE.PointsMaterial({size:.85,vertexColors:true,transparent:true,
-        opacity:.95,sizeAttenuation:true,depthWrite:false,map:new THREE.CanvasTexture(dotCv)});
-      var stars=new THREE.Points(geo,starMat);
-      scene.add(stars);
-      var mwPts=null;
-
-      /* ===== MILKY WAY BAND: pita galaxy diagonal ===== */
-      (function(){
-        var MW=900, mpos=new Float32Array(MW*3), mcol=new Float32Array(MW*3);
-        var mwC1=new THREE.Color('#8b7bd8'), mwC2=new THREE.Color('#e8b4d8'),
-            mwC3=new THREE.Color('#7dd3fc'), tc=new THREE.Color();
-        for(var k=0;k<MW;k++){
-          var px=-60+Math.random()*120;
-          var py=px*.42+(Math.random()+Math.random()+Math.random()-1.5)*16;
-          var pz=-20-Math.random()*50;
-          mpos[k*3]=px; mpos[k*3+1]=py; mpos[k*3+2]=pz;
-          var pk=Math.random();
-          tc.copy(pk<.4?mwC1:(pk<.7?mwC2:mwC3));
-          tc.multiplyScalar(.25+Math.random()*.5);
-          mcol[k*3]=tc.r; mcol[k*3+1]=tc.g; mcol[k*3+2]=tc.b;
-        }
-        var mg=new THREE.BufferGeometry();
-        mg.setAttribute('position',new THREE.BufferAttribute(mpos,3));
-        mg.setAttribute('color',new THREE.BufferAttribute(mcol,3));
-        var dotTex2=new THREE.CanvasTexture(dotCv);
-        var mm=new THREE.PointsMaterial({size:.7,vertexColors:true,transparent:true,
-          opacity:.75,map:dotTex2,depthWrite:false,blending:THREE.AdditiveBlending});
-        var mw=new THREE.Points(mg,mm);
-        mw.userData={mat:mm};
-        scene.add(mw);
-        mwPts=mw;
-      })();
-      nebula('rgba(139,123,216,0.35)',-18,10,60,.14);
-      nebula('rgba(232,180,216,0.28)',20,-8,55,.12);
-
-      /* black hole kini via ray-traced shader (#bh) */
-
-
-                  /* ===== TESSERACT v3 — ruang berlapis ala Interstellar =====
-         Lapisan dekat (rapat, terang) + lapisan jauh (jarang, redup) = parallax nyata.
-         Warna vertex: amber hangat di koridor tengah → cokelat gelap di tepi. */
+      // ===== WORLD 2: TESSERACT (z=-200) =====
       var tessGroup=new THREE.Group();
-      var tessLayers=[];
-      function latticeGeom(cell, grid, accentEvery){
-        var half=(grid*cell)/2, v=[], a=[];
-        function push(arr,px1,py1,pz1,px2,py2,pz2){arr.push(px1,py1,pz1,px2,py2,pz2);}
-        var x,y,z;
-        for(y=0;y<=grid;y++) for(z=0;z<=grid;z++)
-          push((y%accentEvery===0&&z%accentEvery===0)?a:v,
-            -half,-half+y*cell,-half+z*cell, half,-half+y*cell,-half+z*cell);
-        for(x=0;x<=grid;x++) for(z=0;z<=grid;z++)
-          push((x%accentEvery===0&&z%accentEvery===0)?a:v,
-            -half+x*cell,-half,-half+z*cell, -half+x*cell,half,-half+z*cell);
-        for(x=0;x<=grid;x++) for(y=0;y<=grid;y++)
-          push((x%accentEvery===0&&y%accentEvery===0)?a:v,
-            -half+x*cell,-half+y*cell,-half, -half+x*cell,-half+y*cell,half);
-        function paint(arr, bright){
-          var col=new Float32Array(arr.length);
-          var warm=[.98,.74,.42], dark=[.14,.09,.05];
-          for(var i=0;i<arr.length;i+=3){
-            var d=Math.sqrt(arr[i]*arr[i]+arr[i+1]*arr[i+1])/(half*1.15);
-            d=Math.min(1,d);
-            var f=Math.pow(1-d,1.7)*bright;
-            col[i]=dark[0]+(warm[0]-dark[0])*f;
-            col[i+1]=dark[1]+(warm[1]-dark[1])*f;
-            col[i+2]=dark[2]+(warm[2]-dark[2])*f;
-          }
-          var g=new THREE.BufferGeometry();
-          g.setAttribute('position',new THREE.BufferAttribute(new Float32Array(arr),3));
-          g.setAttribute('color',new THREE.BufferAttribute(col,3));
-          return g;
-        }
-        return {base:paint(v,.55), accent:paint(a,.8)};
+      // Lighting sinematik
+      var amb=new THREE.AmbientLight(0x8a6a4a,.9);
+      tessGroup.add(amb);
+      var key=new THREE.DirectionalLight(0xffd9a0,1.2);
+      key.position.set(10,15,5);
+      tessGroup.add(key);
+      var fill=new THREE.PointLight(0xff9a50,1.5,80);
+      fill.position.set(-8,3,-195);
+      tessGroup.add(fill);
+      var rim=new THREE.PointLight(0x6a9aff,.8,80);
+      rim.position.set(8,-5,-205);
+      tessGroup.add(rim);
+      
+      // Rak buku: lattice 3D ala Cooper
+      var woodMat=new THREE.MeshStandardMaterial({
+        color:0x8a5a33, roughness:.75, metalness:.05
+      });
+      var bookColors=[0x8a3a2a,0x2a5a8a,0x3a6a3a,0xd4a95a,0x5a3a6a,0xb56a3a,0x2a3a5a,0x9a2a2a];
+      var shelfGeo=new THREE.BoxGeometry(3.6,.18,1.1);
+      var bookGeo=new THREE.BoxGeometry(.22,.85,.75);
+      var dummy=new THREE.Object3D();
+      var col=new THREE.Color();
+      
+      // Grid 4x3x4 unit rak
+      var units=[];
+      for(var ux=0;ux<4;ux++) for(var uy=0;uy<3;uy++) for(var uz=0;uz<4;uz++){
+        var px=(ux-1.5)*4.2, py=(uy-1)*4.2, pz=-200+(uz-1.5)*4.2;
+        // Koridor tengah untuk kamera
+        if(Math.abs(px)<2.5 && Math.abs(py)<2.5) continue;
+        units.push([px,py,pz]);
       }
-      function addTessLayer(cell, grid, speed, baseOp){
-        var G=latticeGeom(cell,grid,3);
-        var grp=new THREE.Group();
-        var m1=new THREE.LineBasicMaterial({vertexColors:true,transparent:true,opacity:0});
-        var m2=new THREE.LineBasicMaterial({vertexColors:true,transparent:true,opacity:0});
-        grp.add(new THREE.LineSegments(G.base,m1));
-        grp.add(new THREE.LineSegments(G.accent,m2));
-        grp.userData={cell:cell,speed:speed,mats:[m1,m2],baseOp:baseOp};
-        tessGroup.add(grp);
-        tessLayers.push(grp);
-        return grp;
-      }
-      addTessLayer(3.5, 8, 1.0, .22);
-      addTessLayer(7, 9, .45, .12);
-      /* --- RAK BUKU SOLID ala Interstellar: rak kayu + buku 3D beneran ---
-         InstancedMesh (2 draw call) — kebaca sebagai rak buku di layar HP. */
-      (function addSolidBookshelves(){
-        // Tekstur kayu prosedural
-        var woodCv=new OffscreenCanvas(128,128);
-        var wg=woodCv.getContext('2d');
-        wg.fillStyle='#7a5230'; wg.fillRect(0,0,128,128);
-        for(var wi=0;wi<40;wi++){
-          wg.strokeStyle='rgba('+(40+Math.random()*30|0)+','+(25+Math.random()*20|0)+',10,'+(.15+Math.random()*.25)+')';
-          wg.lineWidth=.5+Math.random()*1.5;
-          wg.beginPath();
-          var wy=Math.random()*128;
-          wg.moveTo(0,wy);
-          wg.bezierCurveTo(40,wy+(Math.random()-.5)*8, 80,wy+(Math.random()-.5)*8, 128,wy+(Math.random()-.5)*4);
-          wg.stroke();
-        }
-        var woodTex=new THREE.CanvasTexture(woodCv);
-        woodTex.wrapS=woodTex.wrapT=THREE.RepeatWrapping;
-
-        // Material dengan LIGHTING (bukan flat)
-        var shelfMat=new THREE.MeshLambertMaterial({map:woodTex, color:0xb98a5a});
-        var bookMat=new THREE.MeshLambertMaterial({color:0xffffff});
-
-        // Lampu hangat di koridor
-        var warm1=new THREE.PointLight(0xffb45e, 1.2, 40); warm1.position.set(0,2,-14); scene.add(warm1);
-        var warm2=new THREE.PointLight(0xff9a3e, .8, 40); warm2.position.set(0,-2,-22); scene.add(warm2);
-        var amb=new THREE.AmbientLight(0x604030, .7); scene.add(amb);
-
-        var cell=4, nx=5, ny=3, nz=7;
-        var shelfGeo=new THREE.BoxGeometry(cell*.92, .12, .6);
-        var sideGeo=new THREE.BoxGeometry(.12, cell*.85, .6);
-        var backGeo=new THREE.BoxGeometry(cell*.92, cell*.85, .06);
-        var bookGeo=new THREE.BoxGeometry(.15, .62, .42);
-
-        var units=[];
-        for(var cx=0;cx<nx;cx++) for(var cy=0;cy<ny;cy++) for(var cz=0;cz<nz;cz++){
-          var px=(cx-(nx-1)/2)*cell, py=(cy-(ny-1)/2)*cell, pz=(cz-(nz-1)/2)*cell;
-          if(Math.abs(px)<cell*.7 && Math.abs(py)<cell*.7) continue;
-          units.push([px,py,pz]);
-        }
-        var shelvesPerUnit=4, booksPerShelf=8;
-        var nU=units.length;
-        var shelfMesh=new THREE.InstancedMesh(shelfGeo, shelfMat, nU*shelvesPerUnit);
-        var sideMesh=new THREE.InstancedMesh(sideGeo, shelfMat, nU*2);
-        var backMesh=new THREE.InstancedMesh(backGeo, shelfMat, nU);
-        var bookMesh=new THREE.InstancedMesh(bookGeo, bookMat, nU*shelvesPerUnit*booksPerShelf);
-
-        var dummy=new THREE.Object3D(), col=new THREE.Color();
-        var si=0, di=0, ki=0, bi=0;
-        // Palet buku lebih kaya (kayak rak beneran)
-        var palette=[0x8a5a33,0xa06a3a,0x7a4a28,0xb57a45,0x5e3a22,0x96703f,0x6e452a,0xc08a50,
-                     0x4a6a8a,0x8a4a5a,0x3a6a4a,0xd4a95a,0x2a3a5a,0x9a3a2a,0xe8d5b0,0x5a4a6a];
-        units.forEach(function(u){
-          // panel samping (kiri-kanan)
-          [-1,1].forEach(function(sgn){
-            dummy.position.set(u[0]+sgn*cell*.44, u[1], u[2]);
-            dummy.rotation.set(0,0,0); dummy.scale.set(1,1,1); dummy.updateMatrix();
-            sideMesh.setMatrixAt(di++,dummy.matrix);
-          });
-          // panel belakang
-          dummy.position.set(u[0], u[1], u[2]-.28);
-          dummy.rotation.set(0,0,0); dummy.scale.set(1,1,1); dummy.updateMatrix();
-          backMesh.setMatrixAt(ki++,dummy.matrix);
-
-          for(var s=0;s<shelvesPerUnit;s++){
-            var sy=u[1]-cell*.35+s*(cell*.7/(shelvesPerUnit-1));
-            dummy.position.set(u[0],sy,u[2]);
-            dummy.rotation.set(0,0,0); dummy.scale.set(1,1,1); dummy.updateMatrix();
-            shelfMesh.setMatrixAt(si++,dummy.matrix);
-            for(var b=0;b<booksPerShelf;b++){
-              // kadang ada slot kosong (natural)
-              if(Math.random()<.12) continue;
-              var bx=u[0]-cell*.38+b*(cell*.76/(booksPerShelf-1))+(Math.random()-.5)*.04;
-              var bh=.75+Math.random()*.45;
-              dummy.position.set(bx, sy+.06+bh*.31, u[2]+(Math.random()-.5)*.05);
-              dummy.scale.set(1,bh,1);
-              dummy.rotation.set(0,(Math.random()-.5)*.1,Math.random()<.08?.12:0);
-              dummy.updateMatrix();
-              bookMesh.setMatrixAt(bi,dummy.matrix);
-              col.setHex(palette[(Math.random()*palette.length)|0]);
-              col.multiplyScalar(.7+Math.random()*.55);
-              bookMesh.setColorAt(bi,col);
-              bi++;
-            }
-            dummy.scale.set(1,1,1);
+      var shelvesPerUnit=4, booksPerShelf=6;
+      var nU=units.length;
+      var shelfMesh=new THREE.InstancedMesh(shelfGeo,woodMat,nU*shelvesPerUnit);
+      var bookMat=new THREE.MeshStandardMaterial({color:0xffffff,roughness:.8});
+      var bookMesh=new THREE.InstancedMesh(bookGeo,bookMat,nU*shelvesPerUnit*booksPerShelf);
+      var si=0, bi=0;
+      units.forEach(function(u){
+        for(var s=0;s<shelvesPerUnit;s++){
+          var sy=u[1]-1.4+s*(2.8/(shelvesPerUnit-1));
+          dummy.position.set(u[0],sy,u[2]);
+          dummy.rotation.set(0,0,0); dummy.scale.set(1,1,1);
+          dummy.updateMatrix(); shelfMesh.setMatrixAt(si++,dummy.matrix);
+          for(var b=0;b<booksPerShelf;b++){
+            if(Math.random()<.15) continue;
+            var bx=u[0]-1.5+b*(3/(booksPerShelf-1))+(Math.random()-.5)*.1;
+            dummy.position.set(bx,sy+.5,u[2]+(Math.random()-.5)*.1);
+            dummy.scale.set(1,.8+Math.random()*.4,1);
+            dummy.rotation.set(0,(Math.random()-.5)*.12,0);
+            dummy.updateMatrix(); bookMesh.setMatrixAt(bi,dummy.matrix);
+            col.setHex(bookColors[(Math.random()*bookColors.length)|0]);
+            bookMesh.setColorAt(bi,col); bi++;
           }
-        });
-        shelfMesh.count=si; sideMesh.count=di; backMesh.count=ki; bookMesh.count=bi;
-        shelfMesh.instanceMatrix.needsUpdate=true; sideMesh.instanceMatrix.needsUpdate=true;
-        backMesh.instanceMatrix.needsUpdate=true; bookMesh.instanceMatrix.needsUpdate=true;
-        if(bookMesh.instanceColor) bookMesh.instanceColor.needsUpdate=true;
-
-        // Material transparan untuk fade
-        var sm=shelfMat.clone(); sm.transparent=true; sm.opacity=0;
-        var bm=bookMat.clone(); bm.transparent=true; bm.opacity=0;
-        shelfMesh.material=sm; sideMesh.material=sm; backMesh.material=sm; bookMesh.material=bm;
-
-        var grp=new THREE.Group();
-        grp.add(shelfMesh); grp.add(sideMesh); grp.add(backMesh); grp.add(bookMesh);
-        grp.userData={mats:[sm,bm],cell:cell*3,speed:1,baseOp:.95};
-        tessGroup.add(grp);
-        tessLayers.push(grp);
-      })();
-
-      (function(){
-        var cell=3.5, grid=11, half=(grid*cell)/2, pv=[], x, y, z;
-        for(x=0;x<=grid;x+=2) for(y=0;y<=grid;y+=2) for(z=0;z<=grid;z+=2)
-          pv.push(-half+x*cell,-half+y*cell,-half+z*cell);
-        var pg=new THREE.BufferGeometry();
-        pg.setAttribute('position',new THREE.BufferAttribute(new Float32Array(pv),3));
-        var dc2=document.createElement('canvas'); dc2.width=dc2.height=64;
-        var dg2=dc2.getContext('2d'),
-            grd2=dg2.createRadialGradient(32,32,0,32,32,32);
-        grd2.addColorStop(0,'rgba(255,232,180,1)'); grd2.addColorStop(.45,'rgba(255,214,150,.45)');
-        grd2.addColorStop(1,'rgba(255,214,150,0)');
-        dg2.fillStyle=grd2; dg2.fillRect(0,0,64,64);
-        var pm=new THREE.PointsMaterial({color:0xffdf9e,size:.42,transparent:true,
-          opacity:0,map:new THREE.CanvasTexture(dc2),depthWrite:false,
-          blending:THREE.AdditiveBlending});
-        var pts=new THREE.Points(pg,pm);
-        pts.userData={mat:pm,cell:cell,speed:1};
-        tessGroup.add(pts);
-        tessLayers.push(pts);
-      })();
-      tessGroup.position.set(0,0,-18);
-      tessGroup.visible=false;
+        }
+      });
+      shelfMesh.count=si; bookMesh.count=bi;
+      shelfMesh.instanceMatrix.needsUpdate=true;
+      bookMesh.instanceMatrix.needsUpdate=true;
+      if(bookMesh.instanceColor) bookMesh.instanceColor.needsUpdate=true;
+      tessGroup.add(shelfMesh); tessGroup.add(bookMesh);
       scene.add(tessGroup);
 
-/* ===== NEBULA ===== */
-      function nebula(colorHex,ox,oy,s,op){
-        var cv=document.createElement('canvas'); cv.width=cv.height=128;
-        var ng=cv.getContext('2d'), grd=ng.createRadialGradient(64,64,0,64,64,64);
-        grd.addColorStop(0,colorHex); grd.addColorStop(1,'rgba(0,0,0,0)');
-        ng.fillStyle=grd; ng.fillRect(0,0,128,128);
-        var sp=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(cv),
-          transparent:true,opacity:op,depthWrite:false}));
-        sp.position.set(ox,oy,-32); sp.scale.set(s,s,1); scene.add(sp);
+      // ===== STARFIELD (selalu ada) =====
+      var starGeo=new THREE.BufferGeometry();
+      var starCount=isMobile?800:2000;
+      var sp=new Float32Array(starCount*3);
+      for(var i=0;i<starCount;i++){
+        sp[i*3]=(Math.random()-.5)*400;
+        sp[i*3+1]=(Math.random()-.5)*400;
+        sp[i*3+2]=30-Math.random()*450;
       }
-      nebula('rgba(198,242,78,0.5)',-26,14,46,.13);
-      nebula('rgba(125,211,252,0.45)',28,-16,50,.1);
-      nebula('rgba(233,161,59,0.4)',0,-22,40,.08);
+      starGeo.setAttribute('position',new THREE.BufferAttribute(sp,3));
+      var stars=new THREE.Points(starGeo,new THREE.PointsMaterial({
+        color:0xffffff,size:.7,transparent:true,opacity:.9
+      }));
+      scene.add(stars);
 
-      /* ===== JOURNEY: scroll menggerakkan kamera menembus ruang-waktu ===== */
-      var tmx=0,tmy=0,mx=0,my=0,journey=0,lastY=window.scrollY,scrollVel=0;
-      var dmFill=document.getElementById('dmFill'), dmMarker=document.getElementById('dmMarker'),
-          dmStage=document.getElementById('dmStage');
-      var stages=[[0,'CH.00 · THE VOID','SCROLL TO EXPLORE'],
-                  [.14,'CH.01 · THE PROBLEM','EVERY BUSINESS HITS THIS WALL'],
-                  [.28,'CH.02 · TRANSFORMATION','FROM CHAOS TO SYSTEM'],
-                  [.44,'CH.03 · THE WORKS','DESCENDING INTO THE WORK'],
-                  [.66,'CH.04 · THE SERVICES','CHOOSE YOUR MODULE'],
-                  [.86,'CH.05 · NEXT CHAPTER','FIND YOUR NEXT CHAPTER']];
-      window.addEventListener('mousemove',function(e){
-        tmx=(e.clientX/window.innerWidth-.5); tmy=(e.clientY/window.innerHeight-.5);
-      },{passive:true});
+      // ===== SCROLL JOURNEY =====
+      var journey=0, targetJourney=0;
       function onScroll(){
-        var y=window.scrollY, max=document.documentElement.scrollHeight-window.innerHeight;
-        journey=max>0?Math.min(y/max,1):0;
-        scrollVel=Math.abs(y-lastY); lastY=y;
-        var pct=Math.round(journey*100);
-        if(dmFill) dmFill.style.height=pct+'%';
-        if(dmMarker) dmMarker.style.top=pct+'%';
-        
-
-if(dmStage){ var s=stages[0][1],h=stages[0][2];
-          for(var k=0;k<stages.length;k++) if(journey>=stages[k][0]){s=stages[k][1];h=stages[k][2];}
-          if(dmStage.textContent!==s) dmStage.textContent=s;
-          var dh=document.getElementById('dmHint');
-          if(dh&&dh.textContent!==h) dh.textContent=h; }
+        var max= document.documentElement.scrollHeight-window.innerHeight;
+        targetJourney=max>0?window.scrollY/max:0;
       }
-      window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+      window.addEventListener('scroll',onScroll,{passive:true});
+      onScroll();
+
+      // ===== ANIMATION LOOP =====
+      var clock=new THREE.Clock();
+      function animate(){
+        requestAnimationFrame(animate);
+        var t=clock.getElapsedTime();
+        // Smooth journey
+        journey+=(targetJourney-journey)*.06;
+        
+        // Kamera: dari z=30 (black hole) ke z=-230 (tesseract)
+        // 0.0-0.35: black hole, 0.35-0.7: tesseract, 0.7-1.0: beyond
+        var camZ, lookZ;
+        if(journey<.35){
+          var p=journey/.35;
+          camZ=30-p*45; // 30 -> -15 (mendekat black hole)
+          lookZ=0;
+          // Black hole membesar saat mendekat
+          var s=1+p*1.5;
+          bhGroup.scale.set(s,s,s);
+          disk.rotation.z=t*.3;
+        } else {
+          var p2=(journey-.35)/.65;
+          camZ=-15-p2*215; // -15 -> -230 (masuk tesseract)
+          lookZ=-200;
+          // Sembunyikan black hole saat jauh
+          bhGroup.visible=journey<.5;
+        }
+        camera.position.set(Math.sin(t*.1)*2, Math.cos(t*.07)*1.5, camZ);
+        camera.lookAt(0,0,lookZ);
+        
+        // Tesseract selalu terlihat saat di world-nya
+        tessGroup.visible=journey>.25;
+        
+        renderer.render(scene,camera);
+      }
+      animate();
+
       window.addEventListener('resize',function(){
         camera.aspect=window.innerWidth/window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth,window.innerHeight);
       });
-
-      var t0=performance.now();
-      (function loop(){
-        var t=(performance.now()-t0)*.001;
-        mx+=(tmx-mx)*.04; my+=(tmy-my)*.04;
-        scrollVel*=.9;
-        var warp=Math.min(scrollVel*.05,1.1);
-
-        stars.rotation.y=t*.016+mx*.35;
-        if(mwPts){ mwPts.rotation.y=t*.008; mwPts.rotation.z=Math.sin(t*.05)*.02; }
-        stars.rotation.x=my*.25+Math.sin(t*.1)*.02;
-        starMat.size=.85+warp*1.7;
-
-        // DIVE: 0→30% — black hole shader (uDive) + fade; kamera 3D utk stars/wormhole
-        var dive=Math.min(journey/.3,1), ease=dive*dive*(3-2*dive);
-        if(window.__bh){ __bh.uDive=dive;
-          var _bhC=document.getElementById('bh');
-          if(_bhC) _bhC.style.opacity=Math.max(0,1-Math.max(0,(journey-.3)/.08)).toFixed(3);
-        }
-        // TESSERACT v3: scroll menggerakkan kamera menembus lapisan (parallax nyata)
-        var tessIn=Math.max(0,Math.min((journey-.32)/.07,1)),
-            tessOut=Math.max(0,Math.min((journey-.62)/.07,1));
-        var tessOp=tessIn*(1-tessOut);
-        var tessProg=Math.max(0,Math.min((journey-.32)/(.62-.32),1));
-        tessGroup.visible=tessOp>0.01;
-        if(tessGroup.visible){
-          for(var li2=0;li2<tessLayers.length;li2++){
-            var L=tessLayers[li2], ud=L.userData;
-            var raw=(tessProg*ud.cell*7 + t*.55*ud.speed) % ud.cell;
-            L.position.z=((raw%ud.cell)+ud.cell)%ud.cell - ud.cell/2;
-            L.rotation.y=Math.sin(t*.07)*.035*ud.speed + mx*.05*ud.speed;
-            L.rotation.x=Math.cos(t*.06)*.02*ud.speed + my*.03*ud.speed;
-            var op=tessOp*(ud.baseOp!==undefined?ud.baseOp:.8);
-            if(ud.mats){ ud.mats[0].opacity=op; ud.mats[1].opacity=Math.min(1,op*1.5); }
-            else if(ud.mat){ ud.mat.opacity=tessOp*(ud.baseOp!==undefined?ud.baseOp:.35); }
-          }
-        }
-
-
-        // kamera: dolly + parallax + fov warp
-        camera.position.z=26-ease*15;
-        camera.position.x=mx*3;
-        camera.position.y=-ease*2.2+my*2;
-        camera.lookAt(mx*4,my*2,-20);
-        var nf=62+warp*13;
-        if(Math.abs(camera.fov-nf)>.1){ camera.fov=nf; camera.updateProjectionMatrix(); }
-
-        renderer.render(scene,camera);
-        requestAnimationFrame(loop);
-      })();
-      return;
-    }catch(e){ /* jatuh ke fallback 2D */ }
+    }catch(e){ /* fallback: tanpa 3D */ }
   }
-
-  /* --- fallback 2D canvas --- */
-  var x=canvas.getContext('2d'), W,H,s2=[],fmx=0,fmy=0,ftmx=0,ftmy=0,fsy=0;
-  var N2=window.innerWidth<640?130:260;
-  function rs(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
-  rs(); window.addEventListener('resize',rs);
-  for(var j=0;j<N2;j++) s2.push({x:Math.random(),y:Math.random(),z:Math.random()*.75+.25,
-    r:Math.random()*1.3+.3,tw:Math.random()*Math.PI*2,lime:Math.random()<.12});
-  window.addEventListener('mousemove',function(e){
-    ftmx=(e.clientX/window.innerWidth-.5); ftmy=(e.clientY/window.innerHeight-.5);
-  },{passive:true});
-  window.addEventListener('scroll',function(){ fsy=window.scrollY; },{passive:true});
-  (function loop2(t){
-    x.clearRect(0,0,W,H);
-    fmx+=(ftmx-fmx)*.045; fmy+=(ftmy-fmy)*.045;
-    for(var k=0;k<s2.length;k++){
-      var s=s2[k];
-      var px=(((s.x-fmx*s.z*.05-fsy*.000035*s.z)%1)+1)%1*W;
-      var py=(((s.y-fmy*s.z*.05)%1)+1)%1*H;
-      x.globalAlpha=(.22+.78*Math.abs(Math.sin(t*.0011+s.tw)))*s.z;
-      x.fillStyle=s.lime?'#C6F24E':'#ffffff';
-      x.beginPath(); x.arc(px,py,s.r*s.z,0,7); x.fill();
-    }
-    x.globalAlpha=1;
-    requestAnimationFrame(loop2);
-  })(0);
 })();
 
 /* ---------- Intro ---------- */
