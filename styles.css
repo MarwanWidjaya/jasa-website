@@ -424,11 +424,11 @@ section[id]{scroll-margin-top:80px}
 /* ============ READABILITY: scrim ala poggufanz ============ */
 /* Redupkan kanvas 3D agar tidak bertarung dengan teks */
 #stars{opacity:.85}
-#stars::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,rgba(5,5,7,.55) 100%);pointer-events:none}
+
 /* Scrim di belakang konten tiap section */
 .section{position:relative}
 .section .wrap{position:relative;z-index:2}
-.section::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+.section::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background:radial-gradient(ellipse 90% 70% at 50% 40%,rgba(5,5,7,.72) 0%,rgba(5,5,7,.35) 55%,transparent 100%)}
 /* Hero: teks di atas black hole harus tegas */
 .hero .wrap{position:relative;z-index:3;text-shadow:0 2px 24px rgba(0,0,0,.8)}
