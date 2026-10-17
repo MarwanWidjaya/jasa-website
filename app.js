@@ -29,7 +29,10 @@ if(document.fonts && document.fonts.ready){ document.fonts.ready.then(initIcons)
     var len=orig.length, frame=0;
     var q=[];
     for(var i=0;i<len;i++) q.push({c:orig[i], start:(Math.random()*15)|0, end:((Math.random()*15)|0)+18});
+    var startMs=performance.now();
     (function update(){
+      // safety: paksa selesai setelah 3 detik
+      if(performance.now()-startMs>3000){ node.textContent=orig; done(); return; }
       var out='', n=0;
       for(var i=0;i<len;i++){
         if(frame>=q[i].end){ n++; out+=q[i].c; }
@@ -904,7 +907,7 @@ var t0=performance.now(),lastT=0;
   function resize(){ W=cv.width=window.innerWidth; H=cv.height=window.innerHeight; }
   function initStreaks(){
     streaks=[];
-    var N=window.innerWidth<640?120:250;
+    var N=window.innerWidth<640?60:120;
     for(var i=0;i<N;i++){
       var a=Math.random()*Math.PI*2;
       var r=Math.max(W,H)*(.1+Math.random()*.4);
@@ -934,11 +937,8 @@ var t0=performance.now(),lastT=0;
       var x=cx+Math.cos(s.a)*s.r, y=cy+Math.sin(s.a)*s.r;
       var tail=s.len*(1+el*8);
       var x2=cx+Math.cos(s.a)*(s.r+tail), y2=cy+Math.sin(s.a)*(s.r+tail);
-      var grad=ctx.createLinearGradient(x,y,x2,y2);
-      grad.addColorStop(0,'rgba('+s.hue+',0)');
-      grad.addColorStop(1,'rgba('+s.hue+','+(.3+el*.7)+')');
-      ctx.strokeStyle=grad;
-      ctx.lineWidth=1+el*1.5;
+      ctx.strokeStyle='rgba('+s.hue+','+(.25+el*.65)+')';
+      ctx.lineWidth=1+el;
       ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x2,y2); ctx.stroke();
     }
     // flash putih di akhir
