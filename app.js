@@ -64,7 +64,10 @@ if(document.fonts && document.fonts.ready){ document.fonts.ready.then(initIcons)
   if(!reduceMotion && 'IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){
       es.forEach(function(e){
-        if(e.isIntersecting){ scrambleEl(e.target); io.unobserve(e.target); }
+        if(e.isIntersecting){
+          io.unobserve(e.target);
+          if(!e.target.dataset.scrambled) scrambleEl(e.target);
+        }
       });
     },{threshold:.4});
     document.addEventListener('DOMContentLoaded',function(){
