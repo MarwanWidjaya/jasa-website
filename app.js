@@ -970,19 +970,28 @@ var t0=performance.now(),lastT=0;
 })();
 
 
-/* ---------- Cinematic parallax (image backgrounds) ---------- */
+/* ---------- Cinematic scroll journey (ala referensi) ---------- */
 (function(){
-  var bgs=document.querySelectorAll('.cine-bg');
-  if(!bgs.length) return;
+  var heroBg=document.querySelector('.hero .cine-bg img');
+  var hero=document.querySelector('.hero');
+  if(!heroBg||!hero) return;
   var ticking=false;
+  // Matikan Ken Burns di hero (diganti scroll-driven)
+  heroBg.style.animation='none';
   function update(){
+    var r=hero.getBoundingClientRect();
     var vh=window.innerHeight;
-    bgs.forEach(function(bg){
-      var r=bg.parentElement.getBoundingClientRect();
-      // hitung posisi relatif terhadap viewport (-1 sampai 1)
-      var prog=(r.top+r.height/2-vh/2)/vh;
-      bg.style.transform='translateY('+(prog*60)+'px)';
-    });
+    // prog: 0 = hero penuh terlihat, 1 = hero sudah di-scroll habis
+    var prog=Math.max(0,Math.min(1,-r.top/vh));
+    // DIVE: gambar membesar seolah kita terbang masuk
+    var scale=1+prog*2.5;
+    // FADE: semakin dalam, semakin gelap (masuk lubang hitam)
+    var bright=1-prog*.85;
+    heroBg.style.transform='scale('+scale+')';
+    heroBg.style.filter='brightness('+bright+')';
+    // Teks hero fade out saat dive
+    var heroContent=hero.querySelector('.wrap');
+    if(heroContent) heroContent.style.opacity=Math.max(0,1-prog*2.5);
     ticking=false;
   }
   window.addEventListener('scroll',function(){
