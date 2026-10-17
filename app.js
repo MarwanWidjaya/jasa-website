@@ -969,3 +969,24 @@ var t0=performance.now(),lastT=0;
   window.addEventListener('resize', resize);
 })();
 
+
+/* ---------- Cinematic parallax (image backgrounds) ---------- */
+(function(){
+  var bgs=document.querySelectorAll('.cine-bg');
+  if(!bgs.length) return;
+  var ticking=false;
+  function update(){
+    var vh=window.innerHeight;
+    bgs.forEach(function(bg){
+      var r=bg.parentElement.getBoundingClientRect();
+      // hitung posisi relatif terhadap viewport (-1 sampai 1)
+      var prog=(r.top+r.height/2-vh/2)/vh;
+      bg.style.transform='translateY('+(prog*60)+'px)';
+    });
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){
+    if(!ticking){ requestAnimationFrame(update); ticking=true; }
+  },{passive:true});
+  update();
+})();
