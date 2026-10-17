@@ -141,7 +141,7 @@ var EMBED_MODE = /[?&]embed=1/.test(location.search);
           g.setAttribute('color',new THREE.BufferAttribute(col,3));
           return g;
         }
-        return {base:paint(v,1), accent:paint(a,1.35)};
+        return {base:paint(v,.55), accent:paint(a,.8)};
       }
       function addTessLayer(cell, grid, speed, baseOp){
         var G=latticeGeom(cell,grid,3);
@@ -155,12 +155,12 @@ var EMBED_MODE = /[?&]embed=1/.test(location.search);
         tessLayers.push(grp);
         return grp;
       }
-      addTessLayer(3.5, 11, 1.0, .55);
-      addTessLayer(7, 9, .45, .30);
+      addTessLayer(3.5, 8, 1.0, .22);
+      addTessLayer(7, 9, .45, .12);
       /* --- RAK BUKU SOLID ala Interstellar: rak kayu + buku 3D beneran ---
          InstancedMesh (2 draw call) — kebaca sebagai rak buku di layar HP. */
       (function addSolidBookshelves(){
-        var cell=4, nx=7, ny=4, nz=9;
+        var cell=4, nx=5, ny=3, nz=7;
         var shelfGeo=new THREE.BoxGeometry(cell*.92, .1, .55);
         var bookGeo=new THREE.BoxGeometry(.14, .62, .4);
         var shelfMat=new THREE.MeshBasicMaterial({color:0x6b4a2e});
@@ -207,7 +207,7 @@ var EMBED_MODE = /[?&]embed=1/.test(location.search);
         shelfMesh.material=sm; bookMesh.material=bm;
         var grp=new THREE.Group();
         grp.add(shelfMesh); grp.add(bookMesh);
-        grp.userData={mats:[sm,bm],cell:cell*3,speed:1,baseOp:.95};
+        grp.userData={mats:[sm,bm],cell:cell*3,speed:1,baseOp:.4};
         tessGroup.add(grp);
         tessLayers.push(grp);
       })();
@@ -318,7 +318,7 @@ if(dmStage){ var s=stages[0][1],h=stages[0][2];
             L.rotation.x=Math.cos(t*.06)*.02*ud.speed + my*.03*ud.speed;
             var op=tessOp*(ud.baseOp!==undefined?ud.baseOp:.8);
             if(ud.mats){ ud.mats[0].opacity=op; ud.mats[1].opacity=Math.min(1,op*1.5); }
-            else if(ud.mat){ ud.mat.opacity=tessOp*(ud.baseOp!==undefined?ud.baseOp:.85); }
+            else if(ud.mat){ ud.mat.opacity=tessOp*(ud.baseOp!==undefined?ud.baseOp:.35); }
           }
         }
 
