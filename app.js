@@ -16,6 +16,63 @@ if(document.fonts && document.fonts.ready){ document.fonts.ready.then(initIcons)
 
 /* ---------- EMBED MODE (?embed=1): demo di dalam iframe ----------
    Mencegah iframe bersarang + meringankan efek di dalam demo. */
+
+/* ============ TEXT SCRAMBLE — signature animation ============
+   Pakai: scramble(el) atau tambah class .scramble ke heading.
+   Hormat prefers-reduced-motion. Sekali jalan per elemen. */
+(function(){
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var GLYPHS='!<>-_\\/[]{}=+*^?#@$%&';
+  function scrambleText(node, done){
+    var orig=node.textContent;
+    if(!orig.trim()){ done(); return; }
+    var len=orig.length, frame=0;
+    var q=[];
+    for(var i=0;i<len;i++) q.push({c:orig[i], start:(Math.random()*15)|0, end:((Math.random()*15)|0)+18});
+    (function update(){
+      var out='', n=0;
+      for(var i=0;i<len;i++){
+        if(frame>=q[i].end){ n++; out+=q[i].c; }
+        else if(frame>=q[i].start){ out+=GLYPHS[(Math.random()*GLYPHS.length)|0]; }
+        else { n++; out+=q[i].c; }
+      }
+      node.textContent=out;
+      if(n===len){ node.textContent=orig; done(); }
+      else { frame++; requestAnimationFrame(update); }
+    })();
+  }
+  function scrambleEl(el){
+    if(el.dataset.scrambled || reduceMotion) return;
+    el.dataset.scrambled='1';
+    // kumpulkan text nodes (termasuk dalam <em>, <br> diskip)
+    var nodes=[];
+    (function walk(n){
+      for(var i=0;i<n.childNodes.length;i++){
+        var c=n.childNodes[i];
+        if(c.nodeType===3 && c.textContent.trim()) nodes.push(c);
+        else if(c.nodeType===1 && c.tagName!=='BR') walk(c);
+      }
+    })(el);
+    var pending=nodes.length;
+    if(!pending) return;
+    nodes.forEach(function(nd){
+      scrambleText(nd, function(){ if(--pending===0){} });
+    });
+  }
+  window.scramble=scrambleEl;
+  // auto: semua .scramble saat masuk viewport (sekali)
+  if(!reduceMotion && 'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){ scrambleEl(e.target); io.unobserve(e.target); }
+      });
+    },{threshold:.4});
+    document.addEventListener('DOMContentLoaded',function(){
+      document.querySelectorAll('.scramble').forEach(function(el){ io.observe(el); });
+    });
+  }
+})();
+
 var EMBED_MODE = /[?&]embed=1/.test(location.search);
 
 /* ---------- 3D COSMIC JOURNEY: black hole → wormhole → tesseract ---------- */
@@ -375,6 +432,51 @@ if(dmStage){ var s=stages[0][1],h=stages[0][2];
 
 /* ---------- Intro ---------- */
 (function(){
+  /* ===== BIG BANG: cosmic web ungu mekar ===== */
+  (function(){
+    var bc=document.getElementById('bangCanvas');
+    if(!bc) return;
+    var bctx=bc.getContext('2d'), BW, BH, pts=[];
+    var reduceM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function bresize(){ BW=bc.width=window.innerWidth; BH=bc.height=window.innerHeight; }
+    bresize(); window.addEventListener('resize',bresize);
+    var N=window.innerWidth<640?70:140;
+    for(var i=0;i<N;i++){
+      var a=Math.random()*Math.PI*2, d=Math.random()*.3;
+      pts.push({a:a, d:d, sp:.4+Math.random()*.8, s:Math.random()*1.8+.4,
+        hue:270+Math.random()*40});
+    }
+    var bt0=performance.now();
+    (function bang(){
+      var intro=document.getElementById('intro');
+      if(!intro || intro.classList.contains('gone')) return;
+      var t=(performance.now()-bt0)/2600; // 2.6 detik mekar penuh
+      bctx.fillStyle='rgba(5,5,7,.12)';
+      bctx.fillRect(0,0,BW,BH);
+      var cx=BW/2, cy=BH/2, maxR=Math.max(BW,BH)*.7;
+      for(var i=0;i<pts.length;i++){
+        var p=pts[i];
+        var r=Math.min(1,t*p.sp+p.d)*maxR;
+        var x=cx+Math.cos(p.a)*r, y=cy+Math.sin(p.a)*r;
+        // garis ke tetangga (cosmic web)
+        for(var j=i+1;j<Math.min(i+4,pts.length);j++){
+          var q=pts[j];
+          var r2=Math.min(1,t*q.sp+q.d)*maxR;
+          var x2=cx+Math.cos(q.a)*r2, y2=cy+Math.sin(q.a)*r2;
+          var dist=Math.hypot(x-x2,y-y2);
+          if(dist<maxR*.18){
+            bctx.strokeStyle='hsla('+p.hue+',70%,60%,'+(0.14*(1-dist/(maxR*.18)))+')';
+            bctx.lineWidth=.6;
+            bctx.beginPath(); bctx.moveTo(x,y); bctx.lineTo(x2,y2); bctx.stroke();
+          }
+        }
+        bctx.fillStyle='hsla('+p.hue+',80%,70%,'+Math.min(1,t*2)*.9+')';
+        bctx.beginPath(); bctx.arc(x,y,p.s,0,7); bctx.fill();
+      }
+      if(!reduceM) requestAnimationFrame(bang);
+    })();
+  })();
+
   var intro=document.getElementById('intro');
   if(!intro) return;
   var num=document.getElementById('introNum'),
@@ -386,9 +488,16 @@ if(dmStage){ var s=stages[0][1],h=stages[0][2];
     for(var i=0;i<heroRvs.length;i++){
       (function(el,j){ setTimeout(function(){ el.classList.add('in'); },160+j*130); })(heroRvs[i],i);
     }
+    // hero scramble setelah intro selesai
+    setTimeout(function(){
+      var hh=document.querySelector('.hero .scramble');
+      if(hh && window.scramble) window.scramble(hh);
+    }, 400);
   }
+  var seen=false;
+  try{ seen=!!localStorage.getItem('mw_seen'); localStorage.setItem('mw_seen','1'); }catch(e){}
   var iv=setInterval(function(){
-    p=Math.min(100, p+Math.random()*15+7);
+    p=Math.min(100, p+(seen?Math.random()*30+18:Math.random()*15+7));
     if(bar) bar.style.width=p+'%';
     if(num) num.textContent=String(Math.floor(p/100*999)+1).padStart(3,'0');
     if(p>=100){ clearInterval(iv); setTimeout(finish,380); }
@@ -508,6 +617,8 @@ if(dmStage){ var s=stages[0][1],h=stages[0][2];
   function paint(){
     var c=cur();
     dots.forEach(function(d,i){ d.classList.toggle('on',i===c); });
+    var rc=document.getElementById('roomCur');
+    if(rc) rc.textContent=String(c+1).padStart(2,'0');
     if(prev) prev.style.opacity=c===0?.35:1;
     if(next) next.style.opacity=c===rooms.length-1?.35:1;
   }
@@ -745,3 +856,80 @@ var t0=performance.now(),lastT=0;
   var c=document.getElementById('tdClose');
   if(c) c.addEventListener('click', function(){ dismissed=true; hide(); });
 })();
+
+/* ============ HYPERSPACE WARP ============ */
+(function(){
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var warpEl=document.getElementById('warp'), cv=document.getElementById('warpCanvas');
+  var toTop=document.getElementById('toTop');
+  if(!warpEl || !cv || !toTop) return;
+  var ctx=cv.getContext('2d'), W, H, streaks=[], raf=null, startT=0;
+  var DUR=1200; // 1.2 detik
+
+  function resize(){ W=cv.width=window.innerWidth; H=cv.height=window.innerHeight; }
+  function initStreaks(){
+    streaks=[];
+    var N=window.innerWidth<640?120:250;
+    for(var i=0;i<N;i++){
+      var a=Math.random()*Math.PI*2;
+      var r=Math.max(W,H)*(.1+Math.random()*.4);
+      streaks.push({
+        x:W/2+Math.cos(a)*r, y:H/2+Math.sin(a)*r,
+        a:a, r:r, len:2+Math.random()*8,
+        sp:.6+Math.random()*.9,
+        hue:Math.random()<.7?'125,211,252':'255,255,255'
+      });
+    }
+  }
+  function frame(t){
+    var el=(t-startT)/DUR;
+    if(el>=1){ end(); return; }
+    // ease-in: makin cepat
+    var speed=1+el*el*14;
+    ctx.fillStyle='rgba(2,2,4,.28)';
+    ctx.fillRect(0,0,W,H);
+    var cx=W/2, cy=H/2;
+    for(var i=0;i<streaks.length;i++){
+      var s=streaks[i];
+      s.r-=s.sp*speed*3;
+      if(s.r<2){ // reset ke tepi
+        s.a=Math.random()*Math.PI*2;
+        s.r=Math.max(W,H)*(.5+Math.random()*.3);
+      }
+      var x=cx+Math.cos(s.a)*s.r, y=cy+Math.sin(s.a)*s.r;
+      var tail=s.len*(1+el*8);
+      var x2=cx+Math.cos(s.a)*(s.r+tail), y2=cy+Math.sin(s.a)*(s.r+tail);
+      var grad=ctx.createLinearGradient(x,y,x2,y2);
+      grad.addColorStop(0,'rgba('+s.hue+',0)');
+      grad.addColorStop(1,'rgba('+s.hue+','+(.3+el*.7)+')');
+      ctx.strokeStyle=grad;
+      ctx.lineWidth=1+el*1.5;
+      ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x2,y2); ctx.stroke();
+    }
+    // flash putih di akhir
+    if(el>.85){
+      ctx.fillStyle='rgba(255,255,255,'+((el-.85)/.15*.9)+')';
+      ctx.fillRect(0,0,W,H);
+    }
+    raf=requestAnimationFrame(frame);
+  }
+  function end(){
+    cancelAnimationFrame(raf); raf=null;
+    window.scrollTo(0,0);
+    warpEl.classList.remove('on');
+  }
+  function start(){
+    if(reduceMotion){ window.scrollTo(0,0); return; }
+    resize(); initStreaks();
+    warpEl.classList.add('on');
+    startT=performance.now();
+    // ESC untuk skip
+    function onKey(e){ if(e.key==='Escape'){ end(); window.removeEventListener('keydown',onKey); } }
+    window.addEventListener('keydown',onKey);
+    setTimeout(function(){ window.removeEventListener('keydown',onKey); }, DUR+100);
+    raf=requestAnimationFrame(frame);
+  }
+  toTop.addEventListener('click', function(e){ e.preventDefault(); start(); });
+  window.addEventListener('resize', resize);
+})();
+
