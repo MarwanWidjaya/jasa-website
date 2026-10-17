@@ -82,180 +82,110 @@ if(document.fonts && document.fonts.ready){ document.fonts.ready.then(initIcons)
 var EMBED_MODE = /[?&]embed=1/.test(location.search);
 
 /* ---------- 3D COSMIC JOURNEY: black hole → wormhole → tesseract ---------- */
+
+/* Main-thread 3D fallback (jika worker gagal) */
+function initMainThread3D(canvas, isMobile){
+  try{
+    var renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:!isMobile});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, isMobile?1.5:2));
+    renderer.setSize(window.innerWidth,window.innerHeight);
+    var scene=new THREE.Scene();
+    scene.fog=new THREE.FogExp2(0x050507,0.015);
+    var camera=new THREE.PerspectiveCamera(62,window.innerWidth/window.innerHeight,.1,600);
+    // Black hole sederhana
+    var bh=new THREE.Group();
+    bh.add(new THREE.Mesh(new THREE.SphereGeometry(3,24,24),
+      new THREE.MeshBasicMaterial({color:0x000000})));
+    var disk=new THREE.Mesh(new THREE.RingGeometry(3.5,7,48),
+      new THREE.MeshBasicMaterial({color:0xE9A13B,transparent:true,opacity:.85,side:THREE.DoubleSide}));
+    disk.rotation.x=-Math.PI/2.3; bh.add(disk);
+    scene.add(bh);
+    // Stars
+    var sc=isMobile?800:2000, sp=new Float32Array(sc*3);
+    for(var i=0;i<sc;i++){sp[i*3]=(Math.random()-.5)*400;sp[i*3+1]=(Math.random()-.5)*400;sp[i*3+2]=30-Math.random()*450;}
+    var sg=new THREE.BufferGeometry(); sg.setAttribute('position',new THREE.BufferAttribute(sp,3));
+    scene.add(new THREE.Points(sg,new THREE.PointsMaterial({color:0xffffff,size:.7,transparent:true,opacity:.9})));
+    var journey=0, tj=0;
+    window.addEventListener('scroll',function(){
+      var max=document.documentElement.scrollHeight-window.innerHeight;
+      tj=max>0?window.scrollY/max:0;
+    },{passive:true});
+    (function anim(){
+      requestAnimationFrame(anim);
+      journey+=(tj-journey)*.07;
+      var p=Math.min(1,journey/.35);
+      camera.position.set(0,0,30-p*45);
+      camera.lookAt(0,0,0);
+      var s=1+p*1.5; bh.scale.set(s,s,s);
+      disk.rotation.z+=.005;
+      renderer.render(scene,camera);
+    })();
+  }catch(e){}
+}
+
 (function(){
   var canvas=document.getElementById('stars');
   if(!canvas) return;
   if(EMBED_MODE){ return; }
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isMobile = window.innerWidth<640;
+  if(reduceMotion || !window.THREE) return;
 
-  if(window.THREE && !reduceMotion){
+  var journey=0, targetJourney=0, worker=null, useWorker=false;
+
+  function onScroll(){
+    var max=document.documentElement.scrollHeight-window.innerHeight;
+    targetJourney=max>0?window.scrollY/max:0;
+    if(useWorker && worker) worker.postMessage({type:'scroll', journey:targetJourney});
+  }
+
+  // Coba Web Worker + OffscreenCanvas
+  function initWorker(){
     try{
-      var renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:!isMobile});
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, isMobile?1.5:2));
-      renderer.setSize(window.innerWidth,window.innerHeight);
-      var scene=new THREE.Scene();
-      scene.fog=new THREE.FogExp2(0x050507,0.015);
-      var camera=new THREE.PerspectiveCamera(62,window.innerWidth/window.innerHeight,.1,600);
-      
-      // ===== WORLD 0: BLACK HOLE (z=0) =====
-      var bhGroup=new THREE.Group();
-      // Event horizon (bola hitam)
-      var bhSphere=new THREE.Mesh(
-        new THREE.SphereGeometry(3,32,32),
-        new THREE.MeshBasicMaterial({color:0x000000})
-      );
-      bhGroup.add(bhSphere);
-      // Accretion disk (cakram emas)
-      var diskGeo=new THREE.RingGeometry(3.5,7,64);
-      var diskMat=new THREE.MeshBasicMaterial({
-        color:0xE9A13B, transparent:true, opacity:.85, side:THREE.DoubleSide
+      if(!window.Worker || !canvas.transferControlToOffscreen) return false;
+      worker=new Worker('worker-3d.js');
+      var off=canvas.transferControlToOffscreen();
+      var ready=false;
+      worker.onmessage=function(e){
+        if(e.data.type==='ready'){ ready=true; }
+        else if(e.data.type==='error'){ initFallback(); }
+      };
+      worker.onerror=function(){ initFallback(); };
+      worker.postMessage({type:'init', canvas:off,
+        width:window.innerWidth, height:window.innerHeight,
+        dpr:window.devicePixelRatio||1, isMobile:isMobile}, [off]);
+      // Timeout: jika worker tidak ready dalam 5 detik, fallback
+      setTimeout(function(){ if(!ready) initFallback(); }, 5000);
+      useWorker=true;
+      window.addEventListener('scroll', onScroll, {passive:true});
+      window.addEventListener('resize', function(){
+        if(worker) worker.postMessage({type:'resize', width:window.innerWidth, height:window.innerHeight});
       });
-      var disk=new THREE.Mesh(diskGeo,diskMat);
-      disk.rotation.x=-Math.PI/2.3;
-      bhGroup.add(disk);
-      // Glow
-      var glowGeo=new THREE.RingGeometry(3.2,4.2,64);
-      var glowMat=new THREE.MeshBasicMaterial({
-        color:0xffd700, transparent:true, opacity:.4, side:THREE.DoubleSide,
-        blending:THREE.AdditiveBlending
+      document.addEventListener('visibilitychange', function(){
+        if(!worker) return;
+        worker.postMessage({type: document.hidden?'pause':'resume'});
       });
-      var glow=new THREE.Mesh(glowGeo,glowMat);
-      glow.rotation.x=-Math.PI/2.3;
-      bhGroup.add(glow);
-      bhGroup.position.z=0;
-      scene.add(bhGroup);
+      return true;
+    }catch(e){ return false; }
+  }
 
-      // ===== WORLD 2: TESSERACT (z=-200) =====
-      var tessGroup=new THREE.Group();
-      // Lighting sinematik
-      var amb=new THREE.AmbientLight(0x8a6a4a,.9);
-      tessGroup.add(amb);
-      var key=new THREE.DirectionalLight(0xffd9a0,1.2);
-      key.position.set(10,15,5);
-      tessGroup.add(key);
-      var fill=new THREE.PointLight(0xff9a50,1.5,80);
-      fill.position.set(-8,3,-195);
-      tessGroup.add(fill);
-      var rim=new THREE.PointLight(0x6a9aff,.8,80);
-      rim.position.set(8,-5,-205);
-      tessGroup.add(rim);
-      
-      // Rak buku: lattice 3D ala Cooper
-      var woodMat=new THREE.MeshStandardMaterial({
-        color:0x8a5a33, roughness:.75, metalness:.05
-      });
-      var bookColors=[0x8a3a2a,0x2a5a8a,0x3a6a3a,0xd4a95a,0x5a3a6a,0xb56a3a,0x2a3a5a,0x9a2a2a];
-      var shelfGeo=new THREE.BoxGeometry(3.6,.18,1.1);
-      var bookGeo=new THREE.BoxGeometry(.22,.85,.75);
-      var dummy=new THREE.Object3D();
-      var col=new THREE.Color();
-      
-      // Grid 4x3x4 unit rak
-      var units=[];
-      for(var ux=0;ux<4;ux++) for(var uy=0;uy<3;uy++) for(var uz=0;uz<4;uz++){
-        var px=(ux-1.5)*4.2, py=(uy-1)*4.2, pz=-200+(uz-1.5)*4.2;
-        // Koridor tengah untuk kamera
-        if(Math.abs(px)<2.5 && Math.abs(py)<2.5) continue;
-        units.push([px,py,pz]);
-      }
-      var shelvesPerUnit=4, booksPerShelf=6;
-      var nU=units.length;
-      var shelfMesh=new THREE.InstancedMesh(shelfGeo,woodMat,nU*shelvesPerUnit);
-      var bookMat=new THREE.MeshStandardMaterial({color:0xffffff,roughness:.8});
-      var bookMesh=new THREE.InstancedMesh(bookGeo,bookMat,nU*shelvesPerUnit*booksPerShelf);
-      var si=0, bi=0;
-      units.forEach(function(u){
-        for(var s=0;s<shelvesPerUnit;s++){
-          var sy=u[1]-1.4+s*(2.8/(shelvesPerUnit-1));
-          dummy.position.set(u[0],sy,u[2]);
-          dummy.rotation.set(0,0,0); dummy.scale.set(1,1,1);
-          dummy.updateMatrix(); shelfMesh.setMatrixAt(si++,dummy.matrix);
-          for(var b=0;b<booksPerShelf;b++){
-            if(Math.random()<.15) continue;
-            var bx=u[0]-1.5+b*(3/(booksPerShelf-1))+(Math.random()-.5)*.1;
-            dummy.position.set(bx,sy+.5,u[2]+(Math.random()-.5)*.1);
-            dummy.scale.set(1,.8+Math.random()*.4,1);
-            dummy.rotation.set(0,(Math.random()-.5)*.12,0);
-            dummy.updateMatrix(); bookMesh.setMatrixAt(bi,dummy.matrix);
-            col.setHex(bookColors[(Math.random()*bookColors.length)|0]);
-            bookMesh.setColorAt(bi,col); bi++;
-          }
-        }
-      });
-      shelfMesh.count=si; bookMesh.count=bi;
-      shelfMesh.instanceMatrix.needsUpdate=true;
-      bookMesh.instanceMatrix.needsUpdate=true;
-      if(bookMesh.instanceColor) bookMesh.instanceColor.needsUpdate=true;
-      tessGroup.add(shelfMesh); tessGroup.add(bookMesh);
-      scene.add(tessGroup);
+  // Fallback: render di main thread (kode 3D yang sudah ada)
+  function initFallback(){
+    if(worker){ try{worker.terminate();}catch(e){} worker=null; }
+    useWorker=false;
+    startMainThread();
+  }
 
-      // ===== STARFIELD (selalu ada) =====
-      var starGeo=new THREE.BufferGeometry();
-      var starCount=isMobile?800:2000;
-      var sp=new Float32Array(starCount*3);
-      for(var i=0;i<starCount;i++){
-        sp[i*3]=(Math.random()-.5)*400;
-        sp[i*3+1]=(Math.random()-.5)*400;
-        sp[i*3+2]=30-Math.random()*450;
-      }
-      starGeo.setAttribute('position',new THREE.BufferAttribute(sp,3));
-      var stars=new THREE.Points(starGeo,new THREE.PointsMaterial({
-        color:0xffffff,size:.7,transparent:true,opacity:.9
-      }));
-      scene.add(stars);
+  function startMainThread(){
+    // (implementasi main-thread dipindah ke fungsi terpisah di bawah)
+    initMainThread3D(canvas, isMobile);
+  }
 
-      // ===== SCROLL JOURNEY =====
-      var journey=0, targetJourney=0;
-      function onScroll(){
-        var max= document.documentElement.scrollHeight-window.innerHeight;
-        targetJourney=max>0?window.scrollY/max:0;
-      }
-      window.addEventListener('scroll',onScroll,{passive:true});
-      onScroll();
-
-      // ===== ANIMATION LOOP =====
-      var clock=new THREE.Clock();
-      function animate(){
-        requestAnimationFrame(animate);
-        var t=clock.getElapsedTime();
-        // Smooth journey
-        journey+=(targetJourney-journey)*.06;
-        
-        // Kamera: dari z=30 (black hole) ke z=-230 (tesseract)
-        // 0.0-0.35: black hole, 0.35-0.7: tesseract, 0.7-1.0: beyond
-        var camZ, lookZ;
-        if(journey<.35){
-          var p=journey/.35;
-          camZ=30-p*45; // 30 -> -15 (mendekat black hole)
-          lookZ=0;
-          // Black hole membesar saat mendekat
-          var s=1+p*1.5;
-          bhGroup.scale.set(s,s,s);
-          disk.rotation.z=t*.3;
-        } else {
-          var p2=(journey-.35)/.65;
-          camZ=-15-p2*215; // -15 -> -230 (masuk tesseract)
-          lookZ=-200;
-          // Sembunyikan black hole saat jauh
-          bhGroup.visible=journey<.5;
-        }
-        camera.position.set(Math.sin(t*.1)*2, Math.cos(t*.07)*1.5, camZ);
-        camera.lookAt(0,0,lookZ);
-        
-        // Tesseract selalu terlihat saat di world-nya
-        tessGroup.visible=journey>.25;
-        
-        renderer.render(scene,camera);
-      }
-      animate();
-
-      window.addEventListener('resize',function(){
-        camera.aspect=window.innerWidth/window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth,window.innerHeight);
-      });
-    }catch(e){ /* fallback: tanpa 3D */ }
+  if(!initWorker()){
+    initFallback();
+  } else {
+    // Worker mode: tetap perlu scroll listener awal
+    onScroll();
   }
 })();
 
