@@ -699,8 +699,9 @@ if(!canvas) return;
 if(EMBED_MODE){ canvas.style.display='none'; return; } // demo iframe: tanpa ray-tracer
 var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var isMobile=window.innerWidth<640;
-var gl=canvas.getContext('webgl',{alpha:false,antialias:false,depth:false,stencil:false});
-if(!gl){ canvas.style.display='none'; return; }
+var gl=null;
+try{ gl=canvas.getContext('webgl',{alpha:false,antialias:false,depth:false,stencil:false}); }catch(e){}
+if(!gl){ return; } // biarkan CSS fallback (radial gradient) yang tampil
 
 var VS='attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
 var FS=[
@@ -766,11 +767,11 @@ var FS=[
 ].join('\n');
 
 function sh(type,src){var s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);
- if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){canvas.style.display='none';return null;}return s;}
+ if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){return null;}return s;}
 var vs=sh(gl.VERTEX_SHADER,VS),fs=sh(gl.FRAGMENT_SHADER,FS);
 if(!vs||!fs) return;
 var pr=gl.createProgram();gl.attachShader(pr,vs);gl.attachShader(pr,fs);gl.linkProgram(pr);
-if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){canvas.style.display='none';return;}
+if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){return;}
 gl.useProgram(pr);
 var buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
 gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
